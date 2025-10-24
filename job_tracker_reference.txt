@@ -1,0 +1,186 @@
+# Personalized LinkedIn Job Tracker - Project Reference Guide
+
+## Overview
+This project tracks **internship and job openings** relevant to your interests (Machine Learning, AI, Cybersecurity, Data Engineering, etc.) from official **company career pages and ATS APIs** (Greenhouse, Lever, Workday, SmartRecruiters, etc.).  
+It notifies you via email, Slack, or desktop popup whenever a new opportunity appears.
+
+---
+
+## 1. Architecture Summary
+
+**Goal:** Detect new job postings automatically and alert you in real-time.
+
+**Main components:**
+- **Ingestion Layer:** Scrapers for each ATS/career site
+- **Normalizer:** Converts all job data to a unified schema
+- **Filter Engine:** Keeps only relevant postings (intern, Summer 2026, ML/AI/etc.)
+- **Deduper:** Detects new or updated jobs
+- **Notifier:** Sends alerts through your preferred channels
+- **UI/CLI:** Manage your watchlist and filters
+
+---
+
+## 2. Technologies and Tools
+
+| Component | Recommended Tool |
+|------------|------------------|
+| Language | Python 3.11+ |
+| Web Scraping | Requests, Playwright, Selectolax |
+| API Framework | FastAPI |
+| ORM & DB | SQLAlchemy + PostgreSQL |
+| Scheduling | Celery + Redis or APScheduler |
+| Alerts | Slack Webhooks / Email / Pushover |
+| Deployment | Docker Compose |
+| Config Files | YAML for watchlist and filters |
+
+---
+
+## 3. Repository Structure
+
+```
+job-tracker/
+  README.md
+  docker-compose.yml
+  pyproject.toml
+  src/
+    app/                  # FastAPI backend
+    core/                 # Database + schema logic
+    ingest/               # Scrapers per ATS
+    scheduler/            # Periodic job runner
+    utils/                # Common helpers
+  config/
+    watchlist.yaml        # Companies and preferences
+    filters.yaml          # Role and category filters
+  tests/                  # Unit and integration tests
+```
+
+---
+
+## 4. Configuration
+
+### `watchlist.yaml`
+Defines which companies and roles to monitor.
+
+```yaml
+targets:
+  - company: "Citadel"
+    ats_type: "greenhouse"
+    roles_include: ["intern","summer 2026"]
+    locations: ["New York","Chicago","Boston","Remote"]
+
+  - company: "Two Sigma"
+    ats_type: "lever"
+    roles_include: ["intern","summer 2026"]
+    locations: ["New York","Remote"]
+```
+
+### `filters.yaml`
+Defines keywords and categories (ML/AI, Data, Cybersecurity).
+
+```yaml
+categories:
+  ml_ai:
+    title_any:
+      - "(?i)machine learning"
+      - "(?i)ai|artificial intelligence"
+  cybersecurity:
+    title_any:
+      - "(?i)security|threat|incident response"
+  data_engineering:
+    title_any:
+      - "(?i)data engineer|etl|pipeline"
+  data_science:
+    title_any:
+      - "(?i)data scientist|applied scientist"
+```
+
+---
+
+## 5. Running the Tracker
+
+### Option A: Quick Local Run
+```bash
+python src/ingest/runner.py
+```
+Runs all scrapers once and prints matched jobs.
+
+### Option B: Automated (via Scheduler)
+```bash
+docker-compose up
+```
+This runs the tracker every hour and sends alerts.
+
+### Option C: Periodic via Cron
+```bash
+@hourly /usr/bin/python3 /path/to/job-tracker/src/ingest/runner.py
+```
+
+---
+
+## 6. Adding New Companies
+
+1. Identify their ATS type (Greenhouse, Lever, Workday, etc.).  
+2. Add an entry to `watchlist.yaml`.  
+3. The corresponding scraper will fetch data automatically.
+
+Example:
+```yaml
+- company: "CrowdStrike"
+  ats_type: "workday"
+  roles_include: ["intern","security","ml","data"]
+  locations: ["Remote","Austin","Boston"]
+```
+
+---
+
+## 7. Notifications Setup
+
+### Slack
+Create a Slack Incoming Webhook and add it to `.env`:
+```
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/XXXX
+```
+
+### Email (optional)
+```
+SMTP_SERVER=smtp.gmail.com
+SMTP_USER=you@gmail.com
+SMTP_PASS=app_password
+```
+
+### Desktop Push (optional)
+Use Pushover or ntfy.sh with their API URLs.
+
+---
+
+## 8. Customization
+
+- Modify `filters.yaml` to adjust keywords or categories.
+- Edit `watchlist.yaml` to add or remove companies.
+- Update scheduler interval in `scheduler/tasks.py`.
+- Change database or notification settings in `.env`.
+
+---
+
+## 9. Notes and Best Practices
+
+- **Do not scrape LinkedIn directly.** It violates LinkedIn’s ToS.
+- Use official **ATS JSON endpoints** instead.
+- Respect **robots.txt** and use reasonable scraping intervals.
+- Test new scrapers before production with sample responses.
+- Maintain logs for debugging and rate-limit failures.
+
+---
+
+## 10. Future Enhancements
+
+- Add NLP-based similarity scoring for fuzzy job titles.  
+- Integrate with Notion or Google Sheets.  
+- Build a small web dashboard (React + FastAPI).  
+- Add sentiment detection for company culture using scraped reviews.
+
+---
+
+**Created:** 2025-10-24
+**Author:** Yash Lad  
+**Project:** Personalized LinkedIn Job Tracker

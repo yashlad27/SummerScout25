@@ -1,0 +1,281 @@
+# Job Tracker — Deep Overview and Mechanics
+Version: 2025-10-24
+
+This expands the overview and mechanics of your internship/job tracker. It complements `job_tracker_reference.txt`.
+
+---
+
+## 0. System goals and constraints
+- Track **ML/AI, Cybersecurity, Data Engineering, Data Science** internships for **Summer 2026**.
+- Sources: **ATS endpoints and public career pages**. No LinkedIn scraping or automation.
+- Output: clean, deduped jobs with **first-seen alerts** and **material-change alerts**.
+- Update frequency: 15–60 minutes per source, tuned by rate limits and robots.txt.
+
+---
+
+## 1. End‑to‑end flow
+1) **Scheduler** triggers a cycle.
+2) **Watchlist** is loaded (DB or `config/watchlist.yaml`).
+3) For each target:
+   - Select scraper plugin by `ats_type` or **generic HTML**.
+   - **Fetch** raw listings with pagination.
+   - **Normalize** to the `Job` schema.
+   - **Classify** into a category (ml_ai, cybersecurity, data_engineering, data_science, ml_platform, platform_security).
+   - **Filter** using internship/term/location/negative rules.
+   - **Deduplicate** using `source+source_id` then cross-source similarity.
+   - **Version** changes; persist to DB.
+   - **Notify** per alert policy.
+4) **Metrics/Logs** are written. Health checks updated.
+
+ASCII sequence:
+
+Scheduler -> Runner -> Scraper -> ATS
+ATS -> Scraper -> Normalizer -> Filter
+Filter -> Dedupe -> DB -> Notifier -> Channels
+DB -> Versioning/Diff store
+
+---
+
+## 2. Scraper mechanics (per ATS)
+**Greenhouse**
+- Endpoint: `https://boards.greenhouse.io/{{company}}` plus JSON job board endpoints.
+- Extract: `id`, `title`, `location.name`, `updated_at`, `absolute_url`, `content` (HTML).
+
+**Lever**
+- Endpoint: `https://api.lever.co/v0/postings/{{company}}?mode=json` (or `/api/postings/...`).
+- Extract: `id`, `text`, `categories.location`, `createdAt`, `hostedUrl`, `lists/requirements`.
+
+**SmartRecruiters**
+- Endpoint family under `/api/jobs` with paging.
+- Extract: `id`, `name`, `location`, `releasedDate`, `referral.boardUrl`, `jobAd.sections`.
+
+**Ashby**
+- Endpoint: `https://api.ashbyhq.com/api/job-board` with company slug.
+- Extract: `id`, `title`, `location`, `departments`, `description`, `urls.applyUrl`.
+
+**Workday**
+- Uses JSON or GraphQL search endpoints (`/wday/cxs`, `/wday/jobs` variants).
+- Send POST with `limit, offset, searchText, locations, jobFamilies` when available.
+- Extract: `bulletFields`, `jobPostingId`, `title`, `locationsText`, `postedOn`, `externalPath`.
+
+**Generic careers HTML**
+- Discover via `sitemap.xml` and anchor text containing “Careers/Jobs/Internships”.
+- Parse with **Selectolax/Parsel**. Prefer stable selectors over brittle ones.
+- Use **Playwright** only when content is rendered client-side and no API exists.
+
+**Common rules**
+- Respect **robots.txt**. Limit to 1–3 RPS per domain.
+- Handle paging with cursors or `offset+limit`.
+- Retry with exponential backoff and jitter on 408/429/5xx.
+- Set `If-None-Match` and `If-Modified-Since` when supported.
+
+---
+
+## 3. Normalization
+Target schema fields:
+- `source` (enum), `source_id` (text), `company`, `title`, `location`, `remote` (bool),
+- `employment_type` (enum), `posted_at` (timestamptz), `url`, `description_md`,
+- `hash_stable`, `hash_full`, `first_seen_at`, `last_seen_at`, `is_active` (bool), `tags` (text[]).
+
+Normalization steps:
+- **Company**: from watchlist or source payload.
+- **Location**: unify commas, strip country noise, map “Remote/Hybrid”.
+- **Employment type**: infer from title+desc (`intern`, `co-op`, `full-time`).
+- **Posted date**: parse ISO/epoch; fall back to fetch time if absent.
+- **Description**: clean HTML -> Markdown; strip tracking junk.
+- **URL**: prefer canonical external posting link.
+
+---
+
+## 4. Classification and filtering
+Order:
+1) **Internship gate**: title or desc must match `Summer 2026` patterns.
+2) **Negatives**: drop `Senior/Staff/Lead/Manager` and non-engineering functions.
+3) **Category**: route by regex on title and hints in description.
+4) **Geo**: require location in the configured set (`Boston`, `NYC`, `Remote`, etc.).
+5) **Tagging**: add `internship`, `summer-2026`, and category tag.
+
+Optional fallback:
+- If no regex hit, compute **TF‑IDF/embedding similarity** against canonical titles; accept if cosine ≥ 0.55.
+
+---
+
+## 5. Deduplication and change detection
+**Identity keys**
+- **Primary**: `(source, source_id)` unique index.
+- **Cross-source duplicates**: normalize title tokens, strip “Intern –”, compare Jaccard ≥ 0.8 and same company+location.
+
+**Hashes**
+- `hash_stable = sha256(normalize(title)|normalize(company)|normalize(location)|canonical_url)`.
+- `hash_full = sha256(hash_stable|employment_type|posted_at|text_digest(description_md))`.
+
+**Versioning**
+- If `hash_stable` unseen → insert job; set `first_seen_at=now()` and `last_seen_at=now()`.
+- If seen and `hash_full` changed → insert into `job_versions` with `diff_json` and update `last_seen_at`.
+- If job returns 404 or disappears for N cycles → set `is_active=false`.
+
+**Diffs**
+- Use `difflib.unified_diff` or JSON Patch. Store material changes (requirements, location).
+
+---
+
+## 6. Notifications
+Rules:
+- Fire on **new jobs** that pass filters.
+- Fire on **material updates** if `hash_full` changed and change touches any of: title, location, requirements, posted date.
+- **Cooldown**: per job+channel, one alert every 24h.
+- **Channels**: Slack webhook, Email, Pushover/ntfy.
+Payload:
+```
+[NEW][ml_ai][Summer 2026] Machine Learning Intern — Citadel (Chicago)
+URL: https://...
+Posted: 2025-10-24 09:12 ET
+Source: greenhouse
+Tags: internship, summer-2026, ml_ai
+```
+Config:
+```
+ALERT_CHANNELS=slack,email
+SLACK_WEBHOOK_URL=...
+SMTP_SERVER=...
+SMTP_USER=...
+SMTP_PASS=...
+```
+
+---
+
+## 7. Scheduling
+Options:
+- **APScheduler** (simple, single process): interval jobs per source group, jitter 10–20%.
+- **Celery Beat + Workers** (scalable): schedule `fetch_all`, `detect_changes`, `notify` tasks.
+Suggested cadence:
+- Greenhouse/Lever/Ashby: every 15–30 min.
+- SmartRecruiters/Workday: every 30–60 min.
+- Generic HTML: hourly.
+- Nightly **backfill** to reindex and catch missed posts.
+
+---
+
+## 8. Persistence and indexes
+PostgreSQL with SQLAlchemy + Alembic.
+
+Tables:
+- `jobs(id uuid pk, source, source_id unique, company, title, location, remote, employment_type, posted_at, url, description_md, hash_stable, hash_full, first_seen_at, last_seen_at, is_active, category, tags text[])`
+- `job_versions(id uuid pk, job_id fk, hash_full, captured_at, diff_json)`
+- `watchlist(id, company, careers_url, ats_type, roles_include text[], locations text[], internship_term text[])`
+- `alerts(id, job_id fk, sent_via, sent_at, status)`
+
+Indexes:
+- `uniq_source_sourceid` on `(source, source_id)`.
+- `idx_jobs_hash_stable`, `idx_jobs_company_title_location`.
+- GIN on `tags`.
+
+Retention:
+- Keep inactive jobs 180–365 days. Vacuum weekly.
+
+---
+
+## 9. Observability
+- Structured logs (JSON). Fields: `event`, `source`, `company`, `status`, `latency_ms`.
+- Metrics: `jobs_fetched_total`, `jobs_new_total`, `alerts_sent_total`, `scrape_errors_total`.
+- Health endpoints: `/healthz`, `/metrics` (Prometheus).
+- Sentry for exceptions.
+
+---
+
+## 10. Security and compliance
+- No LinkedIn automation. Respect site ToS and robots.txt.
+- Store secrets in `.env` or secrets manager.
+- Do not log full descriptions if they contain PII.
+- Rate-limit requests. Back off on 429.
+
+---
+
+## 11. Local dev and deployment
+`.env.example` (extend):
+```
+DATABASE_URL=postgresql+psycopg://user:pass@db:5432/jobs
+REDIS_URL=redis://redis:6379/0
+PLAYWRIGHT_HEADLESS=1
+REQUESTS_TIMEOUT=25
+HTTP_MAX_RPS=2
+```
+
+Docker Compose outline:
+```
+services:
+  api: {{ build: ., env_file: .env, depends_on: [db, redis] }}
+  worker: {{ build: ., command: celery -A scheduler.celery_app worker, env_file: .env, depends_on: [db, redis] }}
+  beat: {{ build: ., command: celery -A scheduler.celery_app beat, env_file: .env, depends_on: [db, redis] }}
+  db: {{ image: postgres:16, environment: {{ POSTGRES_PASSWORD: pass }} }}
+  redis: {{ image: redis:7 }}
+```
+
+Smoke test:
+```
+alembic upgrade head
+python -m src.ingest.runner --dry-run --company Citadel
+```
+
+---
+
+## 12. Adding a new company
+1) Identify ATS by inspecting the careers site network calls.  
+2) Add a `targets` entry in `watchlist.yaml`.  
+3) If generic HTML, add a CSS/XPath rule set in `ingest/generic/careers_html.py`.  
+4) Run with `--dry-run` and verify sample extracts.  
+5) Commit a fixture for regression tests.
+
+---
+
+## 13. Adding a new ATS plugin
+1) Create `ingest/ats/{{name}}.py` implementing `BaseScraper`:
+```python
+class Scraper(BaseScraper):
+    source = "newats"
+    def fetch(self, target): ...
+    def normalize(self, raw): ...
+```
+2) Register in `ingest/registry.py`.  
+3) Write unit tests with recorded responses (vcrpy).  
+4) Add pagination and rate-limit guards.  
+5) Document fields mapping.
+
+---
+
+## 14. Classification rules design
+- Keep **title regex** narrow. Use **desc hints** to widen catch. 
+- Maintain a **negative list** for seniority and unrelated functions.
+- Add a **geo allowlist** to reduce noise.
+- Version filters in `config/filters.yaml` and load dynamically without restart.
+
+---
+
+## 15. Edge cases
+- Multi-location postings → split into per-location rows or tag with multiple locations.
+- “Summer Internship” with year omitted → accept if posted between Aug–Jan and has “Summer” plus internship indicators.
+- International postings → drop if country not in allowlist.
+- Reposts → same `source_id` but new `posted_at`. Treat as update, not new.
+
+---
+
+## 16. Testing strategy
+- **Unit**: per-scraper parsing, classification functions, dedupe, hashing.
+- **Integration**: run against recorded fixtures for each ATS.
+- **E2E**: dockerized pipeline with a mock endpoint returning known jobs.
+- **Property tests**: ensure idempotency across repeated runs.
+
+---
+
+## 17. Export and integrations
+- CSV/JSONL export endpoints.
+- Notion or Google Sheets sync task.
+- Web dashboard: search, filters, snooze, and export. Authentication optional.
+
+---
+
+## 18. Roadmap
+- Embedding-based matching with a small local model.
+- Visa-sponsorship heuristics and tagging.
+- Duplicate collapse across subsidiaries.
+- UI bulk actions and per-company mute windows.

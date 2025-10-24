@@ -1,0 +1,157 @@
+# Job Classification and Filtering Rules
+
+# Job categories with matching patterns
+categories:
+  ml_ai:
+    title_any:
+      - "(?i)machine learning"
+      - "(?i)\\bml\\b"
+      - "(?i)artificial intelligence"
+      - "(?i)\\bai\\b(?!ds)"
+      - "(?i)deep learning"
+      - "(?i)neural network"
+      - "(?i)computer vision"
+      - "(?i)nlp|natural language"
+      - "(?i)reinforcement learning"
+    description_hints:
+      - "(?i)pytorch|tensorflow|keras"
+      - "(?i)model training|model development"
+      - "(?i)llm|large language"
+  
+  cybersecurity:
+    title_any:
+      - "(?i)security"
+      - "(?i)threat"
+      - "(?i)incident response"
+      - "(?i)penetration test"
+      - "(?i)red team|blue team"
+      - "(?i)vulnerability"
+      - "(?i)malware"
+      - "(?i)forensic"
+    description_hints:
+      - "(?i)siem|splunk|elk"
+      - "(?i)firewall|ids|ips"
+      - "(?i)penetration|vulnerability"
+  
+  data_engineering:
+    title_any:
+      - "(?i)data engineer"
+      - "(?i)\\betl\\b"
+      - "(?i)data pipeline"
+      - "(?i)data infrastructure"
+      - "(?i)big data"
+    description_hints:
+      - "(?i)spark|hadoop|kafka"
+      - "(?i)airflow|data pipeline"
+      - "(?i)data warehouse|redshift|snowflake"
+  
+  data_science:
+    title_any:
+      - "(?i)data scien"
+      - "(?i)applied scientist"
+      - "(?i)research scientist"
+      - "(?i)quantitative"
+      - "(?i)analytics"
+    description_hints:
+      - "(?i)statistical|statistics"
+      - "(?i)a/b test|experiment"
+      - "(?i)predictive model"
+  
+  ml_platform:
+    title_any:
+      - "(?i)ml platform"
+      - "(?i)mlops"
+      - "(?i)machine learning.*platform"
+      - "(?i)ml infrastructure"
+    description_hints:
+      - "(?i)mlops|ml platform"
+      - "(?i)model deploy|model serving"
+      - "(?i)kubernetes.*ml|ml.*kubernetes"
+  
+  platform_security:
+    title_any:
+      - "(?i)platform.*security"
+      - "(?i)infrastructure.*security"
+      - "(?i)cloud security"
+      - "(?i)devops.*security|devsecops"
+    description_hints:
+      - "(?i)aws security|azure security|gcp security"
+      - "(?i)iam|identity.*access"
+
+# Internship and term filters
+internship:
+  title_patterns:
+    - "(?i)intern"
+    - "(?i)co-op"
+    - "(?i)summer 2026"
+    - "(?i)summer.*2026"
+    - "(?i)graduate"
+    - "(?i)masters"
+    - "(?i)master's"
+    - "(?i)phd"
+    - "(?i)doctoral"
+  description_patterns:
+    - "(?i)intern"
+    - "(?i)summer 2026"
+    - "(?i)internship"
+    - "(?i)graduate.*student"
+    - "(?i)masters.*student"
+    - "(?i)master's.*student"
+    - "(?i)pursuing.*masters"
+    - "(?i)pursuing.*master's"
+    - "(?i)phd.*student"
+    - "(?i)doctoral.*student"
+    - "(?i)currently.*enrolled"
+
+# Negative filters (exclude these)
+negatives:
+  seniority:
+    - "(?i)senior"
+    - "(?i)staff"
+    - "(?i)principal"
+    - "(?i)lead"
+    - "(?i)manager"
+    - "(?i)director"
+    - "(?i)vp|vice president"
+    - "(?i)head of"
+  
+  non_engineering:
+    - "(?i)sales"
+    - "(?i)marketing"
+    - "(?i)hr|human resources"
+    - "(?i)recruiter"
+    - "(?i)account"
+    - "(?i)business development"
+    - "(?i)product manager(?!.*technical)"
+    - "(?i)finance(?!.*quant)"
+
+# Allowed locations (case-insensitive matching)
+locations:
+  allowed:
+    - "New York"
+    - "NYC"
+    - "Manhattan"
+    - "Chicago"
+    - "Boston"
+    - "Cambridge"
+    - "San Francisco"
+    - "Bay Area"
+    - "Palo Alto"
+    - "Mountain View"
+    - "Seattle"
+    - "Austin"
+    - "Remote"
+    - "Hybrid"
+  
+  # Countries to exclude
+  excluded_countries:
+    - "India"
+    - "China"
+    - "UK"
+    - "Canada"  # Remove if you want Canadian positions
+
+# Similarity matching thresholds
+similarity:
+  title_jaccard_threshold: 0.8
+  description_cosine_threshold: 0.55
+  cross_source_dedup_threshold: 0.85

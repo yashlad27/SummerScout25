@@ -1,0 +1,46 @@
+# Example Watchlist with Indeed (NOT RECOMMENDED)
+# See JOB_AGGREGATOR_SCRAPERS.md for warnings
+
+targets:
+  # RECOMMENDED: Direct company career pages
+  - company: "Citadel"
+    ats_type: "greenhouse"
+    careers_url: "https://boards.greenhouse.io/citadelsecurities"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Chicago", "Boston", "Remote"]
+    categories: ["ml_ai", "data_science", "data_engineering"]
+
+  # EXAMPLE: Indeed scraper (NOT RECOMMENDED - see warnings)
+  # Uncomment to try (expect rate limits and blocks)
+  #
+  # - company: "Tech Startups"
+  #   ats_type: "indeed"
+  #   careers_url: "https://www.indeed.com"
+  #   roles_include: ["intern", "summer 2026", "internship"]
+  #   locations: ["San Francisco", "New York", "Remote"]
+  #   categories: ["ml_ai", "data_science"]
+
+  # LinkedIn and Glassdoor scrapers exist but DON'T WORK
+  # They will just log warnings
+  #
+  # - company: "Example"
+  #   ats_type: "linkedin"  # Will NOT work - just logs warning
+  #   careers_url: "https://www.linkedin.com"
+  #   roles_include: ["intern", "summer 2026"]
+  #   locations: ["Remote"]
+  #   categories: ["ml_ai"]
+  #
+  # - company: "Example"
+  #   ats_type: "glassdoor"  # Will NOT work - just logs warning
+  #   careers_url: "https://www.glassdoor.com"
+  #   roles_include: ["intern", "summer 2026"]
+  #   locations: ["Remote"]
+  #   categories: ["ml_ai"]
+
+  # BEST PRACTICE: Add more direct company career pages
+  - company: "Netflix"
+    ats_type: "generic"
+    careers_url: "https://jobs.netflix.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Los Gatos", "Remote"]
+    categories: ["ml_ai", "data_science", "data_engineering"]

@@ -1,0 +1,53 @@
+# Job Tracker Watchlist Configuration
+# Complete list with all companies
+
+targets:
+  # Original companies
+  - company: "Citadel"
+    ats_type: "greenhouse"
+    careers_url: "https://www.citadel.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Chicago", "Boston", "Remote"]
+    categories: ["ml_ai", "data_science", "data_engineering", "cybersecurity"]
+
+  - company: "Two Sigma"
+    ats_type: "greenhouse"
+    careers_url: "https://careers.twosigma.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai", "data_science", "data_engineering"]
+
+  - company: "Jane Street"
+    ats_type: "lever"
+    careers_url: "https://www.janestreet.com/join-jane-street/open-roles/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai", "data_science"]
+
+  - company: "HRT"
+    ats_type: "greenhouse"
+    careers_url: "https://www.hudsonrivertrading.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Chicago", "Remote"]
+    categories: ["ml_ai", "data_science", "data_engineering"]
+
+  - company: "D.E. Shaw"
+    ats_type: "lever"
+    careers_url: "https://www.deshaw.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai", "data_science", "cybersecurity"]
+
+  - company: "Microsoft"
+    ats_type: "generic"
+    careers_url: "https://careers.microsoft.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Redmond", "New York", "Remote"]
+    categories: ["ml_ai", "cybersecurity", "data_science", "platform_security"]
+
+  - company: "Google"
+    ats_type: "generic"
+    careers_url: "https://careers.google.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Mountain View", "New York", "Seattle", "Remote"]
+    categories: ["ml_ai", "cybersecurity", "data_science", "data_engineering"]

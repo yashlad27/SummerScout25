@@ -1,0 +1,14 @@
+# This file contains the complete list for reference
+# Total: ~110+ companies added to watchlist
+
+Companies added:
+- FAANG: Amazon, Meta, Apple, Google, Microsoft
+- ML/AI: NVIDIA, Databricks, Palantir
+- Data: Snowflake, Confluent, MongoDB  
+- Fintech: Stripe, Block, PayPal, Robinhood
+- Trading: All major firms (Citadel, Two Sigma, Jane Street, HRT, DRW, etc.)
+- Cybersecurity: CrowdStrike, Palo Alto, Okta, Zscaler, etc.
+- Dev Tools: GitHub, GitLab, HashiCorp, Atlassian
+- And 80+ more companies!
+
+See config/watchlist.yaml for the complete YAML configuration.

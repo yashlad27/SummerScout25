@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: job_tracker_db
+    environment:
+      POSTGRES_USER: jobtracker
+      POSTGRES_PASSWORD: changeme123
+      POSTGRES_DB: job_tracker
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jobtracker"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis (for Celery)
+  redis:
+    image: redis:7-alpine
+    container_name: job_tracker_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Run database migrations
+  migrate:
+    build: .
+    container_name: job_tracker_migrate
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://jobtracker:changeme123@db:5432/job_tracker
+    command: alembic upgrade head
+    restart: "no"
+
+  # Celery Worker
+  worker:
+    build: .
+    container_name: job_tracker_worker
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://jobtracker:changeme123@db:5432/job_tracker
+      REDIS_URL: redis://redis:6379/0
+    command: celery -A src.scheduler.tasks worker --loglevel=info
+    restart: unless-stopped
+
+  # Celery Beat (Scheduler)
+  beat:
+    build: .
+    container_name: job_tracker_beat
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://jobtracker:changeme123@db:5432/job_tracker
+      REDIS_URL: redis://redis:6379/0
+    command: celery -A src.scheduler.tasks beat --loglevel=info
+    restart: unless-stopped
+
+  # Optional: FastAPI API server
+  api:
+    build: .
+    container_name: job_tracker_api
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://jobtracker:changeme123@db:5432/job_tracker
+    command: uvicorn src.app.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
