@@ -8,7 +8,9 @@ from datetime import datetime
 from sqlalchemy import create_engine, select, desc
 from sqlalchemy.orm import Session
 from src.core.models import Job
-from src.core.config import settings
+from src.core.config import get_settings
+
+settings = get_settings()
 
 def export_to_csv(filename: str = "jobs_export.csv"):
     """Export jobs to CSV file."""
