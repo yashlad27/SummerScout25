@@ -53,6 +53,7 @@ class JobTrackerRunner:
         
         # Collect all new job IDs for batch notification
         all_new_job_ids = []
+        companies_scanned = []
         
         # Load watchlist
         config_loader = get_config_loader()
@@ -72,6 +73,8 @@ class JobTrackerRunner:
         for target_config in targets:
             try:
                 target = WatchlistTarget(**target_config)
+                companies_scanned.append(target.company)
+                
                 target_stats, new_job_ids = self._process_target(target)
                 
                 # Collect new job IDs
@@ -98,7 +101,7 @@ class JobTrackerRunner:
                 jobs = db.query(Job).filter(Job.id.in_(all_new_job_ids)).all()
                 
                 notification_manager = NotificationManager(db)
-                notification_manager.notify_batch(jobs)
+                notification_manager.notify_batch(jobs, companies_scanned=companies_scanned)
                 db.commit()  # Commit the alerts
                 stats["notifications_sent"] = 1  # One batch email
         

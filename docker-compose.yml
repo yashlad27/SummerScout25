@@ -65,6 +65,11 @@ services:
       - ./exports:/app/exports
     command: celery -A src.scheduler.tasks worker --loglevel=info
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   # Celery Beat (Scheduler)
   beat:
@@ -84,6 +89,11 @@ services:
       REDIS_URL: redis://redis:6379/0
     command: celery -A src.scheduler.tasks beat --loglevel=info
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   # Optional: FastAPI API server
   api:
@@ -102,6 +112,11 @@ services:
     ports:
       - "8000:8000"
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   postgres_data:

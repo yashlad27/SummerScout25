@@ -4,6 +4,7 @@ from celery import Celery
 
 from src.core.config import get_settings
 from src.ingest.runner import JobTrackerRunner
+from src.scheduler.beat_schedule import CELERY_BEAT_SCHEDULE
 from src.utils.logging_config import get_logger, setup_logging
 
 setup_logging()
@@ -28,6 +29,7 @@ celery_app.conf.update(
     task_track_started=True,
     task_time_limit=3600,  # 1 hour max per task
     worker_prefetch_multiplier=1,
+    beat_schedule=CELERY_BEAT_SCHEDULE,  # Add beat schedule
 )
 
 

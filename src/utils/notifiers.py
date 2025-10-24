@@ -154,11 +154,12 @@ class EmailNotifier(BaseNotifier):
         if not all([self.smtp_server, self.smtp_user, self.smtp_pass]):
             logger.warning("Email SMTP settings not fully configured")
     
-    def send_batch(self, jobs: list[Job]) -> bool:
+    def send_batch(self, jobs: list[Job], companies_scanned: list[str] = None) -> bool:
         """Send consolidated email with all jobs.
         
         Args:
             jobs: List of jobs to notify about
+            companies_scanned: List of companies that were scanned
             
         Returns:
             True if sent successfully
@@ -172,11 +173,17 @@ class EmailNotifier(BaseNotifier):
         
         # Group jobs by category
         jobs_by_category = {}
+        jobs_by_company = {}
         for job in jobs:
             category = job.category or "Other"
             if category not in jobs_by_category:
                 jobs_by_category[category] = []
             jobs_by_category[category].append(job)
+            
+            # Group by company
+            if job.company not in jobs_by_company:
+                jobs_by_company[job.company] = []
+            jobs_by_company[job.company].append(job)
         
         # Create email subject
         total = len(jobs)
@@ -186,15 +193,24 @@ class EmailNotifier(BaseNotifier):
         html_parts = [
             "<html><body style='font-family: Arial, sans-serif;'>",
             f"<h1 style='color: #2c3e50;'>{subject}</h1>",
-            f"<p style='color: #7f8c8d;'>Found {total} new internship opportunities across {len(jobs_by_category)} categories</p>",
-            "<hr style='border: 1px solid #ecf0f1;'/>"
+            f"<p style='color: #7f8c8d;'>Found {total} new internship opportunities from {len(jobs_by_company)} companies across {len(jobs_by_category)} categories</p>",
         ]
+        
+        # Add scan summary if provided
+        if companies_scanned:
+            html_parts.append(f"<p style='color: #95a5a6; font-size: 14px;'>✅ Scanned {len(companies_scanned)} companies total</p>")
+        
+        html_parts.append("<hr style='border: 1px solid #ecf0f1;'/>")
         
         text_parts = [
             f"{subject}\n",
-            f"Found {total} new internship opportunities\n",
-            "="*80 + "\n"
+            f"Found {total} new internship opportunities from {len(jobs_by_company)} companies\n",
         ]
+        
+        if companies_scanned:
+            text_parts.append(f"✅ Scanned {len(companies_scanned)} companies total\n")
+        
+        text_parts.append("="*80 + "\n")
         
         # Add jobs grouped by category
         for category, category_jobs in sorted(jobs_by_category.items()):
@@ -220,8 +236,35 @@ class EmailNotifier(BaseNotifier):
                     text_parts.append(f"  Remote: Yes")
                 text_parts.append(f"  Apply: {job.url}\n")
         
+        # Add scan summary footer
         html_parts.append("<hr style='border: 1px solid #ecf0f1; margin-top: 30px;'/>")
-        html_parts.append("<p style='color: #95a5a6; font-size: 12px;'>Automated notification from Job Tracker</p>")
+        
+        if companies_scanned:
+            html_parts.append("<details style='margin-top: 20px;'>")
+            html_parts.append("<summary style='cursor: pointer; color: #7f8c8d; font-size: 14px;'>📊 View All Companies Scanned ({} total)</summary>".format(len(companies_scanned)))
+            html_parts.append("<div style='margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 4px;'>")
+            
+            # Group companies by whether they had jobs
+            companies_with_jobs = set(jobs_by_company.keys())
+            companies_scanned_sorted = sorted(companies_scanned)
+            
+            for company in companies_scanned_sorted:
+                if company in companies_with_jobs:
+                    html_parts.append(f"<span style='color: #27ae60; margin-right: 15px;'>✓ {company} ({len(jobs_by_company[company])} jobs)</span>")
+                else:
+                    html_parts.append(f"<span style='color: #95a5a6; margin-right: 15px;'>○ {company}</span>")
+            
+            html_parts.append("</div></details>")
+            
+            text_parts.append("\n" + "="*80 + "\n")
+            text_parts.append(f"Companies Scanned ({len(companies_scanned)} total):\n")
+            for company in companies_scanned_sorted:
+                if company in companies_with_jobs:
+                    text_parts.append(f"  ✓ {company} ({len(jobs_by_company[company])} jobs)\n")
+                else:
+                    text_parts.append(f"  ○ {company}\n")
+        
+        html_parts.append("<p style='color: #95a5a6; font-size: 12px; margin-top: 20px;'>Automated notification from Job Tracker</p>")
         html_parts.append("</body></html>")
         
         # Create message
@@ -327,11 +370,12 @@ class NotificationManager:
         
         logger.info(f"Initialized notifiers: {list(self.notifiers.keys())}")
     
-    def notify_batch(self, jobs: list[Job]) -> None:
+    def notify_batch(self, jobs: list[Job], companies_scanned: list[str] = None) -> None:
         """Send consolidated notification for multiple jobs.
         
         Args:
             jobs: List of jobs to notify about
+            companies_scanned: List of all companies that were scanned
         """
         if not jobs:
             return
@@ -339,7 +383,7 @@ class NotificationManager:
         # Send batch email if email notifier is configured
         email_notifier = self.notifiers.get("email")
         if email_notifier and hasattr(email_notifier, 'send_batch'):
-            success = email_notifier.send_batch(jobs)
+            success = email_notifier.send_batch(jobs, companies_scanned=companies_scanned)
             
             # Record alerts for all jobs (safely handle session issues)
             try:
