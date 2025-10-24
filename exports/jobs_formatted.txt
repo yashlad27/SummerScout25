@@ -1,0 +1,75 @@
+================================================================================
+SUMMER 2026 INTERNSHIP TRACKER
+Generated: 2025-10-24 18:44:40
+Total Jobs: 11
+================================================================================
+
+
+================================================================================
+🏢 Databricks (6 positions)
+================================================================================
+
+  [1] Product Management Intern (Summer 2026)Bellevue, Washington; Mountain View, California; San Francisco, California
+      📍 Location: Not specified
+      🔖 Tags: internship, summer-2026
+      🔗 Apply: https://www.databricks.com/company/careers/product/product-management-intern-summer-2026-6883068002
+
+  [2] PhD GenAI Research Scientist InternSan Francisco, California
+      📍 Location: Not specified
+      🏷️  Category: data_science
+      🔖 Tags: internship, data_science
+      🔗 Apply: https://www.databricks.com/company/careers/university-recruiting/phd-genai-research-scientist-intern-7011263002
+
+  [3] UX Research InternSeattle, Washington
+      📍 Location: Not specified
+      🔖 Tags: internship
+      🔗 Apply: https://www.databricks.com/company/careers/product/ux-research-intern-8143590002
+
+  [4] Product Design InternSeattle, Washington
+      📍 Location: Not specified
+      🔖 Tags: internship
+      🔗 Apply: https://www.databricks.com/company/careers/product/product-design-intern-8143588002
+
+  [5] Data Science Intern (2026 Start)Mountain View, California; San Francisco, California
+      📍 Location: Not specified
+      🏷️  Category: data_science
+      🔖 Tags: internship, data_science
+      🔗 Apply: https://www.databricks.com/company/careers/university-recruiting/data-science-intern-2026-start-6866538002
+
+  [6] Internships & Early Careers
+      📍 Location: Not specified
+      🔖 Tags: internship
+      🔗 Apply: https://www.databricks.com/company/careers/university-recruiting
+
+
+================================================================================
+🏢 NVIDIA (5 positions)
+================================================================================
+
+  [1] System Software Engineer Intern, AI Performance And Efficiency Tools, Summer 2026
+      📍 Location: Not specified
+      🏷️  Category: ml_ai
+      🔖 Tags: internship, summer-2026, ml_ai
+      🔗 Apply: https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/China-Shanghai/System-Software-Engineer-Intern--AI-Performance-And-Efficiency-Tools--Summer-2026_JR2006462
+
+  [2] Android Software Engineer (RDSS Intern)
+      📍 Location: Not specified
+      🔖 Tags: internship
+      🔗 Apply: https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Taiwan-Taipei/Android-Software-Engineer--RDSS-Intern-_JR2006634
+
+  [3] Developer Technology Engineering Intern - Compute Performance
+      📍 Location: Not specified
+      🔖 Tags: internship
+      🔗 Apply: https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Switzerland-Zurich/Developer-Technology-Engineering-Intern---Compute-Performance_JR2006687
+
+  [4] AI Developer Technology Intern - 2026
+      📍 Location: Not specified
+      🏷️  Category: ml_ai
+      🔖 Tags: internship, ml_ai
+      🔗 Apply: https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Germany-Munich/AI-Developer-Technology-Intern---2026_JR2006380
+
+  [5] Data Processing Developer Technology Intern - 2026
+      📍 Location: Not specified
+      🔖 Tags: internship
+      🔗 Apply: https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/job/Germany-Munich/Data-Processing-Developer-Technology-Intern---2026_JR2006379
+

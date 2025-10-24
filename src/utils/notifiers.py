@@ -341,14 +341,17 @@ class NotificationManager:
         if email_notifier and hasattr(email_notifier, 'send_batch'):
             success = email_notifier.send_batch(jobs)
             
-            # Record alerts for all jobs
-            for job in jobs:
-                self._record_alert(
-                    job_id=job.id,
-                    alert_type="new",
-                    channel="email",
-                    status="sent" if success else "failed",
-                )
+            # Record alerts for all jobs (safely handle session issues)
+            try:
+                for job in jobs:
+                    self._record_alert(
+                        job_id=job.id,
+                        alert_type="new",
+                        channel="email",
+                        status="sent" if success else "failed",
+                    )
+            except Exception as e:
+                logger.warning(f"Failed to record alerts (non-critical): {e}")
         
         logger.info(f"Sent batch notification for {len(jobs)} jobs")
     
@@ -435,4 +438,5 @@ class NotificationManager:
         )
         
         self.db.add(alert)
-        self.db.commit()
+        # Don't commit here - let the caller handle it
+        # self.db.commit()

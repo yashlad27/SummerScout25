@@ -170,37 +170,92 @@ class JobFilter:
             job: Normalized job
             
         Returns:
-            True if location is allowed
+            True if location is allowed (US only)
         """
         location = job.location
-        if not location:
-            # No location specified - allow it
+        
+        # Check title for location info if location field is empty
+        if not location or not location.strip():
+            # Try to extract location from title
+            title_lower = job.title.lower()
+            
+            # Check for non-US locations in title
+            non_us_in_title = ['germany', 'france', 'netherlands', 'denmark', 'serbia',
+                               'canada', 'india', 'china', 'japan', 'uk', 'london',
+                               'paris', 'berlin', 'munich', 'amsterdam', 'toronto',
+                               'bangalore', 'aarhus', 'belgrade']
+            
+            for country in non_us_in_title:
+                if country in title_lower:
+                    return False
+            
+            # If no location data and no non-US in title, allow it (assume US)
             return True
         
         location_lower = location.lower()
         
-        # Check excluded countries
-        excluded_countries = self.locations_config.get("excluded_countries", [])
-        for country in excluded_countries:
-            if country.lower() in location_lower:
+        # US states and common indicators
+        us_indicators = [
+            'united states', 'usa', 'u.s.', 'us,',
+            # States
+            'alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado',
+            'connecticut', 'delaware', 'florida', 'georgia', 'hawaii', 'idaho',
+            'illinois', 'indiana', 'iowa', 'kansas', 'kentucky', 'louisiana',
+            'maine', 'maryland', 'massachusetts', 'michigan', 'minnesota',
+            'mississippi', 'missouri', 'montana', 'nebraska', 'nevada',
+            'new hampshire', 'new jersey', 'new mexico', 'new york', 'north carolina',
+            'north dakota', 'ohio', 'oklahoma', 'oregon', 'pennsylvania',
+            'rhode island', 'south carolina', 'south dakota', 'tennessee', 'texas',
+            'utah', 'vermont', 'virginia', 'washington', 'west virginia',
+            'wisconsin', 'wyoming',
+            # Common cities
+            'new york', 'los angeles', 'chicago', 'houston', 'phoenix', 'philadelphia',
+            'san antonio', 'san diego', 'dallas', 'san jose', 'austin', 'jacksonville',
+            'san francisco', 'columbus', 'fort worth', 'indianapolis', 'charlotte',
+            'seattle', 'denver', 'boston', 'detroit', 'portland', 'las vegas',
+            'miami', 'atlanta', 'oakland', 'minneapolis', 'tulsa', 'tampa',
+            'arlington', 'raleigh', 'pittsburgh', 'cincinnati', 'sacramento',
+            # State abbreviations (be careful with these)
+            ', ca', ', ny', ', tx', ', fl', ', il', ', pa', ', oh', ', ga',
+            ', nc', ', mi', ', nj', ', va', ', wa', ', az', ', ma', ', tn',
+            ', in', ', mo', ', md', ', wi', ', mn', ', co', ', al', ', sc',
+            'remote, us', 'remote - us', 'remote (us)', 'remote usa'
+        ]
+        
+        # Check if location contains any US indicator
+        for indicator in us_indicators:
+            if indicator in location_lower:
+                return True
+        
+        # Check for "remote" with US assumption (if it just says "Remote" and nothing else)
+        if location_lower == 'remote':
+            # Allow plain "Remote" assuming it could be US
+            return True
+        
+        # Explicitly reject non-US countries
+        non_us_countries = [
+            'canada', 'uk', 'united kingdom', 'england', 'scotland', 'wales',
+            'ireland', 'germany', 'france', 'spain', 'italy', 'netherlands',
+            'belgium', 'switzerland', 'austria', 'sweden', 'norway', 'denmark',
+            'finland', 'poland', 'czech', 'portugal', 'greece', 'hungary',
+            'romania', 'bulgaria', 'croatia', 'serbia', 'slovakia', 'slovenia',
+            'india', 'china', 'japan', 'korea', 'singapore', 'australia',
+            'new zealand', 'brazil', 'mexico', 'argentina', 'chile', 'israel',
+            'south africa', 'egypt', 'dubai', 'uae', 'saudi arabia',
+            'toronto', 'vancouver', 'montreal', 'london', 'paris', 'berlin',
+            'munich', 'amsterdam', 'dublin', 'zurich', 'stockholm', 'oslo',
+            'copenhagen', 'warsaw', 'prague', 'barcelona', 'madrid', 'rome',
+            'milan', 'tokyo', 'seoul', 'singapore', 'sydney', 'melbourne',
+            'auckland', 'bangalore', 'mumbai', 'delhi', 'hyderabad', 'chennai',
+            'beijing', 'shanghai', 'hong kong', 'tel aviv'
+        ]
+        
+        for country in non_us_countries:
+            if country in location_lower:
                 return False
         
-        # Check allowed locations (if specified)
-        allowed = self.locations_config.get("allowed", [])
-        if allowed:
-            # If allowed list exists, location must match one of them
-            for allowed_loc in allowed:
-                if allowed_loc.lower() in location_lower:
-                    return True
-            
-            # Remote is always allowed
-            if job.remote:
-                return True
-            
-            return False
-        
-        # If no allowed list, default to allowing
-        return True
+        # If we can't determine, reject it (US only policy)
+        return False
     
     def add_tags(self, job: NormalizedJob) -> list[str]:
         """Add tags to job based on classification.

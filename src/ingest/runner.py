@@ -51,8 +51,8 @@ class JobTrackerRunner:
             "errors": 0,
         }
         
-        # Collect all new jobs for batch notification
-        all_new_jobs = []
+        # Collect all new job IDs for batch notification
+        all_new_job_ids = []
         
         # Load watchlist
         config_loader = get_config_loader()
@@ -72,10 +72,10 @@ class JobTrackerRunner:
         for target_config in targets:
             try:
                 target = WatchlistTarget(**target_config)
-                target_stats, new_jobs = self._process_target(target)
+                target_stats, new_job_ids = self._process_target(target)
                 
-                # Collect new jobs
-                all_new_jobs.extend(new_jobs)
+                # Collect new job IDs
+                all_new_job_ids.extend(new_job_ids)
                 
                 # Aggregate stats
                 for key in stats:
@@ -90,11 +90,16 @@ class JobTrackerRunner:
                 continue
         
         # Send consolidated notification for all new jobs
-        if all_new_jobs and not self.dry_run:
-            logger.info(f"Sending consolidated notification for {len(all_new_jobs)} new jobs")
+        if all_new_job_ids and not self.dry_run:
+            logger.info(f"Sending consolidated notification for {len(all_new_job_ids)} new jobs")
             with get_db_context() as db:
+                # Fetch the jobs in this session
+                from src.core.models import Job
+                jobs = db.query(Job).filter(Job.id.in_(all_new_job_ids)).all()
+                
                 notification_manager = NotificationManager(db)
-                notification_manager.notify_batch(all_new_jobs)
+                notification_manager.notify_batch(jobs)
+                db.commit()  # Commit the alerts
                 stats["notifications_sent"] = 1  # One batch email
         
         logger.info(f"Pipeline complete: {stats}")
@@ -117,7 +122,7 @@ class JobTrackerRunner:
             "notifications_sent": 0,
         }
         
-        new_jobs = []
+        new_job_ids = []
         
         logger.info(f"Processing {target.company} ({target.ats_type})")
         
@@ -125,7 +130,7 @@ class JobTrackerRunner:
         scraper = get_scraper(target)
         if not scraper:
             logger.warning(f"No scraper available for {target.ats_type}")
-            return stats, new_jobs
+            return stats, new_job_ids
         
         # Fetch raw jobs
         raw_jobs = scraper.fetch()
@@ -133,7 +138,7 @@ class JobTrackerRunner:
         
         if not raw_jobs:
             logger.info(f"No jobs found for {target.company}")
-            return stats, new_jobs
+            return stats, new_job_ids
         
         # Process each job
         with get_db_context() as db:
@@ -169,8 +174,11 @@ class JobTrackerRunner:
                             stats["jobs_new"] += 1
                             logger.info(f"New job: {db_job.company} - {db_job.title}")
                             
-                            # Collect for batch notification
-                            new_jobs.append(db_job)
+                            # Flush to ensure ID is generated
+                            db.flush()
+                            
+                            # Collect job ID for batch notification
+                            new_job_ids.append(db_job.id)
                         else:
                             stats["jobs_updated"] += 1
                     else:
@@ -185,7 +193,7 @@ class JobTrackerRunner:
                     logger.error(f"Failed to process job {raw_job.source_id}: {e}")
                     continue
         
-        return stats, new_jobs
+        return stats, new_job_ids
 
 
 def main():
