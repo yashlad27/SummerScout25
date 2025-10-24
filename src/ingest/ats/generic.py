@@ -127,15 +127,16 @@ class GenericScraper(BaseScraper):
             source_id = re.sub(r'[^a-zA-Z0-9]', '_', url)[-100:]
             
             return RawJob(
+                source="generic",
                 source_id=source_id,
                 company=self.company,
                 title=link_data['title'],
                 location=None,
                 url=url,
-                description_raw=link_data['title'],
+                description_html=link_data['title'],
                 posted_at=None,
                 employment_type="internship",
-                remote=None,
+                remote=False,
             )
             
         except Exception as e:

@@ -4,12 +4,12 @@ from celery.schedules import crontab
 
 # Celery Beat schedule
 CELERY_BEAT_SCHEDULE = {
-    # Run full tracker every 30 minutes
-    "run-job-tracker-every-30min": {
+    # Run full tracker every 4 hours
+    "run-job-tracker-every-4hrs": {
         "task": "tasks.run_job_tracker",
-        "schedule": crontab(minute="*/30"),  # Every 30 minutes
+        "schedule": crontab(minute=0, hour="*/4"),  # Every 4 hours (at 0, 4, 8, 12, 16, 20)
         "options": {
-            "expires": 1800,  # Expire after 30 minutes
+            "expires": 14400,  # Expire after 4 hours
         },
     },
     

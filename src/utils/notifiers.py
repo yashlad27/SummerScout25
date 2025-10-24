@@ -154,6 +154,98 @@ class EmailNotifier(BaseNotifier):
         if not all([self.smtp_server, self.smtp_user, self.smtp_pass]):
             logger.warning("Email SMTP settings not fully configured")
     
+    def send_batch(self, jobs: list[Job]) -> bool:
+        """Send consolidated email with all jobs.
+        
+        Args:
+            jobs: List of jobs to notify about
+            
+        Returns:
+            True if sent successfully
+        """
+        if not jobs:
+            return True
+            
+        if not all([self.smtp_server, self.smtp_user, self.smtp_pass]):
+            logger.error("Cannot send email: SMTP settings not configured")
+            return False
+        
+        # Group jobs by category
+        jobs_by_category = {}
+        for job in jobs:
+            category = job.category or "Other"
+            if category not in jobs_by_category:
+                jobs_by_category[category] = []
+            jobs_by_category[category].append(job)
+        
+        # Create email subject
+        total = len(jobs)
+        subject = f"🎯 {total} New Summer 2026 Internship{'s' if total > 1 else ''} Found!"
+        
+        # Build HTML body
+        html_parts = [
+            "<html><body style='font-family: Arial, sans-serif;'>",
+            f"<h1 style='color: #2c3e50;'>{subject}</h1>",
+            f"<p style='color: #7f8c8d;'>Found {total} new internship opportunities across {len(jobs_by_category)} categories</p>",
+            "<hr style='border: 1px solid #ecf0f1;'/>"
+        ]
+        
+        text_parts = [
+            f"{subject}\n",
+            f"Found {total} new internship opportunities\n",
+            "="*80 + "\n"
+        ]
+        
+        # Add jobs grouped by category
+        for category, category_jobs in sorted(jobs_by_category.items()):
+            html_parts.append(f"<h2 style='color: #3498db; margin-top: 30px;'>📁 {category.upper().replace('_', ' ')} ({len(category_jobs)} jobs)</h2>")
+            text_parts.append(f"\n## {category.upper().replace('_', ' ')} ({len(category_jobs)} jobs)\n")
+            
+            for job in category_jobs:
+                # HTML version
+                html_parts.append("<div style='background: #f8f9fa; padding: 15px; margin: 10px 0; border-left: 4px solid #3498db;'>")
+                html_parts.append(f"<h3 style='margin: 0 0 10px 0; color: #2c3e50;'>{job.company} - {job.title}</h3>")
+                html_parts.append(f"<p style='margin: 5px 0;'><strong>📍 Location:</strong> {job.location or 'Not specified'}</p>")
+                if job.remote:
+                    html_parts.append("<p style='margin: 5px 0;'><strong>🏠 Remote:</strong> Yes</p>")
+                if job.tags:
+                    html_parts.append(f"<p style='margin: 5px 0;'><strong>🏷️ Tags:</strong> {', '.join(job.tags)}</p>")
+                html_parts.append(f"<p style='margin: 10px 0 0 0;'><a href='{job.url}' style='background: #3498db; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; display: inline-block;'>Apply Now →</a></p>")
+                html_parts.append("</div>")
+                
+                # Text version
+                text_parts.append(f"\n• {job.company} - {job.title}")
+                text_parts.append(f"  Location: {job.location or 'Not specified'}")
+                if job.remote:
+                    text_parts.append(f"  Remote: Yes")
+                text_parts.append(f"  Apply: {job.url}\n")
+        
+        html_parts.append("<hr style='border: 1px solid #ecf0f1; margin-top: 30px;'/>")
+        html_parts.append("<p style='color: #95a5a6; font-size: 12px;'>Automated notification from Job Tracker</p>")
+        html_parts.append("</body></html>")
+        
+        # Create message
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = subject
+        msg["From"] = self.smtp_from or self.smtp_user
+        msg["To"] = self.smtp_to or self.smtp_user
+        
+        msg.attach(MIMEText("\n".join(text_parts), "plain"))
+        msg.attach(MIMEText("".join(html_parts), "html"))
+        
+        try:
+            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+                server.starttls()
+                server.login(self.smtp_user, self.smtp_pass)
+                server.send_message(msg)
+            
+            logger.info(f"Sent consolidated email with {total} jobs")
+            return True
+        
+        except Exception as e:
+            logger.error(f"Failed to send consolidated email: {e}")
+            return False
+    
     def send(self, job: Job, alert_type: str = "new") -> bool:
         """Send notification via email.
         
@@ -234,6 +326,31 @@ class NotificationManager:
             self.notifiers["email"] = EmailNotifier()
         
         logger.info(f"Initialized notifiers: {list(self.notifiers.keys())}")
+    
+    def notify_batch(self, jobs: list[Job]) -> None:
+        """Send consolidated notification for multiple jobs.
+        
+        Args:
+            jobs: List of jobs to notify about
+        """
+        if not jobs:
+            return
+        
+        # Send batch email if email notifier is configured
+        email_notifier = self.notifiers.get("email")
+        if email_notifier and hasattr(email_notifier, 'send_batch'):
+            success = email_notifier.send_batch(jobs)
+            
+            # Record alerts for all jobs
+            for job in jobs:
+                self._record_alert(
+                    job_id=job.id,
+                    alert_type="new",
+                    channel="email",
+                    status="sent" if success else "failed",
+                )
+        
+        logger.info(f"Sent batch notification for {len(jobs)} jobs")
     
     def notify(self, job: Job, alert_type: str = "new", channels: list[str] | None = None) -> None:
         """Send notifications for a job.

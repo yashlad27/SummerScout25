@@ -136,15 +136,16 @@ class IndeedScraper(BaseScraper):
                 return None
             
             return RawJob(
+                source="indeed",
                 source_id=job_id,
                 company=company,
                 title=title,
                 location=location,
                 url=job_url,
-                description_raw=description,
+                description_html=description,
                 posted_at=None,  # Would need to parse date string
                 employment_type="internship",
-                remote=None,
+                remote=False,
             )
             
         except Exception as e:

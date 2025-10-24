@@ -20,19 +20,22 @@ COPY pyproject.toml ./
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi --no-root
 
-# Install Playwright browsers (for generic HTML scraping)
-RUN playwright install chromium \
-    && playwright install-deps chromium
-
 # Copy application code
 COPY . .
 
 # Install the application
 RUN poetry install --no-interaction --no-ansi
 
+# Install Playwright browsers and dependencies (must be BEFORE switching user)
+RUN playwright install chromium \
+    && playwright install-deps chromium
+
 # Create non-root user
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+
+# Install browsers for the user too
 USER appuser
+RUN playwright install chromium
 
 # Default command
 CMD ["python", "-m", "src.ingest.runner"]
