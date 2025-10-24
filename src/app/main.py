@@ -4,8 +4,12 @@ from datetime import datetime
 from typing import Any
 
 from fastapi import Depends, FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from sqlalchemy import desc, func
 from sqlalchemy.orm import Session
+import os
 
 from src.core.database import get_db
 from src.core.models import Alert, Job
@@ -19,15 +23,55 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# Enable CORS for frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins for local development
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Get frontend directory path
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
+
+# Mount static files for frontend
+if os.path.exists(FRONTEND_DIR):
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+    print(f"✅ Frontend mounted at: {FRONTEND_DIR}")
+else:
+    print(f"⚠️ Frontend directory not found: {FRONTEND_DIR}")
+
 
 @app.get("/")
-def read_root() -> dict[str, str]:
-    """Root endpoint."""
+def read_root():
+    """Serve the frontend dashboard."""
+    index_file = os.path.join(FRONTEND_DIR, "index.html")
+    print(f"Looking for: {index_file}")
+    print(f"Exists: {os.path.exists(index_file)}")
+    
+    if os.path.exists(index_file):
+        return FileResponse(index_file, media_type="text/html")
+    
     return {
         "message": "Job Tracker API",
         "version": "0.1.0",
         "docs": "/docs",
+        "dashboard": "/dashboard",
+        "error": f"Frontend not found at {FRONTEND_DIR}"
     }
+
+
+@app.get("/dashboard")
+def dashboard():
+    """Serve the frontend dashboard."""
+    index_file = os.path.join(FRONTEND_DIR, "index.html")
+    
+    if os.path.exists(index_file):
+        return FileResponse(index_file, media_type="text/html")
+    
+    raise HTTPException(status_code=404, detail=f"Dashboard not found at {FRONTEND_DIR}")
 
 
 @app.get("/healthz")
@@ -200,4 +244,62 @@ def list_companies(db: Session = Depends(get_db)) -> dict[str, Any]:
         "companies": [
             {"name": company, "job_count": count} for company, count in companies
         ]
+    }
+
+
+@app.get("/scraper-status")
+def scraper_status(db: Session = Depends(get_db)) -> dict[str, Any]:
+    """Get scraper status - last run and next scheduled run.
+    
+    Args:
+        db: Database session
+        
+    Returns:
+        Scraper status information
+    """
+    from datetime import timedelta, timezone
+    
+    # Get the most recently created job to determine last scrape
+    last_job = db.query(Job).order_by(desc(Job.created_at)).first()
+    
+    # Get the most recent alert to see when scraper last ran
+    last_alert = db.query(Alert).order_by(desc(Alert.sent_at)).first()
+    
+    # Calculate last scrape time (use the most recent between job creation and alert)
+    last_scrape = None
+    if last_job and last_alert:
+        # Make sure both are timezone-aware
+        job_time = last_job.created_at.replace(tzinfo=timezone.utc) if last_job.created_at.tzinfo is None else last_job.created_at
+        alert_time = last_alert.sent_at.replace(tzinfo=timezone.utc) if last_alert.sent_at.tzinfo is None else last_alert.sent_at
+        last_scrape = max(job_time, alert_time)
+    elif last_job:
+        last_scrape = last_job.created_at.replace(tzinfo=timezone.utc) if last_job.created_at.tzinfo is None else last_job.created_at
+    elif last_alert:
+        last_scrape = last_alert.sent_at.replace(tzinfo=timezone.utc) if last_alert.sent_at.tzinfo is None else last_alert.sent_at
+    
+    # Calculate next scrape (every 4 hours)
+    next_scrape = None
+    hours_until_next = None
+    minutes_until_next = None
+    
+    if last_scrape:
+        next_scrape = last_scrape + timedelta(hours=4)
+        now = datetime.now(timezone.utc)
+        time_until_next = next_scrape - now
+        
+        if time_until_next.total_seconds() > 0:
+            hours_until_next = int(time_until_next.total_seconds() // 3600)
+            minutes_until_next = int((time_until_next.total_seconds() % 3600) // 60)
+        else:
+            # Scrape is overdue
+            hours_until_next = 0
+            minutes_until_next = 0
+            next_scrape = now  # Should run now
+    
+    return {
+        "last_scrape_at": last_scrape.isoformat() if last_scrape else None,
+        "next_scrape_at": next_scrape.isoformat() if next_scrape else None,
+        "hours_until_next": hours_until_next,
+        "minutes_until_next": minutes_until_next,
+        "scrape_interval_hours": 4,
     }

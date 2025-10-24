@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer 2026 Internship Tracker - US Positions</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🎯 Summer 2026 Internship Tracker</h1>
+                <p class="subtitle">United States Positions Only</p>
+                <div class="last-updated">
+                    Dashboard updated: <span id="lastUpdate">Loading...</span>
+                    <button class="refresh-btn" onclick="refreshData()">🔄 Refresh</button>
+                </div>
+                
+                <!-- Scraper Status -->
+                <div class="scraper-status">
+                    <div class="scraper-status-item">
+                        <span class="scraper-label">🔍 Last Scrape:</span>
+                        <span id="lastScrape" class="scraper-value">Loading...</span>
+                    </div>
+                    <div class="scraper-status-item">
+                        <span class="scraper-label">⏰ Next Scrape In:</span>
+                        <span id="nextScrape" class="scraper-value countdown">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Dashboard -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-icon">💼</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="totalJobs">-</div>
+                    <div class="stat-label">Total Internships</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🏢</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="totalCompanies">-</div>
+                    <div class="stat-label">Companies Hiring</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🆕</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="newToday">-</div>
+                    <div class="stat-label">New Today</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📧</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="alertsSent">-</div>
+                    <div class="stat-label">Alerts Sent Today</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter Section -->
+        <div class="search-section">
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="🔍 Search by company name or job title..."
+                    onkeyup="filterJobs()"
+                />
+                <button class="clear-btn" onclick="clearSearch()">✕ Clear</button>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-category="all" onclick="filterByCategory('all')">
+                    All Categories
+                </button>
+                <button class="filter-tab" data-category="ml_ai" onclick="filterByCategory('ml_ai')">
+                    🤖 ML/AI
+                </button>
+                <button class="filter-tab" data-category="cybersecurity" onclick="filterByCategory('cybersecurity')">
+                    🔒 Cybersecurity
+                </button>
+                <button class="filter-tab" data-category="data_science" onclick="filterByCategory('data_science')">
+                    📊 Data Science
+                </button>
+                <button class="filter-tab" data-category="data_engineering" onclick="filterByCategory('data_engineering')">
+                    🔧 Data Engineering
+                </button>
+            </div>
+
+            <div class="location-filter">
+                <label>
+                    <input type="checkbox" id="usOnlyFilter" checked onchange="filterJobs()">
+                    <span>🇺🇸 US Locations Only (Recommended)</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Companies with Openings -->
+        <div class="section">
+            <h2>🏢 Companies with Openings</h2>
+            <div class="companies-grid" id="companiesGrid">
+                <div class="loading">Loading companies...</div>
+            </div>
+        </div>
+
+        <!-- Jobs Listing -->
+        <div class="section">
+            <h2>📋 Available Internships (<span id="jobCount">0</span>)</h2>
+            <div id="jobsContainer" class="jobs-container">
+                <div class="loading">Loading jobs...</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Data updates every 4 hours • Email notifications to yashlad727@gmail.com</p>
+            <p>Tracking 108 companies • Summer 2026 Internships Only</p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
