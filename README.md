@@ -1,196 +1,258 @@
-# Job Tracker - Summer 2026 Internships
+# 🎯 InternTracker
 
-Automated tracker for ML/AI, Cybersecurity, Data Engineering, and Data Science internship openings for Summer 2026.
+**On-demand command-line tool to track Summer 2026 tech internships across 108 top companies.**
 
-## Features
+No cloud required. No 24/7 running. Just scrape when you want, get results, done.
 
-- 🎯 **Targeted Tracking**: Monitors specific companies and ATS platforms
-- 🔍 **Smart Filtering**: ML/AI, Cybersecurity, Data Engineering categories
-- 🔔 **Real-time Alerts**: Slack, Email, and Pushover notifications
-- 🔄 **Change Detection**: Tracks job updates and modifications
-- 🚫 **Deduplication**: Hash-based identity and change tracking
-- 📊 **PostgreSQL Storage**: Versioned job data with full history
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
-## Architecture
+## ✨ Features
 
-```
-┌─────────────┐
-│  Scheduler  │ (Celery Beat / APScheduler)
-└──────┬──────┘
-       │
-       ▼
-┌─────────────────────────────────┐
-│  Scraper Registry               │
-│  ├─ Greenhouse                  │
-│  ├─ Lever                       │
-│  ├─ Ashby                       │
-│  ├─ SmartRecruiters             │
-│  └─ Generic HTML                │
-└──────┬──────────────────────────┘
-       │
-       ▼
-┌─────────────┐      ┌──────────────┐
-│ Normalizer  │──────▶│   Filters    │
-└─────────────┘      └──────┬───────┘
-                            │
-                            ▼
-                     ┌──────────────┐
-                     │  Deduper     │
-                     └──────┬───────┘
-                            │
-                            ▼
-                     ┌──────────────┐      ┌──────────────┐
-                     │  PostgreSQL  │──────▶│  Notifiers   │
-                     └──────────────┘      └──────────────┘
-```
+- 🚀 **On-Demand Scraping** - Run only when you need it
+- 🎯 **108 Top Companies** - FAANG, quant firms, unicorn startups
+- 🇺🇸 **US Positions Only** - Automatically filtered
+- 💼 **Internship Focus** - Summer 2026 positions
+- 📊 **Smart Filtering** - ML/AI, Cybersecurity, Data Engineering, Data Science
+- 🔔 **Email Notifications** - Get alerts for new postings
+- 💾 **Data Persistence** - PostgreSQL storage
+- 🪶 **Lightweight** - Docker stops when done
 
-## Quick Start
-
-### 1. Install Dependencies
+## 🎬 Demo
 
 ```bash
-# Using Poetry (recommended)
-poetry install
+# Scrape all 108 companies
+$ ./scrape.sh
+🔍 SCRAPING JOBS...
+✅ Citadel - 9 jobs found
+✅ Two Sigma - 1 job found
+✅ Databricks - 15 jobs found
+✅ NVIDIA - 5 jobs found
+...
+📊 RESULTS: 72 jobs from 17 companies
 
-# Or using pip
-pip install -r requirements.txt
+# View results
+$ ./show_jobs.sh
+       company        | jobs | last_updated 
+---------------------+------+--------------
+ Databricks          |   15 | 2025-10-24
+ HRT                 |   15 | 2025-10-24
+ Citadel             |    9 | 2025-10-24
+...
 ```
 
-### 2. Configure Environment
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Docker Desktop installed
+- 5GB disk space
+
+### Setup (One-Time)
 
 ```bash
+# 1. Clone the repo
+git clone https://github.com/yourusername/InternTracker.git
+cd InternTracker
+
+# 2. Create environment file
 cp .env.example .env
-# Edit .env with your database and notification settings
+
+# 3. (Optional) Add your Gmail for notifications
+nano .env  # Add SMTP settings
+
+# 4. Build Docker images
+docker-compose build
 ```
 
-### 3. Setup Database
+### Usage
 
+**Scrape all companies (10-15 minutes):**
 ```bash
-# Run migrations
-poetry run alembic upgrade head
+./scrape.sh
 ```
 
-### 4. Configure Watchlist
-
-Edit `config/watchlist.yaml` to add/remove companies:
-
-```yaml
-targets:
-  - company: "Your Company"
-    ats_type: "greenhouse"  # or lever, ashby, etc.
-    roles_include: ["intern", "summer 2026"]
-    locations: ["New York", "Remote"]
-    categories: ["ml_ai", "data_science"]
-```
-
-### 5. Run the Tracker
-
-**One-time run:**
+**Scrape one company (5 seconds):**
 ```bash
-poetry run python -m src.ingest.runner
+./scrape.sh "Google"
+./scrape.sh "Microsoft"
+./scrape.sh "Databricks"
 ```
 
-**Automated with Docker:**
+**View results:**
 ```bash
-docker-compose up -d
+./show_jobs.sh              # All jobs
+./show_jobs.sh "NVIDIA"     # Jobs from specific company
 ```
 
-## Project Structure
-
-```
-job-tracker/
-├── config/
-│   ├── watchlist.yaml       # Companies to track
-│   └── filters.yaml         # Classification rules
-├── src/
-│   ├── app/                 # FastAPI backend
-│   ├── core/                # Database models
-│   ├── ingest/              # ATS scrapers
-│   │   ├── ats/             # Per-ATS implementations
-│   │   ├── base.py          # Base scraper class
-│   │   └── registry.py      # Scraper registry
-│   ├── scheduler/           # Job scheduling
-│   └── utils/               # Utilities
-├── tests/                   # Tests
-├── alembic/                 # Database migrations
-├── docker-compose.yml       # Docker setup
-└── pyproject.toml           # Dependencies
+**Clean up:**
+```bash
+docker-compose down         # Stop Docker
 ```
 
-## Supported ATS Platforms
+That's it! Docker automatically starts when scraping and stops when done.
 
-- ✅ Greenhouse
-- ✅ Lever
-- ✅ Ashby
-- ✅ SmartRecruiters
-- ✅ Workday
-- ✅ Generic HTML (with Playwright)
+## 🏢 Tracked Companies (108)
 
-## Categories
+**Quant/Trading Firms:**
+Citadel, Two Sigma, Jane Street, HRT, D.E. Shaw, Jump Trading, Optiver, IMC, Akuna Capital, Susquehanna (SIG), Virtu Financial, DRW, Five Rings, Old Mission, Belvedere Trading, Tower Research
 
-The tracker classifies jobs into:
-- **ml_ai**: Machine Learning, AI, Deep Learning
-- **cybersecurity**: Security, Threat Detection, Incident Response
-- **data_engineering**: ETL, Data Pipelines, Big Data
-- **data_science**: Analytics, Research Scientists
-- **ml_platform**: MLOps, ML Infrastructure
-- **platform_security**: Cloud Security, DevSecOps
+**FAANG+ Tech:**
+Google, Meta, Amazon, Apple, Netflix, Microsoft, Adobe, Salesforce, Oracle, IBM
 
-## Notifications
+**AI/ML Companies:**
+OpenAI, Anthropic, Scale AI, Hugging Face, Cohere
 
-Configure in `.env`:
+**Cloud/Infrastructure:**
+Databricks, Snowflake, MongoDB, Confluent, HashiCorp
 
-**Slack:**
-```env
-SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK
-```
+**Cybersecurity:**
+CrowdStrike, Palo Alto Networks, Zscaler, Okta, SentinelOne, CrowdStrike
 
-**Email:**
+**Plus 60+ more** including fintech, autonomous vehicles, gaming, and enterprise software companies.
+
+[Full list in `config/watchlist.yaml`](config/watchlist.yaml)
+
+## 🛠️ How It Works
+
+1. **Scraper visits** each company's career page
+2. **Extracts** job listings using Playwright (headless browser)
+3. **Filters** for:
+   - Internships only
+   - US locations only
+   - Summer 2026 positions
+   - ML/AI, Cybersecurity, Data Engineering, Data Science roles
+4. **Saves** to PostgreSQL database
+5. **Sends email** if new jobs found
+6. **Shuts down** Docker when complete
+
+### Supported ATS Platforms
+
+- ✅ Greenhouse (Stripe, Airbnb, Robinhood)
+- ✅ Lever (Netflix, Lyft, Figma)
+- ✅ Ashby (OpenAI, Anthropic, Scale AI)
+- ✅ SmartRecruiters (LinkedIn, Bosch)
+- ✅ Workday (Oracle, IBM)
+- ✅ Generic HTML (with Playwright for all others)
+
+## 📊 Job Categories
+
+Jobs are automatically classified into:
+
+- **ML/AI** - Machine Learning, Deep Learning, NLP, Computer Vision
+- **Cybersecurity** - Security Engineering, Threat Detection, Incident Response  
+- **Data Engineering** - ETL, Data Pipelines, Big Data, Spark
+- **Data Science** - Analytics, Research Scientists, Data Analysts
+
+## 📧 Email Notifications
+
+Get notified when new jobs are found!
+
+**Setup Gmail notifications:**
+
+1. [Create Gmail App Password](https://support.google.com/accounts/answer/185833)
+2. Edit `.env`:
 ```env
 SMTP_SERVER=smtp.gmail.com
+SMTP_PORT=587
 SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
+SMTP_PASS=your-app-password  # 16-character app password
+SMTP_FROM=your-email@gmail.com
+SMTP_TO=your-email@gmail.com
 ```
 
-## Adding New Companies
+3. Run scraper - you'll get email with new jobs!
 
-1. Identify the ATS type (check network tab on their careers page)
-2. Add to `config/watchlist.yaml`
-3. Run with `--dry-run` to test:
-   ```bash
-   poetry run python -m src.ingest.runner --dry-run --company "Company Name"
-   ```
+## ➕ Adding Companies
 
-## Development
-
-**Run tests:**
+1. Open `config/watchlist.yaml`
+2. Add company:
+```yaml
+  - company: "Your Company"
+    url: "https://careers.company.com/jobs"
+    source: generic  # or greenhouse, lever, ashby, etc.
+```
+3. Test:
 ```bash
-poetry run pytest
+./scrape.sh "Your Company"
 ```
 
-**Format code:**
+## 🖥️ Optional: Web Dashboard
+
+View jobs in your browser:
+
 ```bash
-poetry run black src/
-poetry run ruff check src/
+# Start dashboard
+docker-compose up -d api db
+
+# Open browser
+open http://localhost:8000
+
+# Stop when done
+docker-compose down
 ```
 
-**Type checking:**
-```bash
-poetry run mypy src/
+**Features:**
+- 📊 Live statistics
+- 🔍 Search jobs
+- 🏢 Filter by company
+- 📱 Filter by category
+- ⏰ Countdown to next scrape
+
+## 📁 Project Structure
+
+```
+InternTracker/
+├── scrape.sh              # Main scraper command
+├── show_jobs.sh           # View results
+├── config/
+│   └── watchlist.yaml     # 108 companies
+├── src/
+│   ├── ingest/            # Scrapers
+│   ├── core/              # Database models  
+│   └── app/               # Optional web dashboard
+├── frontend/              # Dashboard UI
+└── docker-compose.yml     # Docker setup
 ```
 
-## Compliance
+## ⚖️ Legal & Ethics
 
-- ⚠️ **No LinkedIn scraping** - violates ToS
-- ✅ Uses official ATS JSON endpoints
-- ✅ Respects `robots.txt`
-- ✅ Rate limiting (1-3 RPS per domain)
-- ✅ Exponential backoff on errors
+- ✅ **Respectful scraping** - 1-3 requests/second per domain
+- ✅ **Public data only** - Career pages accessible to everyone
+- ✅ **Respects robots.txt** - Follows site guidelines
+- ❌ **No LinkedIn** - Against their Terms of Service
+- ✅ **Rate limiting** - Doesn't overload servers
+- ✅ **User-Agent** - Identifies as bot
 
-## License
+## 🤝 Contributing
 
-MIT
+Contributions welcome!
 
-## Author
+- Add more companies
+- Improve filtering logic
+- Add new ATS platforms
+- Fix bugs
 
-Yash Lad - 2025
+## 📝 License
+
+MIT License - see [LICENSE](LICENSE)
+
+## 👤 Author
+
+**Yash Lad**
+- GitHub: [@yashlad](https://github.com/yashlad)
+- Email: yashlad727@gmail.com
+
+## ⭐ Star History
+
+If this helped your job search, please star the repo!
+
+## 🙏 Acknowledgments
+
+- Inspired by [Simplify Jobs](https://simplify.jobs/) internship tracker
+- Built with FastAPI, PostgreSQL, Playwright
+- Companies data from public career pages
+
+---
+
+**Happy job hunting! 🎯**
