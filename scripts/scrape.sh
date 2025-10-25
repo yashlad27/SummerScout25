@@ -62,11 +62,15 @@ SELECT
     COUNT(*) as total_jobs,
     COUNT(*) FILTER (WHERE created_at > NOW() - INTERVAL '1 hour') as new_jobs
 FROM jobs 
-WHERE is_active = true
+WHERE is_active = true AND country = 'us'
 GROUP BY company
 ORDER BY total_jobs DESC
 LIMIT 20;
 "
+
+echo ""
+echo "📄 Generating export files..."
+docker-compose run --rm worker python -m src.utils.export_jobs us
 
 echo ""
 echo "======================================================================"

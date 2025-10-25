@@ -68,6 +68,10 @@ LIMIT 20;
 "
 
 echo ""
+echo "📄 Generating export files..."
+docker-compose run --rm worker python -m src.utils.export_jobs india
+
+echo ""
 echo "======================================================================"
 echo "✅ INDIA SCRAPE COMPLETE"
 echo "======================================================================"
