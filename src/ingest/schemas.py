@@ -42,6 +42,7 @@ class NormalizedJob(BaseModel):
     hash_stable: str
     hash_full: str
     category: str | None = None
+    country: str = "us"
     tags: list[str] = Field(default_factory=list)
     raw_data: dict[str, Any] = Field(default_factory=dict)
     
@@ -59,6 +60,7 @@ class WatchlistTarget(BaseModel):
     locations: list[str] = Field(default_factory=list)
     categories: list[str] = Field(default_factory=list)
     internship_term: list[str] = Field(default_factory=lambda: ["summer 2026"])
+    country: str = "us"
     
     @field_validator("ats_type")
     @classmethod

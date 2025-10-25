@@ -42,10 +42,12 @@ echo ""
 if [ -n "$1" ]; then
     docker-compose run --rm worker python -m src.ingest.runner \
         --config config/india/watchlist_india.yaml \
+        --country india \
         --company "$1"
 else
     docker-compose run --rm worker python -m src.ingest.runner \
-        --config config/india/watchlist_india.yaml
+        --config config/india/watchlist_india.yaml \
+        --country india
 fi
 
 # Show results
