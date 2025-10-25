@@ -17,7 +17,13 @@ if [ -n "$1" ]; then
     COMPANY_FILTER="--company \"$1\""
     echo "📋 Scraping: $1"
 else
-    echo "📋 Scraping: All 108 companies"
+    echo "📋 Scraping: All 327 companies from US watchlist"
+    echo "⏱️  Estimated time: 30-40 minutes"
+    echo ""
+    echo "💡 TIP: Use ./scrape_batch.sh for faster targeted scraping:"
+    echo "   ./scrape_batch.sh fraud    (11 companies, ~2 min)"
+    echo "   ./scrape_batch.sh payment  (15 companies, ~3 min)"
+    echo "   ./scrape_batch.sh trading  (15 companies, ~3 min)"
 fi
 echo ""
 

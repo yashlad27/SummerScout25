@@ -10,64 +10,85 @@ echo "🚀 BATCH SCRAPING - By Company Type"
 echo "======================================================================"
 echo ""
 
-# Batch types and their companies (using bash 4+ associative arrays)
-declare -A BATCHES
-
-# Fintech companies (Fast scraping - usually good career pages)
-BATCHES[fintech]="Stripe,Coinbase,Affirm,Plaid,Brex,Ramp,Mercury,Gusto,Rippling,Marqeta,SoFi,Chime,Robinhood,PayPal,Block,Navan"
-
-# FAANG + Big Tech (Can be slow)
-BATCHES[bigtech]="Google,Meta,Amazon,Apple,Microsoft,Netflix,Tesla,Adobe,Salesforce,Oracle,IBM"
-
-# Quant/Trading Firms (Usually fast)
-BATCHES[quant]="Citadel,Two Sigma,Jane Street,HRT,D.E. Shaw,Jump Trading,Optiver,IMC Trading,Akuna Capital,Susquehanna,DRW"
-
-# Cloud/Data Infrastructure (Medium speed)
-BATCHES[cloud]="Databricks,Snowflake,Confluent,MongoDB,Elastic,HashiCorp,Splunk,Datadog"
-
-# Cybersecurity (Fast)
-BATCHES[security]="CrowdStrike,Palo Alto Networks,Okta,Zscaler,Wiz,Snyk,Rapid7,SentinelOne,Tenable,Fortinet,Lacework,Abnormal Security"
-
-# AI/ML Startups (Very fast - small companies)
-BATCHES[ai]="OpenAI,Anthropic,Scale AI,Hugging Face,Cohere,Weights & Biases,Replicate,Modal,Runway,Stability AI,Character.AI,Perplexity AI"
-
-# Gaming (Medium speed)
-BATCHES[gaming]="Unity,Roblox,Epic Games,Riot Games,Bungie"
-
-# Social/Content (Can be slow)
-BATCHES[social]="Reddit,Snap,Pinterest,TikTok,Twitch,Discord"
-
-# Developer Tools (Fast)
-BATCHES[devtools]="GitHub,GitLab,Atlassian,Postman,LaunchDarkly,Vercel,Supabase,PlanetScale,Railway,Render"
-
-# Enterprise SaaS (Medium speed)
-BATCHES[enterprise]="ServiceNow,Twilio,HubSpot,Asana,Notion,Airtable,Monday.com,ClickUp,Miro,Canva"
-
-# Ride-sharing/Delivery (Medium speed)
-BATCHES[mobility]="Uber,DoorDash,Instacart,Waymo,Cruise,Aurora,Zoox,Nuro"
-
-# E-commerce (Medium speed)
-BATCHES[ecommerce]="Shopify,Wayfair,Faire,Flexport,BigCommerce"
-
-# Health Tech (Fast)
-BATCHES[health]="Oscar Health,Ro,Hims & Hers,Tempus"
-
-# EdTech (Fast)
-BATCHES[edtech]="Coursera,Udemy,Duolingo,Quizlet,Grammarly"
-
-# Data/Analytics (Fast)
-BATCHES[data]="Fivetran,dbt Labs,Airbyte,Starburst Data,Census,Hightouch,Amplitude,Mixpanel"
-
-# Banking/Financial Services (Can be slow)
-BATCHES[banking]="JPMorgan Chase,Goldman Sachs,Morgan Stanley,Capital One,Bloomberg"
+# Function to get companies for a batch type (bash 3.x compatible)
+get_batch_companies() {
+    case "$1" in
+        fraud)
+            echo "Sift,Feedzai,BioCatch,Signifyd,Forter,Kount,Riskified,DataVisor,Socure,Arkose Labs,Castle"
+            ;;
+        payment)
+            echo "Adyen,Checkout.com,Modern Treasury,Lithic,Unit,Finix,Bolt,Rapyd,Nuvei,Payoneer,Wise,Remitly,Melio,Bill.com,Tipalti"
+            ;;
+        trading)
+            echo "Citadel Securities,Virtu Financial,Tower Research Capital,Five Rings Capital,Belvedere Trading,Flow Traders,Millennium Management,Point72,Bridgewater Associates,Voleon Group,PDT Partners,Radix Trading,Old Mission Capital,GTS,Schonfeld Strategic Advisors"
+            ;;
+        fintech)
+            echo "Stripe,Coinbase,Affirm,Plaid,Brex,Ramp,Mercury,Gusto,Rippling,Marqeta,SoFi,Chime,Robinhood,PayPal,Block,Navan,Klarna,Upstart"
+            ;;
+        bigtech)
+            echo "Google,Meta,Amazon,Apple,Microsoft,Netflix,Tesla,Adobe,Salesforce,Oracle,IBM,Cisco,VMware,Intuit,Workday"
+            ;;
+        quant)
+            echo "Citadel,Two Sigma,Jane Street,HRT,D.E. Shaw,Jump Trading,Optiver,IMC Trading,Akuna Capital,Susquehanna,DRW"
+            ;;
+        cloud)
+            echo "Databricks,Snowflake,Confluent,MongoDB,Elastic,HashiCorp,Splunk,Datadog"
+            ;;
+        security)
+            echo "CrowdStrike,Palo Alto Networks,Okta,Zscaler,Wiz,Snyk,Rapid7,SentinelOne,Tenable,Fortinet,Lacework,Abnormal Security"
+            ;;
+        ai)
+            echo "OpenAI,Anthropic,Scale AI,Hugging Face,Cohere,Weights & Biases,Replicate,Modal,Runway,Stability AI,Character.AI,Perplexity AI"
+            ;;
+        gaming)
+            echo "Unity,Roblox,Epic Games,Riot Games,Bungie"
+            ;;
+        social)
+            echo "Reddit,Snap,Pinterest,TikTok,Twitch,Discord"
+            ;;
+        devtools)
+            echo "GitHub,GitLab,Atlassian,Postman,LaunchDarkly,Vercel,Supabase,PlanetScale,Railway,Render"
+            ;;
+        enterprise)
+            echo "ServiceNow,Twilio,HubSpot,Asana,Notion,Airtable,Monday.com,ClickUp,Miro,Canva"
+            ;;
+        mobility)
+            echo "Uber,DoorDash,Instacart,Waymo,Cruise,Aurora,Zoox,Nuro"
+            ;;
+        ecommerce)
+            echo "Shopify,Wayfair,Faire,Flexport,BigCommerce"
+            ;;
+        health)
+            echo "Oscar Health,Ro,Hims & Hers,Tempus"
+            ;;
+        edtech)
+            echo "Coursera,Udemy,Duolingo,Quizlet,Grammarly"
+            ;;
+        data)
+            echo "Fivetran,dbt Labs,Airbyte,Starburst Data,Census,Hightouch,Amplitude,Mixpanel"
+            ;;
+        banking)
+            echo "JPMorgan Chase,Goldman Sachs,Morgan Stanley,Capital One,Bloomberg"
+            ;;
+        *)
+            echo ""
+            ;;
+    esac
+}
 
 # Show available batches if no argument
 if [ $# -eq 0 ]; then
     echo "Available batch types:"
     echo ""
-    echo "  fintech    - Fintech companies (16 companies, ~2-3 min)"
-    echo "  bigtech    - FAANG + Big Tech (11 companies, ~5-8 min)"
-    echo "  quant      - Quant/Trading firms (11 companies, ~2-3 min)"
+    echo "  🔥 RECOMMENDED FOR YOUR EXPERIENCE:"
+    echo "  fraud      - Fraud Detection (Sift, Feedzai, BioCatch...) (11 companies, ~2 min)"
+    echo "  payment    - Payment Infrastructure (Adyen, Stripe, Modern Treasury...) (15 companies, ~3 min)"
+    echo "  trading    - Trading Firms (Citadel Securities, Virtu, Tower...) (15 companies, ~3 min)"
+    echo ""
+    echo "  OTHER CATEGORIES:"
+    echo "  fintech    - Fintech companies (18 companies, ~3 min)"
+    echo "  bigtech    - FAANG + Big Tech (15 companies, ~6-8 min)"
+    echo "  quant      - Original Quant firms (11 companies, ~2-3 min)"
     echo "  cloud      - Cloud/Data Infrastructure (8 companies, ~2 min)"
     echo "  security   - Cybersecurity (12 companies, ~2-3 min)"
     echo "  ai         - AI/ML Startups (12 companies, ~2 min)"
@@ -106,19 +127,21 @@ echo "📦 Running migrations..."
 docker-compose run --rm migrate > /dev/null 2>&1
 
 if [ "$BATCH_TYPE" == "all" ]; then
-    echo "🔍 SCRAPING ALL 187 COMPANIES..."
-    echo "⏱️  Estimated time: 25-30 minutes"
+    echo "🔍 SCRAPING ALL 327 COMPANIES..."
+    echo "⏱️  Estimated time: 30-40 minutes"
     echo ""
     docker-compose run --rm worker python -m src.ingest.runner
 else
+    # Get companies for this batch type
+    COMPANIES=$(get_batch_companies "$BATCH_TYPE")
+    
     # Check if batch exists
-    if [ -z "${BATCHES[$BATCH_TYPE]}" ]; then
+    if [ -z "$COMPANIES" ]; then
         echo "❌ Unknown batch type: $BATCH_TYPE"
         echo "Run './scrape_batch.sh' without arguments to see available batches"
         exit 1
     fi
     
-    COMPANIES="${BATCHES[$BATCH_TYPE]}"
     COMPANY_COUNT=$(echo "$COMPANIES" | tr ',' '\n' | wc -l | tr -d ' ')
     
     echo "🔍 SCRAPING BATCH: $BATCH_TYPE"
