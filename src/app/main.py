@@ -17,6 +17,9 @@ from src.utils.logging_config import setup_logging
 
 setup_logging()
 
+# Get region from environment variable (us or india)
+REGION = os.getenv('REGION', 'us')
+
 app = FastAPI(
     title="Job Tracker API",
     description="API for Summer 2026 Internship Job Tracker",
@@ -104,6 +107,9 @@ def list_jobs(
     """
     query = db.query(Job)
     
+    # Filter by region
+    query = query.filter(Job.country == REGION)
+    
     # Apply filters
     if company:
         query = query.filter(Job.company.ilike(f"%{company}%"))
@@ -187,13 +193,13 @@ def get_stats(db: Session = Depends(get_db)) -> dict[str, Any]:
     Returns:
         Statistics dictionary
     """
-    total_jobs = db.query(func.count(Job.id)).scalar()
-    active_jobs = db.query(func.count(Job.id)).filter(Job.is_active == True).scalar()
+    total_jobs = db.query(func.count(Job.id)).filter(Job.country == REGION).scalar()
+    active_jobs = db.query(func.count(Job.id)).filter(Job.is_active == True, Job.country == REGION).scalar()
     
     # Jobs by company
     jobs_by_company = (
         db.query(Job.company, func.count(Job.id))
-        .filter(Job.is_active == True)
+        .filter(Job.is_active == True, Job.country == REGION)
         .group_by(Job.company)
         .all()
     )
@@ -201,7 +207,7 @@ def get_stats(db: Session = Depends(get_db)) -> dict[str, Any]:
     # Jobs by category
     jobs_by_category = (
         db.query(Job.category, func.count(Job.id))
-        .filter(Job.is_active == True)
+        .filter(Job.is_active == True, Job.country == REGION)
         .group_by(Job.category)
         .all()
     )
@@ -234,7 +240,7 @@ def list_companies(db: Session = Depends(get_db)) -> dict[str, Any]:
     """
     companies = (
         db.query(Job.company, func.count(Job.id).label("job_count"))
-        .filter(Job.is_active == True)
+        .filter(Job.is_active == True, Job.country == REGION)
         .group_by(Job.company)
         .order_by(desc("job_count"))
         .all()

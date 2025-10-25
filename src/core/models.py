@@ -78,6 +78,7 @@ class Job(Base):
     # Status and categorization
     is_active = Column(Boolean, default=True, index=True)
     category = Column(String(100), nullable=True, index=True)
+    country = Column(String(50), nullable=True, default="us", index=True)
     tags = Column(ARRAY(String), nullable=True)
     
     # Metadata
