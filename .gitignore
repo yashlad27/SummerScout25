@@ -79,5 +79,6 @@ alembic/versions/*.pyc
 # Playwright
 playwright/.cache/
 
-# Documentation archive
+# Documentation archive and dev files
 docs/archive/
+exports/
