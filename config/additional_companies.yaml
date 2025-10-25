@@ -1,0 +1,385 @@
+# Additional Medium-Sized Tech Companies for Summer 2026 Internships
+# Add these to your main watchlist.yaml
+
+additional_targets:
+  # Cybersecurity & Cloud Security
+  - company: "Lacework"
+    url: "https://www.lacework.com/careers/"
+    source: generic
+  
+  - company: "Abnormal Security"
+    url: "https://abnormalsecurity.com/careers"
+    source: generic
+  
+  - company: "Axonius"
+    url: "https://www.axonius.com/careers"
+    source: generic
+  
+  - company: "SecurityScorecard"
+    url: "https://securityscorecard.com/company/careers"
+    source: generic
+  
+  - company: "Netgear"
+    url: "https://www.netgear.com/about/careers/"
+    source: generic
+  
+  # Developer Tools & Infrastructure
+  - company: "Vercel"
+    url: "https://vercel.com/careers"
+    source: generic
+  
+  - company: "Supabase"
+    url: "https://supabase.com/careers"
+    source: generic
+  
+  - company: "PlanetScale"
+    url: "https://planetscale.com/careers"
+    source: generic
+  
+  - company: "Neon"
+    url: "https://neon.tech/careers"
+    source: generic
+  
+  - company: "Fly.io"
+    url: "https://fly.io/jobs/"
+    source: generic
+  
+  - company: "Railway"
+    url: "https://railway.app/careers"
+    source: generic
+  
+  - company: "Render"
+    url: "https://render.com/careers"
+    source: generic
+  
+  - company: "Postman"
+    url: "https://www.postman.com/company/careers/"
+    source: generic
+  
+  - company: "LaunchDarkly"
+    url: "https://launchdarkly.com/careers/"
+    source: generic
+  
+  - company: "Pulumi"
+    url: "https://www.pulumi.com/careers/"
+    source: generic
+  
+  - company: "Temporal"
+    url: "https://temporal.io/careers"
+    source: generic
+  
+  # Data & Analytics
+  - company: "Fivetran"
+    url: "https://www.fivetran.com/careers"
+    source: generic
+  
+  - company: "dbt Labs"
+    url: "https://www.getdbt.com/careers/"
+    source: generic
+  
+  - company: "Airbyte"
+    url: "https://airbyte.com/careers"
+    source: generic
+  
+  - company: "Starburst Data"
+    url: "https://www.starburst.io/careers/"
+    source: generic
+  
+  - company: "Preset"
+    url: "https://preset.io/careers/"
+    source: generic
+  
+  - company: "Census"
+    url: "https://www.getcensus.com/careers"
+    source: generic
+  
+  - company: "Hightouch"
+    url: "https://hightouch.com/careers"
+    source: generic
+  
+  # Fintech
+  - company: "Ramp"
+    url: "https://ramp.com/careers"
+    source: generic
+  
+  - company: "Mercury"
+    url: "https://mercury.com/careers"
+    source: generic
+  
+  - company: "Gusto"
+    url: "https://gusto.com/careers"
+    source: generic
+  
+  - company: "Rippling"
+    url: "https://www.rippling.com/careers"
+    source: generic
+  
+  - company: "Marqeta"
+    url: "https://www.marqeta.com/careers"
+    source: generic
+  
+  - company: "Navan (TripActions)"
+    url: "https://navan.com/careers"
+    source: generic
+  
+  - company: "Column"
+    url: "https://column.com/careers"
+    source: generic
+  
+  - company: "Unit"
+    url: "https://www.unit.co/careers"
+    source: generic
+  
+  # E-commerce & Retail Tech
+  - company: "Faire"
+    url: "https://www.faire.com/careers"
+    source: generic
+  
+  - company: "Flexport"
+    url: "https://www.flexport.com/careers/"
+    source: generic
+  
+  - company: "Shippo"
+    url: "https://goshippo.com/careers"
+    source: generic
+  
+  - company: "Salsify"
+    url: "https://www.salsify.com/careers"
+    source: generic
+  
+  - company: "BigCommerce"
+    url: "https://careers.bigcommerce.com/"
+    source: generic
+  
+  # Communication & Collaboration
+  - company: "Discord"
+    url: "https://discord.com/careers"
+    source: generic
+  
+  - company: "Zoom"
+    url: "https://careers.zoom.us/"
+    source: generic
+  
+  - company: "Slack (Salesforce)"
+    url: "https://slack.com/careers"
+    source: generic
+  
+  - company: "Airtable"
+    url: "https://www.airtable.com/careers"
+    source: generic
+  
+  - company: "Loom"
+    url: "https://www.loom.com/careers"
+    source: generic
+  
+  - company: "Pitch"
+    url: "https://pitch.com/careers"
+    source: generic
+  
+  # AI & ML Startups
+  - company: "Weights & Biases"
+    url: "https://www.wandb.com/careers"
+    source: generic
+  
+  - company: "Replicate"
+    url: "https://replicate.com/careers"
+    source: generic
+  
+  - company: "Modal"
+    url: "https://modal.com/careers"
+    source: generic
+  
+  - company: "Runway"
+    url: "https://runwayml.com/careers/"
+    source: generic
+  
+  - company: "Stability AI"
+    url: "https://stability.ai/careers"
+    source: generic
+  
+  - company: "Character.AI"
+    url: "https://character.ai/careers"
+    source: generic
+  
+  - company: "Midjourney"
+    url: "https://www.midjourney.com/careers"
+    source: generic
+  
+  - company: "Perplexity AI"
+    url: "https://www.perplexity.ai/careers"
+    source: generic
+  
+  - company: "Together AI"
+    url: "https://www.together.ai/careers"
+    source: generic
+  
+  # Gaming & Entertainment
+  - company: "Unity"
+    url: "https://careers.unity.com/"
+    source: generic
+  
+  - company: "Roblox"
+    url: "https://corp.roblox.com/careers/"
+    source: generic
+  
+  - company: "Epic Games"
+    url: "https://www.epicgames.com/site/careers"
+    source: generic
+  
+  - company: "Riot Games"
+    url: "https://www.riotgames.com/en/work-with-us/jobs"
+    source: generic
+  
+  - company: "Bungie"
+    url: "https://careers.bungie.com/"
+    source: generic
+  
+  - company: "Activision Blizzard"
+    url: "https://careers.activisionblizzard.com/"
+    source: generic
+  
+  # Health Tech
+  - company: "Oscar Health"
+    url: "https://www.hioscar.com/careers"
+    source: generic
+  
+  - company: "Devoted Health"
+    url: "https://www.devoted.com/careers"
+    source: generic
+  
+  - company: "Ro"
+    url: "https://ro.co/careers/"
+    source: generic
+  
+  - company: "Hims & Hers"
+    url: "https://www.forhims.com/careers"
+    source: generic
+  
+  - company: "1Life Healthcare (One Medical)"
+    url: "https://www.onemedical.com/careers/"
+    source: generic
+  
+  - company: "Tempus"
+    url: "https://www.tempus.com/careers/"
+    source: generic
+  
+  # Autonomous Vehicles & Robotics
+  - company: "Cruise"
+    url: "https://getcruise.com/careers/"
+    source: generic
+  
+  - company: "Aurora"
+    url: "https://aurora.tech/careers"
+    source: generic
+  
+  - company: "Zoox"
+    url: "https://zoox.com/careers/"
+    source: generic
+  
+  - company: "Nuro"
+    url: "https://www.nuro.ai/careers"
+    source: generic
+  
+  - company: "Boston Dynamics"
+    url: "https://www.bostondynamics.com/careers"
+    source: generic
+  
+  # SaaS & Enterprise
+  - company: "Okta"
+    url: "https://www.okta.com/company/careers/"
+    source: generic
+  
+  - company: "Auth0"
+    url: "https://auth0.com/careers"
+    source: generic
+  
+  - company: "Segment"
+    url: "https://segment.com/careers/"
+    source: generic
+  
+  - company: "Amplitude"
+    url: "https://amplitude.com/careers"
+    source: generic
+  
+  - company: "Mixpanel"
+    url: "https://mixpanel.com/careers/"
+    source: generic
+  
+  - company: "Heap"
+    url: "https://heap.io/careers"
+    source: generic
+  
+  - company: "Pendo"
+    url: "https://www.pendo.io/careers/"
+    source: generic
+  
+  - company: "Gong"
+    url: "https://www.gong.io/careers/"
+    source: generic
+  
+  - company: "Outreach"
+    url: "https://www.outreach.io/company/careers"
+    source: generic
+  
+  - company: "Salesloft"
+    url: "https://salesloft.com/careers/"
+    source: generic
+  
+  # PropTech & Real Estate
+  - company: "Opendoor"
+    url: "https://www.opendoor.com/jobs"
+    source: generic
+  
+  - company: "Redfin"
+    url: "https://www.redfin.com/careers"
+    source: generic
+  
+  - company: "Zillow"
+    url: "https://www.zillow.com/careers/"
+    source: generic
+  
+  - company: "Compass"
+    url: "https://www.compass.com/careers/"
+    source: generic
+  
+  # Social & Content
+  - company: "Reddit"
+    url: "https://www.redditinc.com/careers"
+    source: generic
+  
+  - company: "Snap"
+    url: "https://careers.snap.com/"
+    source: generic
+  
+  - company: "Pinterest"
+    url: "https://www.pinterestcareers.com/"
+    source: generic
+  
+  - company: "TikTok (ByteDance)"
+    url: "https://careers.tiktok.com/"
+    source: generic
+  
+  - company: "Twitch"
+    url: "https://www.twitch.tv/jobs/"
+    source: generic
+  
+  # EdTech
+  - company: "Coursera"
+    url: "https://about.coursera.org/careers/"
+    source: generic
+  
+  - company: "Udemy"
+    url: "https://about.udemy.com/careers/"
+    source: generic
+  
+  - company: "Duolingo"
+    url: "https://careers.duolingo.com/"
+    source: generic
+  
+  - company: "Quizlet"
+    url: "https://quizlet.com/careers"
+    source: generic
+  
+  - company: "Grammarly"
+    url: "https://www.grammarly.com/jobs"
+    source: generic

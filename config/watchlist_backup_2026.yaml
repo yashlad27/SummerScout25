@@ -1,0 +1,759 @@
+# Job Tracker Watchlist Configuration
+# Define companies and roles to monitor
+
+targets:
+  - company: "Citadel"
+    ats_type: "generic"
+    careers_url: "https://www.citadel.com/careers/open-positions/positions-for-students/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Chicago", "Boston", "Remote"]
+    categories: ["ml_ai", "data_science", "data_engineering", "cybersecurity"]
+
+  - company: "Two Sigma"
+    ats_type: "generic"
+    careers_url: "https://careers.twosigma.com/careers/JobDetail?jobId=12345"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai", "data_science", "data_engineering"]
+
+  - company: "Jane Street"
+    ats_type: "generic"
+    careers_url: "https://www.janestreet.com/join-jane-street/open-roles/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai", "data_science"]
+
+  - company: "HRT"
+    ats_type: "generic"
+    careers_url: "https://www.hudsonrivertrading.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Chicago", "Remote"]
+    categories: ["ml_ai", "data_science", "data_engineering"]
+
+  - company: "D.E. Shaw"
+    ats_type: "generic"
+    careers_url: "https://www.deshaw.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai", "data_science", "cybersecurity"]
+
+  - company: "Microsoft"
+    ats_type: "generic"
+    careers_url: "https://careers.microsoft.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Redmond", "New York", "Remote"]
+    categories: ["ml_ai", "cybersecurity", "data_science", "platform_security"]
+
+  - company: "Google"
+    ats_type: "generic"
+    careers_url: "https://careers.google.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Mountain View", "New York", "Seattle", "Remote"]
+    categories: ["ml_ai", "cybersecurity", "data_science", "data_engineering"]
+
+  - company: "Amazon"
+    ats_type: "generic"
+    careers_url: "https://www.amazon.jobs/en/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Seattle", "Bay Area", "Boston", "New York", "Austin", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","cybersecurity","ml_platform","platform_security"]
+
+  - company: "Meta"
+    ats_type: "generic"
+    careers_url: "https://www.metacareers.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "New York", "Boston", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","cybersecurity","ml_platform","platform_security"]
+
+  - company: "Apple"
+    ats_type: "generic"
+    careers_url: "https://jobs.apple.com/en-us/search?team=internships"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Cupertino", "Seattle", "Austin", "Boston", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","cybersecurity","ml_platform","platform_security"]
+
+  - company: "NVIDIA"
+    ats_type: "generic"
+    careers_url: "https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "Austin", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","cybersecurity","ml_platform","platform_security"]
+
+  - company: "Databricks"
+    ats_type: "generic"
+    careers_url: "https://www.databricks.com/company/careers/open-positions"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "New York", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","ml_platform","platform_security","cybersecurity"]
+
+  - company: "Snowflake"
+    ats_type: "generic"
+    careers_url: "https://www.snowflake.com/careers/jobs/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "Bellevue", "Boston", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","ml_platform","platform_security","cybersecurity"]
+
+  - company: "Confluent"
+    ats_type: "generic"
+    careers_url: "https://www.confluent.io/careers/jobs/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Austin", "Remote"]
+    categories: ["data_engineering","ml_platform","ml_ai","data_science","platform_security","cybersecurity"]
+
+  - company: "MongoDB"
+    ats_type: "generic"
+    careers_url: "https://www.mongodb.com/careers/positions"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Boston", "Remote"]
+    categories: ["data_engineering","data_science","ml_ai","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Palantir"
+    ats_type: "generic"
+    careers_url: "https://www.palantir.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Palo Alto", "Seattle", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Cloudflare"
+    ats_type: "generic"
+    careers_url: "https://www.cloudflare.com/careers/jobs/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["San Francisco", "Austin", "New York", "Remote"]
+    categories: ["platform_security","cybersecurity","data_engineering","ml_ai","ml_platform","data_science"]
+
+  - company: "Stripe"
+    ats_type: "generic"
+    careers_url: "https://stripe.com/jobs/search"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "New York", "Remote"]
+    categories: ["data_engineering","ml_ai","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Block (Square)"
+    ats_type: "generic"
+    careers_url: "https://block.xyz/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "New York", "Seattle", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","cybersecurity","ml_platform","platform_security"]
+
+  - company: "Optiver"
+    ats_type: "generic"
+    careers_url: "https://optiver.com/working-at-optiver/career-opportunities/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Chicago", "Austin", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Akuna Capital"
+    ats_type: "generic"
+    careers_url: "https://akunacapital.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Chicago", "Boston", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Susquehanna (SIG)"
+    ats_type: "generic"
+    careers_url: "https://sig.com/campus-programs/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Philadelphia", "New York", "Chicago", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Airbnb"
+    ats_type: "generic"
+    careers_url: "https://careers.airbnb.com/university/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Uber"
+    ats_type: "generic"
+    careers_url: "https://www.uber.com/us/en/careers/teams/university/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "New York", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "DoorDash"
+    ats_type: "generic"
+    careers_url: "https://careers.doordash.com/university"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "New York", "Seattle", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Instacart"
+    ats_type: "generic"
+    careers_url: "https://careers.instacart.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Toronto", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Wayfair"
+    ats_type: "generic"
+    careers_url: "https://www.wayfair.com/careers/university"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Boston", "Austin", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Shopify"
+    ats_type: "generic"
+    careers_url: "https://www.shopify.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Tesla"
+    ats_type: "generic"
+    careers_url: "https://www.tesla.com/careers/search/?site=US"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Austin", "Seattle", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Waymo"
+    ats_type: "generic"
+    careers_url: "https://waymo.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Mountain View", "San Francisco", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","ml_platform","platform_security","cybersecurity"]
+
+  - company: "Adobe"
+    ats_type: "generic"
+    careers_url: "https://careers.adobe.com/us/en/students"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "San Jose", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Salesforce"
+    ats_type: "generic"
+    careers_url: "https://www.salesforce.com/company/careers/university-recruiting/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "ServiceNow"
+    ats_type: "generic"
+    careers_url: "https://careers.servicenow.com/early-career-programs"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "San Diego", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Atlassian"
+    ats_type: "generic"
+    careers_url: "https://www.atlassian.com/company/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Remote", "Austin", "Bay Area"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Twilio"
+    ats_type: "generic"
+    careers_url: "https://www.twilio.com/company/jobs"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Denver", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "HubSpot"
+    ats_type: "generic"
+    careers_url: "https://www.hubspot.com/careers/students"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Boston", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Datadog"
+    ats_type: "generic"
+    careers_url: "https://www.datadoghq.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Boston", "Denver", "Remote"]
+    categories: ["platform_security","cybersecurity","data_engineering","ml_ai","ml_platform","data_science"]
+
+  - company: "Splunk"
+    ats_type: "generic"
+    careers_url: "https://www.splunk.com/en_us/careers/university.html"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "Remote"]
+    categories: ["platform_security","cybersecurity","data_engineering","ml_ai","ml_platform","data_science"]
+
+  - company: "CrowdStrike"
+    ats_type: "generic"
+    careers_url: "https://www.crowdstrike.com/careers/students-and-grads/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Austin", "Sunnyvale", "Boston", "Remote"]
+    categories: ["cybersecurity","platform_security","ml_ai","data_science","data_engineering","ml_platform"]
+
+  - company: "Palo Alto Networks"
+    ats_type: "generic"
+    careers_url: "https://jobs.paloaltonetworks.com/en/jobs/search/intern/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Santa Clara", "Austin", "Remote"]
+    categories: ["cybersecurity","platform_security","ml_ai","data_science","data_engineering","ml_platform"]
+
+  - company: "Okta"
+    ats_type: "generic"
+    careers_url: "https://www.okta.com/company/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["San Francisco", "San Jose", "Remote"]
+    categories: ["cybersecurity","platform_security","ml_ai","data_science","data_engineering","ml_platform"]
+
+  - company: "Zscaler"
+    ats_type: "generic"
+    careers_url: "https://www.zscaler.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "San Jose", "Remote"]
+    categories: ["cybersecurity","platform_security","ml_ai","data_science","data_engineering","ml_platform"]
+
+  - company: "Rapid7"
+    ats_type: "generic"
+    careers_url: "https://www.rapid7.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Boston", "Austin", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science","ml_platform"]
+
+  - company: "Tenable"
+    ats_type: "generic"
+    careers_url: "https://www.tenable.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Columbia MD", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science","ml_platform"]
+
+  - company: "SentinelOne"
+    ats_type: "generic"
+    careers_url: "https://www.sentinelone.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Remote"]
+    categories: ["cybersecurity","platform_security","ml_ai","data_science","data_engineering","ml_platform"]
+
+  - company: "Snyk"
+    ats_type: "generic"
+    careers_url: "https://snyk.io/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Boston", "New York", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science","ml_platform"]
+
+  - company: "Wiz"
+    ats_type: "generic"
+    careers_url: "https://www.wiz.io/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Bay Area", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science","ml_platform"]
+
+  - company: "Fortinet"
+    ats_type: "generic"
+    careers_url: "https://www.fortinet.com/corporate/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Austin", "Boston", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","ml_platform","data_science"]
+
+  - company: "Check Point"
+    ats_type: "generic"
+    careers_url: "https://www.checkpoint.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Bay Area", "Dallas", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science","ml_platform"]
+
+  - company: "Coinbase"
+    ats_type: "generic"
+    careers_url: "https://www.coinbase.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Affirm"
+    ats_type: "generic"
+    careers_url: "https://www.affirm.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Notion"
+    ats_type: "generic"
+    careers_url: "https://www.notion.so/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["San Francisco", "New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "GitHub"
+    ats_type: "generic"
+    careers_url: "https://github.com/about/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Seattle", "Bay Area", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "GitLab"
+    ats_type: "generic"
+    careers_url: "https://about.gitlab.com/jobs/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Plaid"
+    ats_type: "generic"
+    careers_url: "https://plaid.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["San Francisco", "New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Brex"
+    ats_type: "generic"
+    careers_url: "https://www.brex.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "PayPal"
+    ats_type: "generic"
+    careers_url: "https://www.paypal.com/us/webapps/mpp/jobs/interns-and-grads"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Austin", "New York", "Remote"]
+    categories: ["data_engineering","ml_ai","data_science","cybersecurity","platform_security","ml_platform"]
+
+  - company: "Robinhood"
+    ats_type: "generic"
+    careers_url: "https://careers.robinhood.com/openings/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Menlo Park", "New York", "Seattle", "Remote"]
+    categories: ["data_engineering","ml_ai","data_science","cybersecurity","ml_platform","platform_security"]
+
+  - company: "Bloomberg"
+    ats_type: "generic"
+    careers_url: "https://www.bloomberg.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Princeton", "San Francisco", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","cybersecurity","ml_platform","platform_security"]
+
+  - company: "Capital One"
+    ats_type: "generic"
+    careers_url: "https://www.capitalonecareers.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["McLean", "New York", "Richmond", "Remote"]
+    categories: ["data_engineering","data_science","ml_ai","cybersecurity","platform_security","ml_platform"]
+
+  - company: "JPMorgan Chase"
+    ats_type: "generic"
+    careers_url: "https://careers.jpmorgan.com/us/en/students/programs"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Chicago", "Columbus", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","cybersecurity","platform_security","ml_platform"]
+
+  - company: "Goldman Sachs"
+    ats_type: "generic"
+    careers_url: "https://www.goldmansachs.com/careers/students/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Dallas", "Salt Lake City", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","cybersecurity","platform_security","ml_platform"]
+
+  - company: "Morgan Stanley"
+    ats_type: "generic"
+    careers_url: "https://www.morganstanley.com/careers/campus"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Montreal", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","cybersecurity","platform_security","ml_platform"]
+
+  - company: "Jump Trading"
+    ats_type: "generic"
+    careers_url: "https://www.jumptrading.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Chicago", "New York", "Austin", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","cybersecurity","ml_platform"]
+
+  - company: "DRW"
+    ats_type: "generic"
+    careers_url: "https://drw.com/work-at-drw/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Chicago", "Austin", "New York", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","cybersecurity","ml_platform"]
+
+  - company: "IMC Trading"
+    ats_type: "generic"
+    careers_url: "https://careers.imc.com/us/en/students-and-graduates"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Chicago", "New York", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Canva"
+    ats_type: "generic"
+    careers_url: "https://www.canva.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Austin", "San Francisco", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Webflow"
+    ats_type: "generic"
+    careers_url: "https://webflow.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["San Francisco", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Asana"
+    ats_type: "generic"
+    careers_url: "https://asana.com/jobs"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["San Francisco", "New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "HashiCorp"
+    ats_type: "generic"
+    careers_url: "https://www.hashicorp.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "Remote"]
+    categories: ["data_engineering","platform_security","ml_ai","data_science","ml_platform","cybersecurity"]
+
+  - company: "SoFi"
+    ats_type: "generic"
+    careers_url: "https://www.sofi.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Seattle", "Bay Area", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Chime"
+    ats_type: "generic"
+    careers_url: "https://www.chime.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Chicago", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Elastic"
+    ats_type: "generic"
+    careers_url: "https://www.elastic.co/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Denver", "Remote"]
+    categories: ["platform_security","cybersecurity","data_engineering","ml_ai","data_science","ml_platform"]
+
+  - company: "New Relic"
+    ats_type: "generic"
+    careers_url: "https://newrelic.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Portland", "San Francisco", "Remote"]
+    categories: ["data_engineering","ml_platform","platform_security","ml_ai","data_science","cybersecurity"]
+
+  - company: "Grafana Labs"
+    ats_type: "generic"
+    careers_url: "https://grafana.com/about/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Austin", "Remote"]
+    categories: ["data_engineering","ml_platform","platform_security","ml_ai","data_science","cybersecurity"]
+
+  - company: "Linear"
+    ats_type: "generic"
+    careers_url: "https://linear.app/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "ClickUp"
+    ats_type: "generic"
+    careers_url: "https://clickup.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["San Diego", "Austin", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Monday.com"
+    ats_type: "generic"
+    careers_url: "https://monday.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Miro"
+    ats_type: "generic"
+    careers_url: "https://miro.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Austin", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Coda"
+    ats_type: "generic"
+    careers_url: "https://coda.io/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["San Francisco", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Betterment"
+    ats_type: "generic"
+    careers_url: "https://www.betterment.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Wealthfront"
+    ats_type: "generic"
+    careers_url: "https://www.wealthfront.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Sophos"
+    ats_type: "generic"
+    careers_url: "https://www.sophos.com/en-us/company/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Boston", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science"]
+
+  - company: "Trellix"
+    ats_type: "generic"
+    careers_url: "https://careers.trellix.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Dallas", "Bay Area", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science","ml_platform"]
+
+  - company: "Darktrace"
+    ats_type: "generic"
+    careers_url: "https://darktrace.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["cybersecurity","ml_ai","platform_security","data_engineering","data_science"]
+
+  - company: "Vectra AI"
+    ats_type: "generic"
+    careers_url: "https://www.vectra.ai/company/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Austin", "Remote"]
+    categories: ["cybersecurity","ml_ai","platform_security","data_engineering","data_science"]
+
+  - company: "Exabeam"
+    ats_type: "generic"
+    careers_url: "https://www.exabeam.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Boston", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science"]
+
+  - company: "Arctic Wolf"
+    ats_type: "generic"
+    careers_url: "https://arcticwolf.com/company/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Austin", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science"]
+
+  - company: "Cybereason"
+    ats_type: "generic"
+    careers_url: "https://www.cybereason.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Boston", "New York", "Remote"]
+    categories: ["cybersecurity","platform_security","ml_ai","data_engineering","data_science"]
+
+  - company: "Netskope"
+    ats_type: "generic"
+    careers_url: "https://www.netskope.com/company/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Dallas", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science"]
+
+  - company: "Proofpoint"
+    ats_type: "generic"
+    careers_url: "https://www.proofpoint.com/us/company/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Boston", "Remote"]
+    categories: ["cybersecurity","platform_security","data_engineering","ml_ai","data_science"]
+
+  - company: "Rubrik"
+    ats_type: "generic"
+    careers_url: "https://www.rubrik.com/company/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Dallas", "Remote"]
+    categories: ["platform_security","cybersecurity","data_engineering","ml_ai","data_science"]
+
+  - company: "Dynatrace"
+    ats_type: "generic"
+    careers_url: "https://www.dynatrace.com/company/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Boston", "Denver", "Remote"]
+    categories: ["data_engineering","ml_platform","platform_security","ml_ai","data_science","cybersecurity"]
+
+  - company: "Sumo Logic"
+    ats_type: "generic"
+    careers_url: "https://www.sumologic.com/company/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Denver", "Remote"]
+    categories: ["data_engineering","ml_platform","platform_security","ml_ai","data_science","cybersecurity"]
+
+  - company: "Honeycomb"
+    ats_type: "generic"
+    careers_url: "https://www.honeycomb.io/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["San Francisco", "Austin", "Remote"]
+    categories: ["data_engineering","ml_platform","platform_security","ml_ai","data_science","cybersecurity"]
+
+  - company: "AppDynamics"
+    ats_type: "generic"
+    careers_url: "https://www.appdynamics.com/company/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Dallas", "Remote"]
+    categories: ["data_engineering","platform_security","ml_ai","data_science","ml_platform","cybersecurity"]
+
+  - company: "LogicMonitor"
+    ats_type: "generic"
+    careers_url: "https://www.logicmonitor.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Austin", "Remote"]
+    categories: ["data_engineering","ml_platform","platform_security","ml_ai","data_science","cybersecurity"]
+
+  - company: "Chronosphere"
+    ats_type: "generic"
+    careers_url: "https://chronosphere.io/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["data_engineering","ml_platform","platform_security","ml_ai","data_science","cybersecurity"]
+
+  - company: "Coralogix"
+    ats_type: "generic"
+    careers_url: "https://coralogix.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["data_engineering","ml_platform","platform_security","ml_ai","data_science","cybersecurity"]
+
+  - company: "JetBrains"
+    ats_type: "generic"
+    careers_url: "https://www.jetbrains.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Sketch"
+    ats_type: "generic"
+    careers_url: "https://www.sketch.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "InVision"
+    ats_type: "generic"
+    careers_url: "https://www.invisionapp.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Framer"
+    ats_type: "generic"
+    careers_url: "https://www.framer.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Mural"
+    ats_type: "generic"
+    careers_url: "https://www.mural.co/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Public.com"
+    ats_type: "generic"
+    careers_url: "https://public.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "Webull"
+    ats_type: "generic"
+    careers_url: "https://www.webull.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["New York", "Remote"]
+    categories: ["ml_ai","data_engineering","data_science","platform_security","cybersecurity","ml_platform"]
+
+  - company: "ServiceNow"
+    ats_type: "generic"
+    careers_url: "https://careers.servicenow.com/early-career-programs"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bay Area", "Seattle", "San Diego", "Remote"]
+    categories: ["ml_ai","data_science","data_engineering","platform_security","ml_platform","cybersecurity"]
+
+  - company: "Tech Companies"
+    ats_type: "indeed"
+    careers_url: "https://www.indeed.com"
+    roles_include: ["intern", "summer 2026", "internship", "graduate", "masters"]
+    locations: ["Remote", "New York", "San Francisco", "Seattle", "Boston", "Austin", "Chicago"]
+    categories: ["ml_ai", "data_science", "data_engineering", "cybersecurity", "ml_platform", "platform_security"]

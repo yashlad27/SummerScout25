@@ -1,7 +1,85 @@
 # Job Classification and Filtering Rules
 
 # Job categories with matching patterns
+# NOTE: Jobs matching ANY category will be included (for broader coverage of all tech roles)
 categories:
+  software_engineering:
+    title_any:
+      - "(?i)software engineer"
+      - "(?i)software developer"
+      - "(?i)software development"
+      - "(?i)swe"
+      - "(?i)engineer"
+      - "(?i)developer"
+    description_hints:
+      - "(?i)coding|programming"
+      - "(?i)java|python|c\\+\\+|golang"
+      - "(?i)software development"
+  
+  backend:
+    title_any:
+      - "(?i)backend"
+      - "(?i)back-end"
+      - "(?i)server.*engineer"
+      - "(?i)api.*engineer"
+    description_hints:
+      - "(?i)rest.*api|graphql"
+      - "(?i)microservices"
+      - "(?i)database|sql|nosql"
+  
+  frontend:
+    title_any:
+      - "(?i)frontend"
+      - "(?i)front-end"
+      - "(?i)ui.*engineer"
+      - "(?i)web.*engineer"
+    description_hints:
+      - "(?i)react|vue|angular"
+      - "(?i)javascript|typescript"
+      - "(?i)html|css"
+  
+  fullstack:
+    title_any:
+      - "(?i)full.*stack"
+      - "(?i)fullstack"
+    description_hints:
+      - "(?i)frontend.*backend"
+      - "(?i)full.*stack"
+  
+  mobile:
+    title_any:
+      - "(?i)mobile.*engineer"
+      - "(?i)ios.*engineer"
+      - "(?i)android.*engineer"
+      - "(?i)mobile.*developer"
+    description_hints:
+      - "(?i)swift|kotlin|react native"
+      - "(?i)ios|android"
+      - "(?i)mobile.*app"
+  
+  devops:
+    title_any:
+      - "(?i)devops"
+      - "(?i)site reliability"
+      - "(?i)\\bsre\\b"
+      - "(?i)infrastructure.*engineer"
+      - "(?i)platform.*engineer"
+    description_hints:
+      - "(?i)kubernetes|docker"
+      - "(?i)ci/cd|jenkins"
+      - "(?i)aws|azure|gcp"
+  
+  qa_testing:
+    title_any:
+      - "(?i)quality.*assurance"
+      - "(?i)\\bqa\\b"
+      - "(?i)test.*engineer"
+      - "(?i)sdet"
+    description_hints:
+      - "(?i)testing|test automation"
+      - "(?i)selenium|cypress"
+      - "(?i)quality assurance"
+  
   ml_ai:
     title_any:
       - "(?i)machine learning"

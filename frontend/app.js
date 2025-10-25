@@ -144,15 +144,13 @@ async function loadJobs() {
         const response = await fetch(`${API_BASE_URL}/jobs?limit=500`);
         const data = await response.json();
         
-        // Filter for internships and US locations
-        allJobs = data.jobs
-            .filter(job => isInternship(job))
-            .filter(job => !document.getElementById('usOnlyFilter').checked || isUSLocation(job.location))
-            .map(job => ({
-                ...job,
-                isNew: isToday(job.first_seen_at)
-            }));
+        // Store all jobs (filtering happens in renderJobs)
+        allJobs = data.jobs.map(job => ({
+            ...job,
+            isNew: isToday(job.first_seen_at)
+        }));
         
+        console.log('Loaded jobs:', allJobs.length);
         renderJobs();
     } catch (error) {
         console.error('Error loading jobs:', error);
@@ -221,17 +219,20 @@ function renderJobs() {
     const container = document.getElementById('jobsContainer');
     let filteredJobs = [...allJobs];
     
+    // Always filter for internships first
+    filteredJobs = filteredJobs.filter(job => isInternship(job));
+    
     // Apply category filter
     if (currentFilter !== 'all') {
         filteredJobs = filteredJobs.filter(job => job.category === currentFilter);
     }
     
     // Apply search filter
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
     if (searchTerm) {
         filteredJobs = filteredJobs.filter(job => 
-            job.company.toLowerCase().includes(searchTerm) ||
-            job.title.toLowerCase().includes(searchTerm) ||
+            (job.company && job.company.toLowerCase().includes(searchTerm)) ||
+            (job.title && job.title.toLowerCase().includes(searchTerm)) ||
             (job.location && job.location.toLowerCase().includes(searchTerm))
         );
     }
@@ -252,6 +253,7 @@ function renderJobs() {
                 <div class="no-results-icon">😕</div>
                 <h3>No Internships Found</h3>
                 <p>Try adjusting your filters or search terms</p>
+                ${searchTerm ? `<p class="search-hint">Searching for: "<strong>${searchTerm}</strong>"</p>` : ''}
             </div>
         `;
         return;
@@ -339,10 +341,27 @@ function clearSearch() {
 
 // Search specific company
 function searchCompany(companyName) {
+    console.log('Searching for company:', companyName);
     document.getElementById('searchInput').value = companyName;
+    currentFilter = 'all'; // Reset category filter
+    
+    // Update active tab to "All Categories"
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.dataset.category === 'all') {
+            tab.classList.add('active');
+        }
+    });
+    
     filterJobs();
+    
     // Scroll to jobs section
-    document.querySelector('.jobs-container').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+        const jobsSection = document.querySelector('.jobs-container');
+        if (jobsSection) {
+            jobsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, 100);
 }
 
 // Refresh all data
