@@ -148,12 +148,78 @@ else
     echo "📊 Companies: $COMPANY_COUNT"
     echo ""
     
+    # Progress tracking
+    START_TIME=$(date +%s)
+    CURRENT=0
+    
     # Scrape each company in the batch
     IFS=',' read -ra COMPANY_ARRAY <<< "$COMPANIES"
     for company in "${COMPANY_ARRAY[@]}"; do
-        echo "  → $company..."
-        docker-compose run --rm worker python -m src.ingest.runner --company "$company" 2>&1 | grep -E "(Processing|Found|jobs)" | tail -2
+        CURRENT=$((CURRENT + 1))
+        REMAINING=$((COMPANY_COUNT - CURRENT))
+        PERCENT=$((CURRENT * 100 / COMPANY_COUNT))
+        
+        # Calculate elapsed and estimated time
+        CURRENT_TIME=$(date +%s)
+        ELAPSED=$((CURRENT_TIME - START_TIME))
+        ELAPSED_MIN=$((ELAPSED / 60))
+        ELAPSED_SEC=$((ELAPSED % 60))
+        
+        # Estimate remaining time
+        if [ $CURRENT -gt 0 ]; then
+            AVG_TIME_PER_COMPANY=$((ELAPSED / CURRENT))
+            EST_REMAINING=$((AVG_TIME_PER_COMPANY * REMAINING))
+            EST_MIN=$((EST_REMAINING / 60))
+            EST_SEC=$((EST_REMAINING % 60))
+        else
+            EST_MIN=0
+            EST_SEC=0
+        fi
+        
+        # ASCII Progress Bar (40 chars wide)
+        BAR_WIDTH=40
+        FILLED=$((PERCENT * BAR_WIDTH / 100))
+        EMPTY=$((BAR_WIDTH - FILLED))
+        
+        # Generate bars (handle edge cases)
+        if [ $FILLED -gt 0 ]; then
+            BAR=$(printf '█%.0s' $(seq 1 $FILLED))
+        else
+            BAR=""
+        fi
+        
+        if [ $EMPTY -gt 0 ]; then
+            EMPTY_BAR=$(printf '░%.0s' $(seq 1 $EMPTY))
+        else
+            EMPTY_BAR=""
+        fi
+        
+        # Clear previous lines and show progress
+        echo ""
+        echo "╔════════════════════════════════════════════════════════════════╗"
+        echo "║  PROGRESS: [$BAR$EMPTY_BAR] $PERCENT%"
+        echo "║  Company: $CURRENT of $COMPANY_COUNT  |  Remaining: $REMAINING"
+        echo "║  Elapsed: ${ELAPSED_MIN}m ${ELAPSED_SEC}s  |  Est. Time Left: ${EST_MIN}m ${EST_SEC}s"
+        echo "╚════════════════════════════════════════════════════════════════╝"
+        echo ""
+        echo "  🔍 Scraping: $company"
+        
+        docker-compose run --rm worker python -m src.ingest.runner --company "$company" 2>&1 | grep -E "(Processing|Found|jobs|new job)" | tail -3
     done
+    
+    # Final timing
+    END_TIME=$(date +%s)
+    TOTAL_TIME=$((END_TIME - START_TIME))
+    TOTAL_MIN=$((TOTAL_TIME / 60))
+    TOTAL_SEC=$((TOTAL_TIME % 60))
+    
+    echo ""
+    echo "╔════════════════════════════════════════════════════════════════╗"
+    echo "║  ✅ COMPLETE: 100%  [$BAR] "
+    echo "║  Total Companies: $COMPANY_COUNT"
+    echo "║  Total Time: ${TOTAL_MIN}m ${TOTAL_SEC}s"
+    echo "╚════════════════════════════════════════════════════════════════╝"
+    echo ""
 fi
 
 # Show results

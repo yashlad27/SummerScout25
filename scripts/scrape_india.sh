@@ -39,16 +39,95 @@ echo "🔍 SCRAPING INDIAN COMPANIES..."
 echo "======================================================================"
 echo ""
 
+START_TIME=$(date +%s)
+
 if [ -n "$1" ]; then
+    # Single company - simple mode
     docker-compose run --rm worker python -m src.ingest.runner \
         --config config/india/watchlist_india.yaml \
         --country india \
         --company "$1"
 else
+    # Full scrape with progress tracking
+    TOTAL_COMPANIES=32
+    PROCESSED=0
+    
+    echo "╔════════════════════════════════════════════════════════════════╗"
+    echo "║  🚀 Starting India scrape of $TOTAL_COMPANIES companies"
+    echo "║  ⏱️  Estimated time: 5-8 minutes"
+    echo "╚════════════════════════════════════════════════════════════════╝"
+    echo ""
+    
+    # Run scraper and parse output for progress
     docker-compose run --rm worker python -m src.ingest.runner \
         --config config/india/watchlist_india.yaml \
-        --country india
+        --country india 2>&1 | while IFS= read -r line; do
+        echo "$line"
+        
+        # Extract company processing info and count
+        if [[ "$line" =~ "Processing "(.+)" \(" ]]; then
+            PROCESSED=$((PROCESSED + 1))
+            COMPANY="${BASH_REMATCH[1]}"
+            REMAINING=$((TOTAL_COMPANIES - PROCESSED))
+            PERCENT=$((PROCESSED * 100 / TOTAL_COMPANIES))
+            
+            # Calculate timing
+            CURRENT_TIME=$(date +%s)
+            ELAPSED=$((CURRENT_TIME - START_TIME))
+            ELAPSED_MIN=$((ELAPSED / 60))
+            ELAPSED_SEC=$((ELAPSED % 60))
+            
+            # Estimate remaining time
+            if [ "$PROCESSED" -gt 0 ]; then
+                AVG_TIME=$((ELAPSED / PROCESSED))
+                EST_REMAINING=$((AVG_TIME * REMAINING))
+                EST_MIN=$((EST_REMAINING / 60))
+                EST_SEC=$((EST_REMAINING % 60))
+            else
+                EST_MIN=0
+                EST_SEC=0
+            fi
+            
+            # Progress bar
+            BAR_WIDTH=40
+            FILLED=$((PERCENT * BAR_WIDTH / 100))
+            EMPTY=$((BAR_WIDTH - FILLED))
+            
+            # Generate bars (handle edge cases)
+            if [ $FILLED -gt 0 ]; then
+                BAR=$(printf '█%.0s' $(seq 1 $FILLED))
+            else
+                BAR=""
+            fi
+            
+            if [ $EMPTY -gt 0 ]; then
+                EMPTY_BAR=$(printf '░%.0s' $(seq 1 $EMPTY))
+            else
+                EMPTY_BAR=""
+            fi
+            
+            echo ""
+            echo "╔════════════════════════════════════════════════════════════════╗"
+            echo "║  PROGRESS: [$BAR$EMPTY_BAR] $PERCENT%"
+            echo "║  Company: $PROCESSED of $TOTAL_COMPANIES  |  Remaining: $REMAINING"
+            echo "║  Elapsed: ${ELAPSED_MIN}m ${ELAPSED_SEC}s  |  Est. Left: ${EST_MIN}m ${EST_SEC}s"
+            echo "╚════════════════════════════════════════════════════════════════╝"
+        fi
+    done
 fi
+
+# Final timing
+END_TIME=$(date +%s)
+TOTAL_TIME=$((END_TIME - START_TIME))
+TOTAL_MIN=$((TOTAL_TIME / 60))
+TOTAL_SEC=$((TOTAL_TIME % 60))
+
+echo ""
+echo "╔════════════════════════════════════════════════════════════════╗"
+echo "║  ✅ INDIA SCRAPING COMPLETE"
+echo "║  Total Time: ${TOTAL_MIN}m ${TOTAL_SEC}s"
+echo "╚════════════════════════════════════════════════════════════════╝"
+echo ""
 
 # Show results
 echo ""

@@ -1,5 +1,15 @@
 # 🚀 Quick Start Guide
 
+## ✨ NEW: Progress Tracking with ASCII Art!
+All scraping scripts now show:
+- 📊 Real-time progress bar: `[████████████░░░░░░░░] 65%`
+- ⏱️  Elapsed time and estimated time remaining
+- 📈 Company counter: `7 of 11 | Remaining: 4`
+
+See `PROGRESS_TRACKER.md` for examples!
+
+---
+
 ## 🎯 Best Commands for YOUR Experience
 
 ### 1. Scrape Fraud Detection Companies (BEST MATCH)
