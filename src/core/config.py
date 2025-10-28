@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     )
 
     # Redis
-    redis_url: str = Field(default="redis://localhost:6379/0")
+    redis_url: str = Field(default="redis://localhost:6380/0")
 
     # Notifications
     slack_webhook_url: str | None = None
