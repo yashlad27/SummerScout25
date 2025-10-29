@@ -157,17 +157,16 @@ categories:
       - "(?i)iam|identity.*access"
 
 # Internship and term filters
+# NOTE: For MS students ONLY - no PhD, no undergrad-only positions
 internship:
   title_patterns:
     - "(?i)intern"
     - "(?i)co-op"
     - "(?i)summer 2026"
     - "(?i)summer.*2026"
-    - "(?i)graduate"
+    - "(?i)graduate(?!.*phd)"
     - "(?i)masters"
     - "(?i)master's"
-    - "(?i)phd"
-    - "(?i)doctoral"
   description_patterns:
     - "(?i)intern"
     - "(?i)summer 2026"
@@ -177,9 +176,10 @@ internship:
     - "(?i)master's.*student"
     - "(?i)pursuing.*masters"
     - "(?i)pursuing.*master's"
-    - "(?i)phd.*student"
-    - "(?i)doctoral.*student"
     - "(?i)currently.*enrolled"
+    - "(?i)ms.*student"
+    - "(?i)master's.*degree"
+    - "(?i)not phd"
 
 # Negative filters (exclude these)
 negatives:
@@ -202,6 +202,26 @@ negatives:
     - "(?i)business development"
     - "(?i)product manager(?!.*technical)"
     - "(?i)finance(?!.*quant)"
+  
+  phd_only:
+    - '(?i)\bphd\b.*(?:intern|graduate|student)'
+    - '(?i)(?:intern|graduate|student).*\bphd\b'
+    - '(?i)doctoral'
+    - '(?i)ph\.d\.'
+  
+  undergrad_only:
+    - "(?i)undergraduate(?!.*graduate)"
+    - "(?i)freshman|sophomore|junior(?!.*graduate)"
+  
+  generic_pages:
+    - "(?i)^internships?$"
+    - "(?i)^internship programs?$"
+    - "(?i)join.*talent.*community"
+    - "(?i)^student.*opportunities?$"
+    - "(?i)career.*perspectives"
+    - "(?i)^undergraduates?$"
+    - "(?i)^graduates?$"
+    - "(?i)early.*career$"
 
 # Allowed locations (case-insensitive matching)
 locations:

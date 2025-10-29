@@ -148,17 +148,41 @@ class JobFilter:
             True if has negative keywords
         """
         title = job.title
+        description = job.description_md or ""
         
         # Check seniority keywords
         seniority_patterns = self.negatives.get("seniority", [])
         for pattern in seniority_patterns:
             if re.search(pattern, title):
+                logger.debug(f"Job '{title}' excluded: seniority keyword match")
                 return True
         
         # Check non-engineering keywords
         non_engineering = self.negatives.get("non_engineering", [])
         for pattern in non_engineering:
             if re.search(pattern, title):
+                logger.debug(f"Job '{title}' excluded: non-engineering keyword")
+                return True
+        
+        # Check PhD-only positions (Masters students not eligible)
+        phd_only = self.negatives.get("phd_only", [])
+        for pattern in phd_only:
+            if re.search(pattern, title) or re.search(pattern, description):
+                logger.debug(f"Job '{title}' excluded: PhD-only position")
+                return True
+        
+        # Check undergrad-only positions
+        undergrad_only = self.negatives.get("undergrad_only", [])
+        for pattern in undergrad_only:
+            if re.search(pattern, title):
+                logger.debug(f"Job '{title}' excluded: undergrad-only position")
+                return True
+        
+        # Check generic career pages (not actual jobs)
+        generic_pages = self.negatives.get("generic_pages", [])
+        for pattern in generic_pages:
+            if re.search(pattern, title):
+                logger.debug(f"Job '{title}' excluded: generic career page")
                 return True
         
         return False
@@ -173,24 +197,59 @@ class JobFilter:
             True if location is allowed (US only)
         """
         location = job.location
+        title = job.title
         
-        # Check title for location info if location field is empty
+        # Comprehensive list of non-US countries/cities to reject
+        non_us_locations = [
+            # European countries
+            'germany', 'france', 'netherlands', 'denmark', 'serbia', 'poland', 'spain',
+            'belgium', 'switzerland', 'austria', 'sweden', 'norway', 'finland',
+            'italy', 'portugal', 'greece', 'ireland', 'czech', 'slovakia', 'hungary',
+            'romania', 'bulgaria', 'croatia', 'slovenia',
+            # European cities
+            'london', 'paris', 'berlin', 'munich', 'amsterdam', 'dublin', 'zurich',
+            'stockholm', 'oslo', 'copenhagen', 'warsaw', 'prague', 'barcelona',
+            'madrid', 'rome', 'milan', 'vienna', 'brussels', 'aarhus', 'belgrade',
+            # Asia Pacific
+            'canada', 'india', 'china', 'japan', 'korea', 'singapore', 'australia',
+            'new zealand', 'hong kong', 'taiwan', 'thailand', 'vietnam', 'malaysia',
+            'philippines', 'indonesia',
+            # Asian cities
+            'toronto', 'vancouver', 'montreal', 'bangalore', 'mumbai', 'delhi',
+            'hyderabad', 'chennai', 'pune', 'beijing', 'shanghai', 'tokyo',
+            'seoul', 'sydney', 'melbourne', 'auckland',
+            # Middle East / Latin America
+            'israel', 'uae', 'dubai', 'saudi arabia', 'brazil', 'mexico',
+            'argentina', 'chile', 'colombia', 'tel aviv', 'sao paulo',
+            # UK specific
+            'uk', 'united kingdom', 'england', 'scotland', 'wales',
+        ]
+        
+        # Check both title and location for non-US indicators
+        combined_text = f"{title} {location}".lower()
+        
+        for non_us_loc in non_us_locations:
+            if non_us_loc in combined_text:
+                logger.debug(f"Job '{title}' excluded: non-US location '{non_us_loc}'")
+                return False
+        
+        # If no location data, be cautious - only allow if title has clear US indicators
         if not location or not location.strip():
-            # Try to extract location from title
-            title_lower = job.title.lower()
+            title_lower = title.lower()
             
-            # Check for non-US locations in title
-            non_us_in_title = ['germany', 'france', 'netherlands', 'denmark', 'serbia',
-                               'canada', 'india', 'china', 'japan', 'uk', 'london',
-                               'paris', 'berlin', 'munich', 'amsterdam', 'toronto',
-                               'bangalore', 'aarhus', 'belgrade']
+            # Check if title has US city/state indicators
+            us_quick_check = ['ny', 'nyc', 'california', 'chicago', 'boston', 'seattle',
+                              'austin', 'denver', 'atlanta', 'miami', 'sf', 'bay area',
+                              'remote, us', 'us remote', 'usa', 'united states']
             
-            for country in non_us_in_title:
-                if country in title_lower:
-                    return False
+            has_us_indicator = any(indicator in title_lower for indicator in us_quick_check)
             
-            # If no location data and no non-US in title, allow it (assume US)
-            return True
+            if has_us_indicator:
+                return True
+            else:
+                # No location data and no clear US indicator - reject to be safe
+                logger.debug(f"Job '{title}' excluded: no location data and no US indicator in title")
+                return False
         
         location_lower = location.lower()
         
