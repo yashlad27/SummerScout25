@@ -1,38 +1,28 @@
 #!/bin/bash
-# One-Command Job Scraper
-# Usage: ./scrape.sh [company_name]
-# Example: ./scrape.sh Google
-# Example: ./scrape.sh  (scrapes all companies)
+# India Internship Scraper
+# Usage: ./scrape_india.sh [company_name]
 
 set -e
 
 echo "======================================================================"
-echo "🚀 STARTING JOB SCRAPER"
+echo "🇮🇳 INDIA INTERNSHIP SCRAPER - Summer 2026"
 echo "======================================================================"
 echo ""
 
 # Check if company filter provided
-COMPANY_FILTER=""
 if [ -n "$1" ]; then
-    COMPANY_FILTER="--company \"$1\""
     echo "📋 Scraping: $1"
 else
-    echo "📋 Scraping: All 327 companies from US watchlist"
-    echo "⏱️  Estimated time: 30-40 minutes"
-    echo ""
-    echo "💡 TIP: Use ./scrape_batch.sh for faster targeted scraping:"
-    echo "   ./scrape_batch.sh fraud    (11 companies, ~2 min)"
-    echo "   ./scrape_batch.sh payment  (15 companies, ~3 min)"
-    echo "   ./scrape_batch.sh trading  (15 companies, ~3 min)"
+    echo "📋 Scraping: All Indian companies"
 fi
 echo ""
 
-# Start database and API for dashboard
-echo "🔧 Starting database and API..."
-docker-compose up -d db redis api
+# Start database and India API
+echo "🔧 Starting services..."
+docker-compose up -d db redis api-india
 sleep 3
 
-# Wait for database to be ready
+# Wait for database
 echo "⏳ Waiting for database..."
 until docker-compose exec -T db pg_isready -U jobtracker > /dev/null 2>&1; do
     sleep 1
@@ -42,10 +32,10 @@ done
 echo "📦 Running migrations..."
 docker-compose run --rm migrate
 
-# Run the scraper
+# Run scraper with India config
 echo ""
 echo "======================================================================"
-echo "🔍 SCRAPING JOBS..."
+echo "🔍 SCRAPING INDIAN COMPANIES..."
 echo "======================================================================"
 echo ""
 
@@ -53,20 +43,25 @@ START_TIME=$(date +%s)
 
 if [ -n "$1" ]; then
     # Single company - simple mode
-    docker-compose run --rm worker python -m src.ingest.runner --company "$1"
+    docker-compose run --rm worker python -m src.ingest.runner \
+        --config config/india/watchlist_india.yaml \
+        --country india \
+        --company "$1"
 else
     # Full scrape with progress tracking
-    TOTAL_COMPANIES=323
+    TOTAL_COMPANIES=32
     PROCESSED=0
     
     echo "╔════════════════════════════════════════════════════════════════╗"
-    echo "║  🚀 Starting full scrape of $TOTAL_COMPANIES companies"
-    echo "║  ⏱️  Estimated time: 30-40 minutes"
+    echo "║  🚀 Starting India scrape of $TOTAL_COMPANIES companies"
+    echo "║  ⏱️  Estimated time: 5-8 minutes"
     echo "╚════════════════════════════════════════════════════════════════╝"
     echo ""
     
     # Run scraper and parse output for progress
-    docker-compose run --rm worker python -m src.ingest.runner 2>&1 | while IFS= read -r line; do
+    docker-compose run --rm worker python -m src.ingest.runner \
+        --config config/india/watchlist_india.yaml \
+        --country india 2>&1 | while IFS= read -r line; do
         echo "$line"
         
         # Extract company processing info and count
@@ -129,7 +124,7 @@ TOTAL_SEC=$((TOTAL_TIME % 60))
 
 echo ""
 echo "╔════════════════════════════════════════════════════════════════╗"
-echo "║  ✅ SCRAPING COMPLETE"
+echo "║  ✅ INDIA SCRAPING COMPLETE"
 echo "║  Total Time: ${TOTAL_MIN}m ${TOTAL_SEC}s"
 echo "╚════════════════════════════════════════════════════════════════╝"
 echo ""
@@ -137,7 +132,7 @@ echo ""
 # Show results
 echo ""
 echo "======================================================================"
-echo "📊 RESULTS"
+echo "📊 INDIA RESULTS"
 echo "======================================================================"
 echo ""
 
@@ -147,7 +142,7 @@ SELECT
     COUNT(*) as total_jobs,
     COUNT(*) FILTER (WHERE created_at > NOW() - INTERVAL '1 hour') as new_jobs
 FROM jobs 
-WHERE is_active = true AND country = 'us'
+WHERE is_active = true AND country = 'india'
 GROUP BY company
 ORDER BY total_jobs DESC
 LIMIT 20;
@@ -155,14 +150,14 @@ LIMIT 20;
 
 echo ""
 echo "📄 Generating export files..."
-docker-compose run --rm worker python -m src.utils.export_jobs us
+docker-compose run --rm worker python -m src.utils.export_jobs india
 
 echo ""
 echo "======================================================================"
-echo "✅ SCRAPE COMPLETE"
+echo "✅ INDIA SCRAPE COMPLETE"
 echo "======================================================================"
 echo ""
-echo "🌐 Dashboard: http://localhost:8000"
+echo "🌐 Dashboard: http://localhost:8001"
 echo "📊 View results in your browser!"
 echo ""
 
@@ -179,9 +174,9 @@ if [[ $REPLY =~ ^[2]$ ]]; then
     docker-compose down
     echo "✅ Everything stopped!"
 else
-    echo "✅ Dashboard running at: http://localhost:8000"
+    echo "✅ Dashboard running at: http://localhost:8001"
     echo ""
-    echo "To view: open http://localhost:8000"
+    echo "To view: open http://localhost:8001"
     echo "To stop: docker-compose down"
     echo ""
     
@@ -189,7 +184,7 @@ else
     if command -v open &> /dev/null; then
         echo "🌐 Opening dashboard in browser..."
         sleep 1
-        open http://localhost:8000
+        open http://localhost:8001
     fi
 fi
 

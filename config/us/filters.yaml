@@ -179,7 +179,6 @@ internship:
     - "(?i)currently.*enrolled"
     - "(?i)ms.*student"
     - "(?i)master's.*degree"
-    - "(?i)not phd"
 
 # Negative filters (exclude these)
 negatives:
@@ -203,16 +202,19 @@ negatives:
     - "(?i)product manager(?!.*technical)"
     - "(?i)finance(?!.*quant)"
   
+  # PhD-only positions (Masters students not eligible)
   phd_only:
     - '(?i)\bphd\b.*(?:intern|graduate|student)'
     - '(?i)(?:intern|graduate|student).*\bphd\b'
     - '(?i)doctoral'
     - '(?i)ph\.d\.'
   
+  # Undergrad-only positions
   undergrad_only:
     - "(?i)undergraduate(?!.*graduate)"
     - "(?i)freshman|sophomore|junior(?!.*graduate)"
   
+  # Generic career pages (not actual job postings)
   generic_pages:
     - "(?i)^internships?$"
     - "(?i)^internship programs?$"

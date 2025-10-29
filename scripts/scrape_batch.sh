@@ -10,64 +10,85 @@ echo "🚀 BATCH SCRAPING - By Company Type"
 echo "======================================================================"
 echo ""
 
-# Batch types and their companies (using bash 4+ associative arrays)
-declare -A BATCHES
-
-# Fintech companies (Fast scraping - usually good career pages)
-BATCHES[fintech]="Stripe,Coinbase,Affirm,Plaid,Brex,Ramp,Mercury,Gusto,Rippling,Marqeta,SoFi,Chime,Robinhood,PayPal,Block,Navan"
-
-# FAANG + Big Tech (Can be slow)
-BATCHES[bigtech]="Google,Meta,Amazon,Apple,Microsoft,Netflix,Tesla,Adobe,Salesforce,Oracle,IBM"
-
-# Quant/Trading Firms (Usually fast)
-BATCHES[quant]="Citadel,Two Sigma,Jane Street,HRT,D.E. Shaw,Jump Trading,Optiver,IMC Trading,Akuna Capital,Susquehanna,DRW"
-
-# Cloud/Data Infrastructure (Medium speed)
-BATCHES[cloud]="Databricks,Snowflake,Confluent,MongoDB,Elastic,HashiCorp,Splunk,Datadog"
-
-# Cybersecurity (Fast)
-BATCHES[security]="CrowdStrike,Palo Alto Networks,Okta,Zscaler,Wiz,Snyk,Rapid7,SentinelOne,Tenable,Fortinet,Lacework,Abnormal Security"
-
-# AI/ML Startups (Very fast - small companies)
-BATCHES[ai]="OpenAI,Anthropic,Scale AI,Hugging Face,Cohere,Weights & Biases,Replicate,Modal,Runway,Stability AI,Character.AI,Perplexity AI"
-
-# Gaming (Medium speed)
-BATCHES[gaming]="Unity,Roblox,Epic Games,Riot Games,Bungie"
-
-# Social/Content (Can be slow)
-BATCHES[social]="Reddit,Snap,Pinterest,TikTok,Twitch,Discord"
-
-# Developer Tools (Fast)
-BATCHES[devtools]="GitHub,GitLab,Atlassian,Postman,LaunchDarkly,Vercel,Supabase,PlanetScale,Railway,Render"
-
-# Enterprise SaaS (Medium speed)
-BATCHES[enterprise]="ServiceNow,Twilio,HubSpot,Asana,Notion,Airtable,Monday.com,ClickUp,Miro,Canva"
-
-# Ride-sharing/Delivery (Medium speed)
-BATCHES[mobility]="Uber,DoorDash,Instacart,Waymo,Cruise,Aurora,Zoox,Nuro"
-
-# E-commerce (Medium speed)
-BATCHES[ecommerce]="Shopify,Wayfair,Faire,Flexport,BigCommerce"
-
-# Health Tech (Fast)
-BATCHES[health]="Oscar Health,Ro,Hims & Hers,Tempus"
-
-# EdTech (Fast)
-BATCHES[edtech]="Coursera,Udemy,Duolingo,Quizlet,Grammarly"
-
-# Data/Analytics (Fast)
-BATCHES[data]="Fivetran,dbt Labs,Airbyte,Starburst Data,Census,Hightouch,Amplitude,Mixpanel"
-
-# Banking/Financial Services (Can be slow)
-BATCHES[banking]="JPMorgan Chase,Goldman Sachs,Morgan Stanley,Capital One,Bloomberg"
+# Function to get companies for a batch type (bash 3.x compatible)
+get_batch_companies() {
+    case "$1" in
+        fraud)
+            echo "Sift,Feedzai,BioCatch,Signifyd,Forter,Kount,Riskified,DataVisor,Socure,Arkose Labs,Castle"
+            ;;
+        payment)
+            echo "Adyen,Checkout.com,Modern Treasury,Lithic,Unit,Finix,Bolt,Rapyd,Nuvei,Payoneer,Wise,Remitly,Melio,Bill.com,Tipalti"
+            ;;
+        trading)
+            echo "Citadel Securities,Virtu Financial,Tower Research Capital,Five Rings Capital,Belvedere Trading,Flow Traders,Millennium Management,Point72,Bridgewater Associates,Voleon Group,PDT Partners,Radix Trading,Old Mission Capital,GTS,Schonfeld Strategic Advisors"
+            ;;
+        fintech)
+            echo "Stripe,Coinbase,Affirm,Plaid,Brex,Ramp,Mercury,Gusto,Rippling,Marqeta,SoFi,Chime,Robinhood,PayPal,Block,Navan,Klarna,Upstart"
+            ;;
+        bigtech)
+            echo "Google,Meta,Amazon,Apple,Microsoft,Netflix,Tesla,Adobe,Salesforce,Oracle,IBM,Cisco,VMware,Intuit,Workday"
+            ;;
+        quant)
+            echo "Citadel,Two Sigma,Jane Street,HRT,D.E. Shaw,Jump Trading,Optiver,IMC Trading,Akuna Capital,Susquehanna,DRW"
+            ;;
+        cloud)
+            echo "Databricks,Snowflake,Confluent,MongoDB,Elastic,HashiCorp,Splunk,Datadog"
+            ;;
+        security)
+            echo "CrowdStrike,Palo Alto Networks,Okta,Zscaler,Wiz,Snyk,Rapid7,SentinelOne,Tenable,Fortinet,Lacework,Abnormal Security"
+            ;;
+        ai)
+            echo "OpenAI,Anthropic,Scale AI,Hugging Face,Cohere,Weights & Biases,Replicate,Modal,Runway,Stability AI,Character.AI,Perplexity AI"
+            ;;
+        gaming)
+            echo "Unity,Roblox,Epic Games,Riot Games,Bungie"
+            ;;
+        social)
+            echo "Reddit,Snap,Pinterest,TikTok,Twitch,Discord"
+            ;;
+        devtools)
+            echo "GitHub,GitLab,Atlassian,Postman,LaunchDarkly,Vercel,Supabase,PlanetScale,Railway,Render"
+            ;;
+        enterprise)
+            echo "ServiceNow,Twilio,HubSpot,Asana,Notion,Airtable,Monday.com,ClickUp,Miro,Canva"
+            ;;
+        mobility)
+            echo "Uber,DoorDash,Instacart,Waymo,Cruise,Aurora,Zoox,Nuro"
+            ;;
+        ecommerce)
+            echo "Shopify,Wayfair,Faire,Flexport,BigCommerce"
+            ;;
+        health)
+            echo "Oscar Health,Ro,Hims & Hers,Tempus"
+            ;;
+        edtech)
+            echo "Coursera,Udemy,Duolingo,Quizlet,Grammarly"
+            ;;
+        data)
+            echo "Fivetran,dbt Labs,Airbyte,Starburst Data,Census,Hightouch,Amplitude,Mixpanel"
+            ;;
+        banking)
+            echo "JPMorgan Chase,Goldman Sachs,Morgan Stanley,Capital One,Bloomberg"
+            ;;
+        *)
+            echo ""
+            ;;
+    esac
+}
 
 # Show available batches if no argument
 if [ $# -eq 0 ]; then
     echo "Available batch types:"
     echo ""
-    echo "  fintech    - Fintech companies (16 companies, ~2-3 min)"
-    echo "  bigtech    - FAANG + Big Tech (11 companies, ~5-8 min)"
-    echo "  quant      - Quant/Trading firms (11 companies, ~2-3 min)"
+    echo "  🔥 RECOMMENDED FOR YOUR EXPERIENCE:"
+    echo "  fraud      - Fraud Detection (Sift, Feedzai, BioCatch...) (11 companies, ~2 min)"
+    echo "  payment    - Payment Infrastructure (Adyen, Stripe, Modern Treasury...) (15 companies, ~3 min)"
+    echo "  trading    - Trading Firms (Citadel Securities, Virtu, Tower...) (15 companies, ~3 min)"
+    echo ""
+    echo "  OTHER CATEGORIES:"
+    echo "  fintech    - Fintech companies (18 companies, ~3 min)"
+    echo "  bigtech    - FAANG + Big Tech (15 companies, ~6-8 min)"
+    echo "  quant      - Original Quant firms (11 companies, ~2-3 min)"
     echo "  cloud      - Cloud/Data Infrastructure (8 companies, ~2 min)"
     echo "  security   - Cybersecurity (12 companies, ~2-3 min)"
     echo "  ai         - AI/ML Startups (12 companies, ~2 min)"
@@ -106,31 +127,99 @@ echo "📦 Running migrations..."
 docker-compose run --rm migrate > /dev/null 2>&1
 
 if [ "$BATCH_TYPE" == "all" ]; then
-    echo "🔍 SCRAPING ALL 187 COMPANIES..."
-    echo "⏱️  Estimated time: 25-30 minutes"
+    echo "🔍 SCRAPING ALL 327 COMPANIES..."
+    echo "⏱️  Estimated time: 30-40 minutes"
     echo ""
     docker-compose run --rm worker python -m src.ingest.runner
 else
+    # Get companies for this batch type
+    COMPANIES=$(get_batch_companies "$BATCH_TYPE")
+    
     # Check if batch exists
-    if [ -z "${BATCHES[$BATCH_TYPE]}" ]; then
+    if [ -z "$COMPANIES" ]; then
         echo "❌ Unknown batch type: $BATCH_TYPE"
         echo "Run './scrape_batch.sh' without arguments to see available batches"
         exit 1
     fi
     
-    COMPANIES="${BATCHES[$BATCH_TYPE]}"
     COMPANY_COUNT=$(echo "$COMPANIES" | tr ',' '\n' | wc -l | tr -d ' ')
     
     echo "🔍 SCRAPING BATCH: $BATCH_TYPE"
     echo "📊 Companies: $COMPANY_COUNT"
     echo ""
     
+    # Progress tracking
+    START_TIME=$(date +%s)
+    CURRENT=0
+    
     # Scrape each company in the batch
     IFS=',' read -ra COMPANY_ARRAY <<< "$COMPANIES"
     for company in "${COMPANY_ARRAY[@]}"; do
-        echo "  → $company..."
-        docker-compose run --rm worker python -m src.ingest.runner --company "$company" 2>&1 | grep -E "(Processing|Found|jobs)" | tail -2
+        CURRENT=$((CURRENT + 1))
+        REMAINING=$((COMPANY_COUNT - CURRENT))
+        PERCENT=$((CURRENT * 100 / COMPANY_COUNT))
+        
+        # Calculate elapsed and estimated time
+        CURRENT_TIME=$(date +%s)
+        ELAPSED=$((CURRENT_TIME - START_TIME))
+        ELAPSED_MIN=$((ELAPSED / 60))
+        ELAPSED_SEC=$((ELAPSED % 60))
+        
+        # Estimate remaining time
+        if [ $CURRENT -gt 0 ]; then
+            AVG_TIME_PER_COMPANY=$((ELAPSED / CURRENT))
+            EST_REMAINING=$((AVG_TIME_PER_COMPANY * REMAINING))
+            EST_MIN=$((EST_REMAINING / 60))
+            EST_SEC=$((EST_REMAINING % 60))
+        else
+            EST_MIN=0
+            EST_SEC=0
+        fi
+        
+        # ASCII Progress Bar (40 chars wide)
+        BAR_WIDTH=40
+        FILLED=$((PERCENT * BAR_WIDTH / 100))
+        EMPTY=$((BAR_WIDTH - FILLED))
+        
+        # Generate bars (handle edge cases)
+        if [ $FILLED -gt 0 ]; then
+            BAR=$(printf '█%.0s' $(seq 1 $FILLED))
+        else
+            BAR=""
+        fi
+        
+        if [ $EMPTY -gt 0 ]; then
+            EMPTY_BAR=$(printf '░%.0s' $(seq 1 $EMPTY))
+        else
+            EMPTY_BAR=""
+        fi
+        
+        # Clear previous lines and show progress
+        echo ""
+        echo "╔════════════════════════════════════════════════════════════════╗"
+        echo "║  PROGRESS: [$BAR$EMPTY_BAR] $PERCENT%"
+        echo "║  Company: $CURRENT of $COMPANY_COUNT  |  Remaining: $REMAINING"
+        echo "║  Elapsed: ${ELAPSED_MIN}m ${ELAPSED_SEC}s  |  Est. Time Left: ${EST_MIN}m ${EST_SEC}s"
+        echo "╚════════════════════════════════════════════════════════════════╝"
+        echo ""
+        echo "  🔍 Scraping: $company"
+        
+        docker-compose run --rm worker python -m src.ingest.runner --company "$company" 2>&1 | grep -E "(Processing|Found|jobs|new job)" | tail -3
     done
+    
+    # Final timing
+    END_TIME=$(date +%s)
+    TOTAL_TIME=$((END_TIME - START_TIME))
+    TOTAL_MIN=$((TOTAL_TIME / 60))
+    TOTAL_SEC=$((TOTAL_TIME % 60))
+    
+    echo ""
+    echo "╔════════════════════════════════════════════════════════════════╗"
+    echo "║  ✅ COMPLETE: 100%  [$BAR] "
+    echo "║  Total Companies: $COMPANY_COUNT"
+    echo "║  Total Time: ${TOTAL_MIN}m ${TOTAL_SEC}s"
+    echo "╚════════════════════════════════════════════════════════════════╝"
+    echo ""
 fi
 
 # Show results
@@ -146,11 +235,15 @@ SELECT
     COUNT(*) as total_jobs,
     COUNT(*) FILTER (WHERE created_at > NOW() - INTERVAL '1 hour') as new_jobs
 FROM jobs 
-WHERE is_active = true
+WHERE is_active = true AND country = 'us'
 GROUP BY company
 ORDER BY total_jobs DESC
 LIMIT 20;
 "
+
+echo ""
+echo "📄 Generating export files..."
+docker-compose run --rm worker python -m src.utils.export_jobs us
 
 echo ""
 echo "======================================================================"

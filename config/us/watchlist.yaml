@@ -5177,6 +5177,63 @@ targets:
   categories:
   - software_engineering
   - backend
+- company: Brex
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/brex
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - backend
+  - ml_ai
+- company: Ramp
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/ramp
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - backend
+  - ml_ai
+- company: Navan
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/tripactions
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - backend
+  - ml_ai
 - company: Recorded Future
   ats_type: greenhouse
   careers_url: https://boards.greenhouse.io/recordedfuture
@@ -6710,6 +6767,25 @@ targets:
 - company: Upstart
   ats_type: greenhouse
   careers_url: https://boards.greenhouse.io/upstart
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+  - data_science
+- company: SoFi
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/sofi
   roles_include:
   - intern
   - summer 2026

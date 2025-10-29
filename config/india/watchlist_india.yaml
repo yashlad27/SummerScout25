@@ -1,0 +1,259 @@
+# India Internship Tracker - Summer 2026
+# Indian tech companies and MNC India offices
+
+targets:
+  # Product Companies - Unicorns
+  - company: "Flipkart"
+    ats_type: "generic"
+    careers_url: "https://www.flipkartcareers.com/#!/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Hyderabad", "Delhi", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "data_engineering", "ml_ai"]
+    country: "india"
+
+  - company: "Swiggy"
+    ats_type: "greenhouse"
+    careers_url: "https://careers.swiggy.com/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Hyderabad", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile", "data_science"]
+    country: "india"
+
+  - company: "Zomato"
+    ats_type: "generic"
+    careers_url: "https://www.zomato.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Gurgaon", "Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile", "data_science"]
+    country: "india"
+
+  - company: "PhonePe"
+    ats_type: "generic"
+    careers_url: "https://www.phonepe.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Pune", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile"]
+    country: "india"
+
+  - company: "Paytm"
+    ats_type: "generic"
+    careers_url: "https://jobs.lever.co/paytm"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Noida", "Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile", "data_science"]
+    country: "india"
+
+  # Fintech
+  - company: "Razorpay"
+    ats_type: "lever"
+    careers_url: "https://razorpay.com/jobs/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Hyderabad", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "devops"]
+    country: "india"
+
+  - company: "CRED"
+    ats_type: "generic"
+    careers_url: "https://careers.cred.club/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile", "data_science"]
+    country: "india"
+
+  - company: "Zerodha"
+    ats_type: "generic"
+    careers_url: "https://zerodha.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "devops"]
+    country: "india"
+
+  # SaaS Companies
+  - company: "Freshworks"
+    ats_type: "greenhouse"
+    careers_url: "https://www.freshworks.com/company/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Chennai", "Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile", "data_science"]
+    country: "india"
+
+  - company: "Zoho"
+    ats_type: "generic"
+    careers_url: "https://www.zoho.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Chennai", "Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile"]
+    country: "india"
+
+  - company: "BrowserStack"
+    ats_type: "greenhouse"
+    careers_url: "https://www.browserstack.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Mumbai", "Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "devops", "qa_testing"]
+    country: "india"
+
+  - company: "Postman"
+    ats_type: "greenhouse"
+    careers_url: "https://www.postman.com/company/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend"]
+    country: "india"
+
+  # Gaming & Entertainment
+  - company: "Dream11"
+    ats_type: "generic"
+    careers_url: "https://www.dream11.com/about-us/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Mumbai", "Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile", "data_science"]
+    country: "india"
+
+  - company: "MPL"
+    ats_type: "generic"
+    careers_url: "https://www.mpl.live/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Pune", "Remote"]
+    categories: ["software_engineering", "backend", "mobile", "data_science"]
+    country: "india"
+
+  # E-commerce & Logistics
+  - company: "Meesho"
+    ats_type: "generic"
+    careers_url: "https://www.meesho.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile", "data_science"]
+    country: "india"
+
+  - company: "Udaan"
+    ats_type: "generic"
+    careers_url: "https://udaan.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "data_engineering"]
+    country: "india"
+
+  - company: "Urban Company"
+    ats_type: "generic"
+    careers_url: "https://www.urbancompany.com/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Gurgaon", "Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile", "data_science"]
+    country: "india"
+
+  # EdTech
+  - company: "Unacademy"
+    ats_type: "generic"
+    careers_url: "https://unacademy.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile", "data_science"]
+    country: "india"
+
+  - company: "PhysicsWallah"
+    ats_type: "generic"
+    careers_url: "https://www.pw.live/careers"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Noida", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile"]
+    country: "india"
+
+  - company: "BYJU'S"
+    ats_type: "generic"
+    careers_url: "https://byjus.com/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Remote"]
+    categories: ["software_engineering", "backend", "frontend", "mobile", "data_science"]
+    country: "india"
+
+  # MNC India Offices
+  - company: "Microsoft India"
+    ats_type: "generic"
+    careers_url: "https://careers.microsoft.com/students/us/en/job/1747482/Internship-Opportunities-for-Students-India"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Hyderabad", "Noida"]
+    categories: ["software_engineering", "backend", "frontend", "ml_ai", "data_science"]
+    country: "india"
+
+  - company: "Google India"
+    ats_type: "generic"
+    careers_url: "https://buildyourfuture.withgoogle.com/programs/step"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Hyderabad", "Gurgaon"]
+    categories: ["software_engineering", "backend", "frontend", "ml_ai", "data_science"]
+    country: "india"
+
+  - company: "Amazon India"
+    ats_type: "generic"
+    careers_url: "https://www.amazon.jobs/en/search?country[]=IND"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Hyderabad", "Chennai"]
+    categories: ["software_engineering", "backend", "frontend", "ml_ai", "data_engineering"]
+    country: "india"
+
+  - company: "Adobe India"
+    ats_type: "generic"
+    careers_url: "https://careers.adobe.com/us/en/students-india"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Noida"]
+    categories: ["software_engineering", "backend", "frontend", "ml_ai"]
+    country: "india"
+
+  - company: "Oracle India"
+    ats_type: "generic"
+    careers_url: "https://www.oracle.com/in/corporate/careers/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Hyderabad"]
+    categories: ["software_engineering", "backend", "data_engineering", "cybersecurity"]
+    country: "india"
+
+  - company: "SAP Labs India"
+    ats_type: "generic"
+    careers_url: "https://www.sap.com/india/about/careers.html"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore"]
+    categories: ["software_engineering", "backend", "frontend", "data_engineering"]
+    country: "india"
+
+  - company: "Goldman Sachs Bangalore"
+    ats_type: "generic"
+    careers_url: "https://www.goldmansachs.com/careers/students/programs/india/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Hyderabad"]
+    categories: ["software_engineering", "backend", "data_science", "ml_ai"]
+    country: "india"
+
+  - company: "JPMorgan Bangalore"
+    ats_type: "generic"
+    careers_url: "https://careers.jpmorgan.com/in/en/students/programs"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Mumbai", "Hyderabad"]
+    categories: ["software_engineering", "backend", "data_science"]
+    country: "india"
+
+  # IT Services
+  - company: "TCS"
+    ats_type: "generic"
+    careers_url: "https://www.tcs.com/careers/students"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Multiple cities", "Remote"]
+    categories: ["software_engineering", "backend", "data_science"]
+    country: "india"
+
+  - company: "Infosys"
+    ats_type: "generic"
+    careers_url: "https://www.infosys.com/careers/internship.html"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Pune", "Hyderabad"]
+    categories: ["software_engineering", "backend", "data_science"]
+    country: "india"
+
+  - company: "Wipro"
+    ats_type: "generic"
+    careers_url: "https://careers.wipro.com/students/"
+    roles_include: ["intern", "summer 2026", "internship"]
+    locations: ["Bangalore", "Hyderabad", "Chennai"]
+    categories: ["software_engineering", "backend", "cybersecurity"]
+    country: "india"

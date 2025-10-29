@@ -10,35 +10,53 @@ No cloud required. No 24/7 running. Just scrape when you want, get results, done
 ## ✨ Features
 
 - 🚀 **On-Demand Scraping** - Run only when you need it
-- 🎯 **108 Top Companies** - FAANG, quant firms, unicorn startups
+- 🖥️ **Interactive CLI** - Full-featured terminal app for managing jobs
+- 🎯 **327 Companies** - FAANG, quant firms, unicorn startups, fintech
 - 🇺🇸 **US Positions Only** - Automatically filtered
-- 💼 **Internship Focus** - Summer 2026 positions
+- 💼 **Internship Focus** - Summer 2026 Masters-eligible positions
 - 📊 **Smart Filtering** - ML/AI, Cybersecurity, Data Engineering, Data Science
 - 🔔 **Email Notifications** - Get alerts for new postings
-- 💾 **Data Persistence** - PostgreSQL storage
+- 💾 **Master CSV Log** - Comprehensive job database updated automatically
+- 📈 **Statistics Dashboard** - Track daily/all-time metrics
 - 🪶 **Lightweight** - Docker stops when done
 
 ## 🎬 Demo
 
+### Interactive CLI (NEW!)
 ```bash
-# Scrape all 108 companies
-$ ./scrape.sh
-🔍 SCRAPING JOBS...
-✅ Citadel - 9 jobs found
-✅ Two Sigma - 1 job found
-✅ Databricks - 15 jobs found
-✅ NVIDIA - 5 jobs found
-...
-📊 RESULTS: 72 jobs from 17 companies
+# Launch interactive terminal app
+$ ./job_tracker.sh
+
+================================================================================
+🎯  JOB TRACKER - Interactive CLI
+================================================================================
+
+📋 MAIN MENU:
+--------------------------------------------------------------------------------
+  1. 🚀 Run Full Scrape (All 327 Companies)
+  2. 🎯 Run Single Company Scrape
+  3. 📊 View Today's Statistics
+  4. 🆕 View New Jobs (Last 24 Hours)
+  5. 📈 View All-Time Statistics
+  6. 📁 View Recent Export Files
+  7. 💾 Export Master Job Log (CSV)
+  8. 🔍 Search Jobs by Keyword
+  9. 🏢 View Jobs by Company
+  0. ❌ Exit
+--------------------------------------------------------------------------------
+👉 Select an option (0-9):
+```
+
+### Command Line
+```bash
+# Scrape all 327 companies
+$ ./scrape_batch.sh
+
+# Scrape single company
+$ ./scrape.sh "Databricks"
 
 # View results
 $ ./show_jobs.sh
-       company        | jobs | last_updated 
----------------------+------+--------------
- Databricks          |   15 | 2025-10-24
- HRT                 |   15 | 2025-10-24
- Citadel             |    9 | 2025-10-24
-...
 ```
 
 ## 🚀 Quick Start
@@ -67,22 +85,34 @@ docker-compose build
 
 ### Usage
 
-**Scrape all companies (10-15 minutes):**
+#### 🖥️ **Interactive CLI (Recommended)**
 ```bash
-./scrape.sh
-```
+# Launch full-featured terminal app
+./job_tracker.sh
 
-**Scrape one company (5 seconds):**
+# Features:
+# - Run scrapes (full or single company)
+# - View today's statistics & new jobs
+# - Search jobs by keyword
+# - Export master CSV log (auto-updated)
+# - Track all-time metrics
+```
+📖 **[Full CLI Guide](CLI_GUIDE.md)**
+
+#### ⌨️ **Command Line**
 ```bash
-./scrape.sh "Google"
-./scrape.sh "Microsoft"
+# Scrape all companies (30-60 minutes)
+./scrape_batch.sh
+
+# Scrape one company (10-30 seconds)
 ./scrape.sh "Databricks"
-```
 
-**View results:**
-```bash
+# View results in terminal
 ./show_jobs.sh              # All jobs
 ./show_jobs.sh "NVIDIA"     # Jobs from specific company
+
+# Master CSV log (auto-updated after scrapes)
+open MASTER_JOB_LOG.csv     # All jobs in Excel/CSV format
 ```
 
 **Clean up:**

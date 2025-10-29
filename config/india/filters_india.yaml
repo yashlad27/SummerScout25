@@ -1,0 +1,156 @@
+# Job Classification and Filtering Rules - India
+
+categories:
+  software_engineering:
+    title_any:
+      - "(?i)software engineer"
+      - "(?i)software developer"
+      - "(?i)sde"
+      - "(?i)swe"
+      - "(?i)engineer"
+      - "(?i)developer"
+    description_hints:
+      - "(?i)coding|programming"
+      - "(?i)java|python|c\\+\\+|golang"
+  
+  backend:
+    title_any:
+      - "(?i)backend"
+      - "(?i)back-end"
+      - "(?i)server.*engineer"
+    description_hints:
+      - "(?i)rest.*api|graphql"
+      - "(?i)microservices"
+      - "(?i)database|sql|nosql"
+  
+  frontend:
+    title_any:
+      - "(?i)frontend"
+      - "(?i)front-end"
+      - "(?i)ui.*engineer"
+      - "(?i)web.*engineer"
+    description_hints:
+      - "(?i)react|vue|angular"
+      - "(?i)javascript|typescript"
+  
+  fullstack:
+    title_any:
+      - "(?i)full.*stack"
+      - "(?i)fullstack"
+    description_hints:
+      - "(?i)frontend.*backend"
+  
+  mobile:
+    title_any:
+      - "(?i)mobile.*engineer"
+      - "(?i)android.*engineer"
+      - "(?i)ios.*engineer"
+    description_hints:
+      - "(?i)kotlin|swift|react native"
+      - "(?i)android|ios"
+  
+  devops:
+    title_any:
+      - "(?i)devops"
+      - "(?i)site reliability"
+      - "(?i)sre"
+      - "(?i)infrastructure"
+    description_hints:
+      - "(?i)kubernetes|docker"
+      - "(?i)ci/cd"
+      - "(?i)aws|azure|gcp"
+  
+  qa_testing:
+    title_any:
+      - "(?i)quality.*assurance"
+      - "(?i)qa"
+      - "(?i)test.*engineer"
+      - "(?i)sdet"
+    description_hints:
+      - "(?i)testing|test automation"
+      - "(?i)selenium"
+  
+  ml_ai:
+    title_any:
+      - "(?i)machine learning"
+      - "(?i)ml"
+      - "(?i)artificial intelligence"
+      - "(?i)ai"
+      - "(?i)deep learning"
+    description_hints:
+      - "(?i)pytorch|tensorflow"
+      - "(?i)model training"
+  
+  data_science:
+    title_any:
+      - "(?i)data scien"
+      - "(?i)analytics"
+      - "(?i)data analyst"
+    description_hints:
+      - "(?i)statistical|statistics"
+      - "(?i)a/b test"
+  
+  data_engineering:
+    title_any:
+      - "(?i)data engineer"
+      - "(?i)etl"
+      - "(?i)data pipeline"
+    description_hints:
+      - "(?i)spark|hadoop|kafka"
+      - "(?i)airflow"
+  
+  cybersecurity:
+    title_any:
+      - "(?i)security"
+      - "(?i)cyber"
+    description_hints:
+      - "(?i)firewall|ids"
+
+internship:
+  title_patterns:
+    - "(?i)intern"
+    - "(?i)summer 2026"
+    - "(?i)summer.*2026"
+    - "(?i)trainee"
+  description_patterns:
+    - "(?i)intern"
+    - "(?i)summer 2026"
+    - "(?i)internship"
+
+negatives:
+  seniority:
+    - "(?i)senior"
+    - "(?i)lead"
+    - "(?i)manager"
+    - "(?i)director"
+  
+  non_engineering:
+    - "(?i)sales"
+    - "(?i)marketing"
+    - "(?i)hr"
+
+locations:
+  allowed:
+    - "Bangalore"
+    - "Bengaluru"
+    - "Hyderabad"
+    - "Pune"
+    - "Mumbai"
+    - "Delhi"
+    - "Noida"
+    - "Gurgaon"
+    - "Gurugram"
+    - "Chennai"
+    - "Kolkata"
+    - "Remote"
+  
+  excluded_countries:
+    - "United States"
+    - "USA"
+    - "UK"
+    - "Singapore"
+    - "Dubai"
+
+similarity:
+  title_jaccard_threshold: 0.8
+  description_cosine_threshold: 0.55

@@ -32,11 +32,13 @@ class JobTrackerRunner:
         
         logger.info(f"Initialized JobTrackerRunner (dry_run={dry_run})")
     
-    def run(self, company_filter: str | None = None) -> dict[str, Any]:
+    def run(self, company_filter: str | None = None, config_path: str | None = None, country: str = "us") -> dict[str, Any]:
         """Run the job tracking pipeline.
         
         Args:
             company_filter: Optional company name filter
+            config_path: Optional path to watchlist config file
+            country: Country for jobs (us or india)
             
         Returns:
             Dictionary with run statistics
@@ -55,9 +57,15 @@ class JobTrackerRunner:
         all_new_job_ids = []
         companies_scanned = []
         
-        # Load watchlist
+        # Load watchlist from specified path or default
         config_loader = get_config_loader()
-        watchlist_config = config_loader.load_watchlist()
+        if config_path:
+            import yaml
+            from pathlib import Path
+            with open(Path(config_path), 'r') as f:
+                watchlist_config = yaml.safe_load(f)
+        else:
+            watchlist_config = config_loader.load_watchlist()
         targets = watchlist_config.get("targets", [])
         
         if not targets:
@@ -75,7 +83,9 @@ class JobTrackerRunner:
                 target = WatchlistTarget(**target_config)
                 companies_scanned.append(target.company)
                 
-                target_stats, new_job_ids = self._process_target(target)
+                # Use target's country if specified, otherwise use CLI country
+                target_country = target.country if hasattr(target, 'country') and target.country else country
+                target_stats, new_job_ids = self._process_target(target, target_country)
                 
                 # Collect new job IDs
                 all_new_job_ids.extend(new_job_ids)
@@ -108,11 +118,12 @@ class JobTrackerRunner:
         logger.info(f"Pipeline complete: {stats}")
         return stats
     
-    def _process_target(self, target: WatchlistTarget) -> tuple[dict[str, Any], list]:
+    def _process_target(self, target: WatchlistTarget, country: str = "us") -> tuple[dict[str, Any], list]:
         """Process a single watchlist target.
         
         Args:
             target: Watchlist target
+            country: Country for jobs (us or india)
             
         Returns:
             Tuple of (statistics dictionary, list of new jobs)
@@ -152,6 +163,9 @@ class JobTrackerRunner:
                 try:
                     # Normalize
                     normalized_job = self.normalizer.normalize(raw_job)
+                    
+                    # Set country
+                    normalized_job.country = country
                     
                     # Classify
                     category = self.classifier.classify(normalized_job)
@@ -214,11 +228,27 @@ def main():
         type=str,
         help="Filter to specific company name (case-insensitive substring match)",
     )
+    parser.add_argument(
+        "--config",
+        type=str,
+        help="Path to watchlist config file (e.g., config/india/watchlist_india.yaml)",
+    )
+    parser.add_argument(
+        "--country",
+        type=str,
+        default="us",
+        choices=["us", "india"],
+        help="Country for jobs (us or india)",
+    )
     
     args = parser.parse_args()
     
     runner = JobTrackerRunner(dry_run=args.dry_run)
-    stats = runner.run(company_filter=args.company)
+    stats = runner.run(
+        company_filter=args.company,
+        config_path=args.config,
+        country=args.country
+    )
     
     print("\n" + "=" * 60)
     print("JOB TRACKER RUN SUMMARY")
