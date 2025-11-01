@@ -4,41 +4,42 @@ from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeo
 from typing import List
 import time
 import random
-from src.ingest.schemas import JobPosting
+from src.ingest.base import BaseScraper
+from src.ingest.schemas import RawJob, WatchlistTarget
 from src.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
 
 
-class LinkedInScraper:
+class LinkedInScraper(BaseScraper):
     """Scraper for LinkedIn job listings as fallback source."""
     
-    def __init__(self, company: str, linkedin_company_id: str = None):
+    source = "linkedin"
+    
+    def __init__(self, target: WatchlistTarget):
         """
         Initialize LinkedIn scraper.
         
         Args:
-            company: Company name
-            linkedin_company_id: LinkedIn company ID (optional, will search by name)
+            target: Watchlist target configuration
         """
-        self.company = company
-        self.linkedin_company_id = linkedin_company_id
-        self.logger = logger
+        super().__init__(target)
+        self.linkedin_company_id = getattr(target, 'linkedin_company_id', None)
         
         # Build search URL
-        if linkedin_company_id:
-            self.base_url = f"https://www.linkedin.com/jobs/search/?f_C={linkedin_company_id}&keywords=software%20engineer%20intern"
+        if self.linkedin_company_id:
+            self.base_url = f"https://www.linkedin.com/jobs/search/?f_C={self.linkedin_company_id}&keywords=software%20engineer%20intern"
         else:
             # Search by company name
-            company_encoded = company.replace(" ", "%20")
+            company_encoded = self.company.replace(" ", "%20")
             self.base_url = f"https://www.linkedin.com/jobs/search/?keywords={company_encoded}%20software%20engineer%20intern"
     
-    def fetch(self) -> List[JobPosting]:
+    def fetch(self) -> List[RawJob]:
         """
         Fetch jobs from LinkedIn.
         
         Returns:
-            List of JobPosting objects
+            List of RawJob objects
         """
         jobs = []
         
@@ -90,14 +91,12 @@ class LinkedInScraper:
                         if self.company.lower() not in company_name.lower():
                             continue
                         
-                        job = JobPosting(
-                            source="linkedin",
+                        job = self._create_raw_job(
                             source_id=f"linkedin_{job_id}",
-                            company=self.company,
                             title=title,
                             location=location,
                             url=job_url,
-                            description_md=f"# {title}\n\n**Company:** {company_name}\n**Location:** {location}\n\n*Source: LinkedIn*",
+                            description_html=f"<h1>{title}</h1><p><strong>Company:</strong> {company_name}</p><p><strong>Location:</strong> {location}</p><p><em>Source: LinkedIn</em></p>",
                             raw_data={
                                 "title": title,
                                 "company": company_name,

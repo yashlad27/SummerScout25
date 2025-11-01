@@ -3,35 +3,36 @@
 import requests
 from bs4 import BeautifulSoup
 from typing import List
-from src.ingest.schemas import JobPosting
+from src.ingest.base import BaseScraper
+from src.ingest.schemas import RawJob, WatchlistTarget
 from src.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
 
 
-class iCIMSScraper:
+class iCIMSScraper(BaseScraper):
     """Scraper for iCIMS ATS job boards."""
     
-    def __init__(self, company: str, icims_id: str):
+    source = "icims"
+    
+    def __init__(self, target: WatchlistTarget):
         """
         Initialize iCIMS scraper.
         
         Args:
-            company: Company name
-            icims_id: iCIMS portal ID (e.g., 'careers-companyname')
+            target: Watchlist target configuration
         """
-        self.company = company
-        self.icims_id = icims_id
+        super().__init__(target)
+        self.icims_id = getattr(target, 'icims_id', f"careers-{target.company.lower().replace(' ', '')}")
         # iCIMS URL pattern
-        self.base_url = f"https://{icims_id}.icims.com/jobs/search"
-        self.logger = logger
+        self.base_url = f"https://{self.icims_id}.icims.com/jobs/search"
     
-    def fetch(self) -> List[JobPosting]:
+    def fetch(self) -> List[RawJob]:
         """
         Fetch jobs from iCIMS portal.
         
         Returns:
-            List of JobPosting objects
+            List of RawJob objects
         """
         jobs = []
         
@@ -80,14 +81,12 @@ class iCIMSScraper:
                         # Extract job ID from URL
                         job_id = job_url.split('/')[-1].split('?')[0]
                         
-                        job = JobPosting(
-                            source="icims",
+                        job = self._create_raw_job(
                             source_id=f"icims_{job_id}",
-                            company=self.company,
                             title=title,
                             location=location,
                             url=job_url,
-                            description_md=f"# {title}\n\n**Company:** {self.company}\n**Location:** {location}",
+                            description_html=f"<h1>{title}</h1><p><strong>Company:</strong> {self.company}</p><p><strong>Location:</strong> {location}</p>",
                             raw_data={
                                 "title": title,
                                 "location": location,

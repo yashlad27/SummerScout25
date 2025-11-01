@@ -2,35 +2,36 @@
 
 import requests
 from typing import List
-from src.ingest.schemas import JobPosting
+from src.ingest.base import BaseScraper
+from src.ingest.schemas import RawJob, WatchlistTarget
 from src.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
 
 
-class WorkdayScraper:
+class WorkdayScraper(BaseScraper):
     """Scraper for Workday ATS job boards."""
     
-    def __init__(self, company: str, workday_company_id: str):
+    source = "workday"
+    
+    def __init__(self, target: WatchlistTarget):
         """
         Initialize Workday scraper.
         
         Args:
-            company: Company name
-            workday_company_id: Workday company identifier (e.g., 'microsoft')
+            target: Watchlist target configuration
         """
-        self.company = company
-        self.workday_company_id = workday_company_id
+        super().__init__(target)
+        self.workday_company_id = getattr(target, 'workday_company_id', target.company.lower().replace(' ', ''))
         # Workday API endpoint pattern
-        self.base_url = f"https://{workday_company_id}.wd1.myworkdayjobs.com/wday/cxs/{workday_company_id}/External/jobs"
-        self.logger = logger
+        self.base_url = f"https://{self.workday_company_id}.wd1.myworkdayjobs.com/wday/cxs/{self.workday_company_id}/External/jobs"
     
-    def fetch(self) -> List[JobPosting]:
+    def fetch(self) -> List[RawJob]:
         """
         Fetch jobs from Workday API.
         
         Returns:
-            List of JobPosting objects
+            List of RawJob objects
         """
         jobs = []
         
@@ -74,15 +75,13 @@ class WorkdayScraper:
                         job_req_id = job_data.get("externalPath", "")
                         job_url = f"https://{self.workday_company_id}.wd1.myworkdayjobs.com{job_req_id}"
                         
-                        job = JobPosting(
-                            source="workday",
+                        job = self._create_raw_job(
                             source_id=job_id or job_req_id,
-                            company=self.company,
                             title=title,
                             location=location,
                             url=job_url,
                             posted_at=posted_on,
-                            description_md=f"# {title}\n\n**Company:** {self.company}\n**Location:** {location}",
+                            description_html=f"<h1>{title}</h1><p><strong>Company:</strong> {self.company}</p><p><strong>Location:</strong> {location}</p>",
                             raw_data=job_data
                         )
                         

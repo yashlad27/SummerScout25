@@ -3,33 +3,34 @@
 import requests
 from bs4 import BeautifulSoup
 from typing import List
-from src.ingest.schemas import JobPosting
+from src.ingest.base import BaseScraper
+from src.ingest.schemas import RawJob, WatchlistTarget
 from src.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
 
 
-class TaleoScraper:
+class TaleoScraper(BaseScraper):
     """Scraper for Taleo ATS job boards."""
     
-    def __init__(self, company: str, taleo_url: str):
+    source = "taleo"
+    
+    def __init__(self, target: WatchlistTarget):
         """
         Initialize Taleo scraper.
         
         Args:
-            company: Company name
-            taleo_url: Full Taleo careers URL
+            target: Watchlist target configuration
         """
-        self.company = company
-        self.base_url = taleo_url
-        self.logger = logger
+        super().__init__(target)
+        self.base_url = getattr(target, 'taleo_url', getattr(target, 'careers_url', ''))
     
-    def fetch(self) -> List[JobPosting]:
+    def fetch(self) -> List[RawJob]:
         """
         Fetch jobs from Taleo portal.
         
         Returns:
-            List of JobPosting objects
+            List of RawJob objects
         """
         jobs = []
         
@@ -81,14 +82,12 @@ class TaleoScraper:
                         if 'intern' not in title.lower():
                             continue
                         
-                        job = JobPosting(
-                            source="taleo",
+                        job = self._create_raw_job(
                             source_id=f"taleo_{job_id}",
-                            company=self.company,
                             title=title,
                             location=location,
                             url=job_url,
-                            description_md=f"# {title}\n\n**Company:** {self.company}\n**Location:** {location}",
+                            description_html=f"<h1>{title}</h1><p><strong>Company:</strong> {self.company}</p><p><strong>Location:</strong> {location}</p>",
                             raw_data={
                                 "title": title,
                                 "location": location,
