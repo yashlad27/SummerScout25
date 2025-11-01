@@ -2,6 +2,7 @@
 
 from contextlib import contextmanager
 from typing import Generator
+import logging
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker, Session
@@ -10,10 +11,17 @@ from src.core.config import get_settings
 
 settings = get_settings()
 
+# Silence SQLAlchemy loggers BEFORE creating engine
+logging.getLogger('sqlalchemy.engine').setLevel(logging.CRITICAL)
+logging.getLogger('sqlalchemy.engine.Engine').setLevel(logging.CRITICAL)
+logging.getLogger('sqlalchemy.pool').setLevel(logging.CRITICAL)
+logging.getLogger('sqlalchemy.dialects').setLevel(logging.CRITICAL)
+logging.getLogger('sqlalchemy.orm').setLevel(logging.CRITICAL)
+
 # Create engine
 engine = create_engine(
     settings.database_url,
-    echo=settings.environment == "development",
+    echo=False,  # Disable SQL logging for cleaner output
     pool_pre_ping=True,
     pool_size=10,
     max_overflow=20,

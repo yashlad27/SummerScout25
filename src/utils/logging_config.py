@@ -13,20 +13,30 @@ def setup_logging() -> None:
     """Configure application logging."""
     log_level = getattr(logging, settings.log_level.upper(), logging.INFO)
     
-    # Configure root logger
+    # Configure root logger with cleaner format
     logging.basicConfig(
         level=log_level,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        format="%(asctime)s | %(levelname)-7s | %(message)s",
+        datefmt="%H:%M:%S",
         handlers=[
             logging.StreamHandler(sys.stdout),
         ],
     )
     
-    # Set third-party loggers to WARNING
-    logging.getLogger("urllib3").setLevel(logging.WARNING)
-    logging.getLogger("requests").setLevel(logging.WARNING)
-    logging.getLogger("asyncio").setLevel(logging.WARNING)
-    logging.getLogger("sqlalchemy.engine").setLevel(logging.WARNING)
+    # Silence third-party loggers completely
+    logging.getLogger("urllib3").setLevel(logging.CRITICAL)
+    logging.getLogger("requests").setLevel(logging.CRITICAL)
+    logging.getLogger("asyncio").setLevel(logging.CRITICAL)
+    logging.getLogger("sqlalchemy").setLevel(logging.CRITICAL)
+    logging.getLogger("sqlalchemy.engine").setLevel(logging.CRITICAL)
+    logging.getLogger("sqlalchemy.engine.Engine").setLevel(logging.CRITICAL)
+    logging.getLogger("sqlalchemy.pool").setLevel(logging.CRITICAL)
+    logging.getLogger("sqlalchemy.dialects").setLevel(logging.CRITICAL)
+    logging.getLogger("sqlalchemy.orm").setLevel(logging.CRITICAL)
+    logging.getLogger("playwright").setLevel(logging.CRITICAL)
+    
+    # Disable SQLAlchemy echo completely
+    logging.getLogger("sqlalchemy.engine.Engine").propagate = False
 
 
 def get_logger(name: str) -> logging.Logger:

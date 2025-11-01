@@ -5192,6 +5192,44 @@ targets:
   categories:
   - software_engineering
   - data_engineering
+- company: Workday
+  ats_type: generic
+  careers_url: https://www.workday.com/en-us/company/careers/university-recruiting.html
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+  - data_engineering
+- company: Box
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/box
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - backend
+  - cybersecurity
 - company: Dropbox
   ats_type: generic
   careers_url: https://www.dropbox.com/jobs/teams/emerging-talent
@@ -5211,6 +5249,25 @@ targets:
   - software_engineering
   - backend
   - ml_ai
+- company: Alteryx
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/alteryx
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - data_engineering
+  - data_science
 - company: Domo
   ats_type: greenhouse
   careers_url: https://boards.greenhouse.io/domo
@@ -5265,6 +5322,25 @@ targets:
   categories:
   - software_engineering
   - data_engineering
+- company: ThoughtSpot
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/thoughtspot
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - data_engineering
+  - ml_ai
 - company: Collibra
   ats_type: greenhouse
   careers_url: https://boards.greenhouse.io/collibra
@@ -5283,6 +5359,43 @@ targets:
   categories:
   - software_engineering
   - data_engineering
+- company: Alation
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/alation
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - data_engineering
+- company: Immuta
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/immuta
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - data_engineering
+  - cybersecurity
 - company: BigID
   ats_type: greenhouse
   careers_url: https://boards.greenhouse.io/bigid
@@ -5302,6 +5415,25 @@ targets:
   - software_engineering
   - data_engineering
   - cybersecurity
+- company: Etsy
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/etsy
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+  - data_science
 - company: eBay
   ats_type: generic
   careers_url: https://careers.ebayinc.com/students
@@ -5321,6 +5453,24 @@ targets:
   - software_engineering
   - ml_ai
   - data_science
+- company: Mercado Libre
+  ats_type: lever
+  careers_url: https://jobs.lever.co/mercadolibre
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
 - company: StockX
   ats_type: greenhouse
   careers_url: https://boards.greenhouse.io/stockx
@@ -5357,6 +5507,137 @@ targets:
   categories:
   - software_engineering
   - ml_ai
+- company: Chainalysis
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/chainalysis
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - data_science
+  - cybersecurity
+- company: Elliptic
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/elliptic
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+  - cybersecurity
+- company: TRM Labs
+  ats_type: lever
+  careers_url: https://jobs.lever.co/trmlabs
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - data_science
+  - cybersecurity
+- company: Lemonade
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/lemonade
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+  - data_science
+- company: Root Insurance
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/rootinc
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+  - data_science
+- company: Hippo Insurance
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/hippoinsurance
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+- company: Next Insurance
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/nextinsurance
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - data_engineering
 - company: ComplyAdvantage
   ats_type: greenhouse
   careers_url: https://boards.greenhouse.io/complyadvantage
@@ -5376,6 +5657,24 @@ targets:
   - software_engineering
   - ml_ai
   - data_science
+- company: Trulioo
+  ats_type: lever
+  careers_url: https://jobs.lever.co/trulioo
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
 - company: Jumio
   ats_type: greenhouse
   careers_url: https://boards.greenhouse.io/jumio
@@ -5395,6 +5694,43 @@ targets:
   - software_engineering
   - ml_ai
   - cybersecurity
+- company: Onfido
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/onfido
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+  - cybersecurity
+- company: Veriff
+  ats_type: lever
+  careers_url: https://jobs.lever.co/veriff
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
 - company: Persona
   ats_type: lever
   careers_url: https://jobs.lever.co/persona
@@ -5432,6 +5768,80 @@ targets:
   categories:
   - software_engineering
   - ml_ai
+- company: Sardine
+  ats_type: lever
+  careers_url: https://jobs.lever.co/sardine
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+  - cybersecurity
+- company: Klarna
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/klarna
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+  - data_science
+- company: Sezzle
+  ats_type: lever
+  careers_url: https://jobs.lever.co/sezzle
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+- company: Zip
+  ats_type: lever
+  careers_url: https://jobs.lever.co/zip
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
 - company: Bread Financial
   ats_type: generic
   careers_url: https://careers.breadfinancial.com/students
@@ -5450,6 +5860,78 @@ targets:
   categories:
   - software_engineering
   - data_engineering
+- company: Synchrony
+  ats_type: generic
+  careers_url: https://careers.synchrony.com/students
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - data_engineering
+- company: Upgrade
+  ats_type: lever
+  careers_url: https://jobs.lever.co/upgrade
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+- company: Avant
+  ats_type: lever
+  careers_url: https://jobs.lever.co/avant
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+- company: Dave
+  ats_type: lever
+  careers_url: https://jobs.lever.co/dave
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
 - company: MoneyLion
   ats_type: greenhouse
   careers_url: https://boards.greenhouse.io/moneylion
@@ -5468,6 +5950,79 @@ targets:
   categories:
   - software_engineering
   - ml_ai
+- company: Current
+  ats_type: lever
+  careers_url: https://jobs.lever.co/current
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+- company: Albert
+  ats_type: lever
+  careers_url: https://jobs.lever.co/albert
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+- company: Varo
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/varomoney
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+- company: LendingClub
+  ats_type: greenhouse
+  careers_url: https://boards.greenhouse.io/lendingclub
+  roles_include:
+  - intern
+  - summer 2026
+  - internship
+  locations:
+  - Remote
+  - New York
+  - Bay Area
+  - Seattle
+  - Boston
+  - Austin
+  - Chicago
+  categories:
+  - software_engineering
+  - ml_ai
+  - data_science
 - company: Prosper
   ats_type: lever
   careers_url: https://jobs.lever.co/prosper

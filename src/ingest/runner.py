@@ -53,8 +53,9 @@ class JobTrackerRunner:
             "errors": 0,
         }
         
-        # Collect all new job IDs for batch notification
+        # Collect all new and updated job IDs for batch notification
         all_new_job_ids = []
+        all_updated_job_ids = []
         companies_scanned = []
         
         # Load watchlist from specified path or default
@@ -78,17 +79,23 @@ class JobTrackerRunner:
             logger.info(f"Filtered to {len(targets)} targets matching '{company_filter}'")
         
         # Process each target
-        for target_config in targets:
+        logger.info(f"🚀 Starting scrape of {len(targets)} companies...")
+        logger.info("=" * 60)
+        
+        for idx, target_config in enumerate(targets, 1):
             try:
                 target = WatchlistTarget(**target_config)
                 companies_scanned.append(target.company)
                 
+                logger.info(f"[{idx}/{len(targets)}] 📍 {target.company} ({target.ats_type})")
+                
                 # Use target's country if specified, otherwise use CLI country
                 target_country = target.country if hasattr(target, 'country') and target.country else country
-                target_stats, new_job_ids = self._process_target(target, target_country)
+                target_stats, new_job_ids, updated_job_ids = self._process_target(target, target_country)
                 
-                # Collect new job IDs
+                # Collect new and updated job IDs
                 all_new_job_ids.extend(new_job_ids)
+                all_updated_job_ids.extend(updated_job_ids)
                 
                 # Aggregate stats
                 for key in stats:
@@ -102,23 +109,40 @@ class JobTrackerRunner:
                 stats["errors"] += 1
                 continue
         
-        # Send consolidated notification for all new jobs
-        if all_new_job_ids and not self.dry_run:
-            logger.info(f"Sending consolidated notification for {len(all_new_job_ids)} new jobs")
+        # Send consolidated notification for all new and updated jobs
+        if (all_new_job_ids or all_updated_job_ids) and not self.dry_run:
+            total_jobs = len(all_new_job_ids) + len(all_updated_job_ids)
+            logger.info(f"Sending consolidated notification for {len(all_new_job_ids)} new + {len(all_updated_job_ids)} updated jobs")
             with get_db_context() as db:
                 # Fetch the jobs in this session
                 from src.core.models import Job
-                jobs = db.query(Job).filter(Job.id.in_(all_new_job_ids)).all()
+                all_job_ids = all_new_job_ids + all_updated_job_ids
+                jobs = db.query(Job).filter(Job.id.in_(all_job_ids)).all()
                 
                 notification_manager = NotificationManager(db)
-                notification_manager.notify_batch(jobs, companies_scanned=companies_scanned)
+                notification_manager.notify_batch(
+                    jobs, 
+                    companies_scanned=companies_scanned,
+                    new_count=len(all_new_job_ids),
+                    updated_count=len(all_updated_job_ids)
+                )
                 db.commit()  # Commit the alerts
                 stats["notifications_sent"] = 1  # One batch email
         
-        logger.info(f"Pipeline complete: {stats}")
+        # Print final summary
+        logger.info("=" * 60)
+        logger.info("✅ Pipeline Complete!")
+        logger.info(f"   Companies processed: {stats['companies_processed']}")
+        logger.info(f"   Jobs fetched: {stats['jobs_fetched']}")
+        logger.info(f"   Jobs filtered out: {stats['jobs_filtered']}")
+        logger.info(f"   New jobs: {stats['jobs_new']}")
+        logger.info(f"   Updated jobs: {stats['jobs_updated']}")
+        logger.info(f"   Errors: {stats['errors']}")
+        logger.info(f"   Notifications: {stats['notifications_sent']}")
+        logger.info("=" * 60)
         return stats
     
-    def _process_target(self, target: WatchlistTarget, country: str = "us") -> tuple[dict[str, Any], list]:
+    def _process_target(self, target: WatchlistTarget, country: str = "us") -> tuple[dict[str, Any], list, list]:
         """Process a single watchlist target.
         
         Args:
@@ -126,7 +150,7 @@ class JobTrackerRunner:
             country: Country for jobs (us or india)
             
         Returns:
-            Tuple of (statistics dictionary, list of new jobs)
+            Tuple of (statistics dictionary, list of new job IDs, list of updated job IDs)
         """
         stats = {
             "jobs_fetched": 0,
@@ -137,22 +161,21 @@ class JobTrackerRunner:
         }
         
         new_job_ids = []
-        
-        logger.info(f"Processing {target.company} ({target.ats_type})")
+        updated_job_ids = []
         
         # Get scraper
         scraper = get_scraper(target)
         if not scraper:
-            logger.warning(f"No scraper available for {target.ats_type}")
-            return stats, new_job_ids
+            logger.warning(f"⚠️  No scraper available for {target.ats_type}")
+            return stats, new_job_ids, updated_job_ids
         
         # Fetch raw jobs
         raw_jobs = scraper.fetch()
         stats["jobs_fetched"] = len(raw_jobs)
         
         if not raw_jobs:
-            logger.info(f"No jobs found for {target.company}")
-            return stats, new_job_ids
+            logger.info(f"   ➜ 0 jobs found")
+            return stats, new_job_ids, updated_job_ids
         
         # Process each job
         with get_db_context() as db:
@@ -198,6 +221,12 @@ class JobTrackerRunner:
                             new_job_ids.append(db_job.id)
                         else:
                             stats["jobs_updated"] += 1
+                            
+                            # Flush to ensure ID is available
+                            db.flush()
+                            
+                            # Collect updated job ID for notification
+                            updated_job_ids.append(db_job.id)
                     else:
                         # Dry run - just log
                         logger.info(
