@@ -6,8 +6,12 @@ from src.ingest.base import BaseScraper
 from src.ingest.ats.greenhouse import GreenhouseScraper
 from src.ingest.ats.lever import LeverScraper
 from src.ingest.ats.ashby import AshbyScraper
-from src.ingest.ats.indeed import IndeedScraper, LinkedInScraper, GlassdoorScraper
+from src.ingest.ats.indeed import IndeedScraper, GlassdoorScraper
 from src.ingest.ats.generic import GenericScraper
+from src.ingest.ats.workday import WorkdayScraper
+from src.ingest.ats.linkedin import LinkedInScraper
+from src.ingest.ats.icims import iCIMSScraper
+from src.ingest.ats.taleo import TaleoScraper
 from src.ingest.schemas import WatchlistTarget
 from src.utils.logging_config import get_logger
 
@@ -21,11 +25,11 @@ SCRAPER_REGISTRY: dict[str, Type[BaseScraper]] = {
     "ashby": AshbyScraper,
     "generic": GenericScraper,  # Generic web scraper using Playwright
     "indeed": IndeedScraper,
-    "linkedin": LinkedInScraper,  # NOT RECOMMENDED - see warnings
+    "linkedin": LinkedInScraper,  # Fallback when career pages fail
     "glassdoor": GlassdoorScraper,  # NOT RECOMMENDED - see warnings
-    # Add more scrapers as implemented
-    # "smartrecruiters": SmartRecruitersScraper,
-    # "workday": WorkdayScraper,
+    "workday": WorkdayScraper,  # 40% of F500 companies
+    "icims": iCIMSScraper,  # Mid-size companies
+    "taleo": TaleoScraper,  # Oracle & large enterprises
 }
 
 
