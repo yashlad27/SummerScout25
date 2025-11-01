@@ -73,8 +73,8 @@ targets:
   - data_science
   - cybersecurity
 - company: Microsoft
-  ats_type: generic
-  careers_url: https://careers.microsoft.com/
+  ats_type: workday
+  workday_company_id: microsoft
   roles_include:
   - intern
   - summer 2026
@@ -106,8 +106,8 @@ targets:
   - data_science
   - data_engineering
 - company: Amazon
-  ats_type: generic
-  careers_url: https://www.amazon.jobs/en/
+  ats_type: workday
+  workday_company_id: amazon
   roles_include:
   - intern
   - summer 2026
@@ -280,8 +280,8 @@ targets:
   - cybersecurity
   - ml_platform
 - company: Cloudflare
-  ats_type: generic
-  careers_url: https://www.cloudflare.com/careers/jobs/
+  ats_type: workday
+  workday_company_id: cloudflare
   roles_include:
   - intern
   - summer 2026
@@ -318,8 +318,8 @@ targets:
   - cybersecurity
   - ml_platform
 - company: Block (Square)
-  ats_type: generic
-  careers_url: https://block.xyz/careers
+  ats_type: workday
+  workday_company_id: block
   roles_include:
   - intern
   - summer 2026
@@ -429,8 +429,8 @@ targets:
   - ml_platform
   - cybersecurity
 - company: DoorDash
-  ats_type: generic
-  careers_url: https://careers.doordash.com/university
+  ats_type: workday
+  workday_company_id: doordash
   roles_include:
   - intern
   - summer 2026
@@ -466,8 +466,8 @@ targets:
   - ml_platform
   - cybersecurity
 - company: Wayfair
-  ats_type: generic
-  careers_url: https://www.wayfair.com/careers/university
+  ats_type: workday
+  workday_company_id: wayfair
   roles_include:
   - intern
   - summer 2026
@@ -1120,8 +1120,8 @@ targets:
   - platform_security
   - ml_platform
 - company: Morgan Stanley
-  ats_type: generic
-  careers_url: https://www.morganstanley.com/careers/campus
+  ats_type: linkedin
+  linkedin_company_id: "1067"
   roles_include:
   - intern
   - summer 2026
@@ -1476,8 +1476,8 @@ targets:
   - cybersecurity
   - ml_platform
 - company: Sophos
-  ats_type: generic
-  careers_url: https://www.sophos.com/en-us/company/careers
+  ats_type: linkedin
+  linkedin_company_id: "9323"
   roles_include:
   - intern
   - summer 2026
@@ -3287,8 +3287,8 @@ targets:
   - platform_security
   - ml_platform
 - company: Roblox
-  ats_type: generic
-  careers_url: https://corp.roblox.com/careers/
+  ats_type: linkedin
+  linkedin_company_id: "2369880"
   roles_include:
   - intern
   - summer 2026
@@ -4382,7 +4382,7 @@ targets:
   - ml_ai
 - company: Balyasny Asset Management
   ats_type: generic
-  careers_url: https://www.balyasny.com/join-us
+  careers_url: https://www.bamfunds.com/careers
   roles_include:
   - intern
   - summer 2026
