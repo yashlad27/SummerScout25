@@ -66,7 +66,7 @@ class WatchlistTarget(BaseModel):
     @classmethod
     def validate_ats_type(cls, v: str) -> str:
         """Validate ATS type."""
-        valid_types = ["greenhouse", "lever", "ashby", "smartrecruiters", "workday", "generic", "indeed", "linkedin", "glassdoor"]
+        valid_types = ["greenhouse", "lever", "ashby", "smartrecruiters", "workday", "generic", "indeed", "linkedin", "glassdoor", "icims", "taleo"]
         if v.lower() not in valid_types:
             raise ValueError(f"Invalid ATS type: {v}. Must be one of {valid_types}")
         return v.lower()

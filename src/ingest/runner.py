@@ -239,7 +239,7 @@ class JobTrackerRunner:
                     logger.error(f"Failed to process job {raw_job.source_id}: {e}")
                     continue
         
-        return stats, new_job_ids
+        return stats, new_job_ids, updated_job_ids
 
 
 def main():

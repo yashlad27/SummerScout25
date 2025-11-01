@@ -3,7 +3,7 @@
 import re
 from typing import Dict, List, Optional
 from datetime import datetime, timedelta
-from src.ingest.schemas import JobPosting
+from src.ingest.schemas import NormalizedJob
 from src.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
@@ -36,7 +36,7 @@ class JobAnalyzer:
     def __init__(self):
         self.logger = logger
     
-    def analyze(self, job: JobPosting) -> Dict:
+    def analyze(self, job: NormalizedJob) -> Dict:
         """
         Analyze job description and extract metadata.
         

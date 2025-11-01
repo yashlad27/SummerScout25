@@ -20,9 +20,16 @@ try:
     from src.ingest.ats.icims import iCIMSScraper
     from src.ingest.ats.taleo import TaleoScraper
     from src.ingest.health_monitor import HealthMonitor, URLHealth
-    from src.utils.ai_classifier import AIJobClassifier
     from src.ingest.job_analyzer import JobAnalyzer
-    print("   ✓ All modules imported successfully")
+    print("   ✓ Core modules imported successfully")
+    
+    # Try importing AI classifier (optional dependency)
+    try:
+        from src.utils.ai_classifier import AIJobClassifier
+        print("   ✓ AI classifier module imported")
+    except ImportError as ie:
+        print(f"   ⚠ AI classifier import skipped (missing dependency: {ie})")
+        print("     Run: pip install openai OR docker-compose build worker")
 except Exception as e:
     print(f"   ✗ Import failed: {e}")
     sys.exit(1)
@@ -118,24 +125,29 @@ except Exception as e:
 # Test 5: Test AI classifier
 print("\n✅ Test 5: Testing AI classifier...")
 try:
-    ai_classifier = AIJobClassifier()
-    if ai_classifier.enabled:
-        print("   ✓ AI Classifier enabled (OpenAI API key found)")
-    else:
-        print("   ⚠ AI Classifier disabled (no OpenAI API key)")
-        print("     Add OPENAI_API_KEY to enable AI features")
+    try:
+        from src.utils.ai_classifier import AIJobClassifier
+        ai_classifier = AIJobClassifier()
+        if ai_classifier.enabled:
+            print("   ✓ AI Classifier enabled (OpenAI API key found)")
+        else:
+            print("   ⚠ AI Classifier disabled (no OpenAI API key)")
+            print("     Add OPENAI_API_KEY to enable AI features")
+    except ImportError:
+        print("   ⚠ AI Classifier module not available (openai package not installed)")
+        print("     Run: docker-compose build worker")
 except Exception as e:
     print(f"   ✗ AI classifier test failed: {e}")
 
 # Test 6: Test job analyzer
 print("\n✅ Test 6: Testing job analyzer...")
 try:
-    from src.ingest.schemas import JobPosting
+    from src.ingest.schemas import NormalizedJob
     
     analyzer = JobAnalyzer()
     
     # Create a test job
-    test_job = JobPosting(
+    test_job = NormalizedJob(
         source="test",
         source_id="test123",
         company="TestCorp",

@@ -249,6 +249,13 @@ class EmailNotifier(BaseNotifier):
             text_parts.append(f"{job.company:<25} {job.title[:33]:<35} {(job.location or 'N/A')[:18]:<20} {remote_text:<8}\n")
             text_parts.append(f"  🔗 {job.url}\n")
         
+        # Group jobs by company for summary
+        jobs_by_company = {}
+        for job in jobs:
+            if job.company not in jobs_by_company:
+                jobs_by_company[job.company] = []
+            jobs_by_company[job.company].append(job)
+        
         # Add scan summary footer
         html_parts.append("<hr style='border: 1px solid #ecf0f1; margin-top: 30px;'/>")
         

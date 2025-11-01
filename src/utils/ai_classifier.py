@@ -3,7 +3,7 @@
 from typing import Tuple, Optional
 import os
 from openai import OpenAI
-from src.ingest.schemas import JobPosting
+from src.ingest.schemas import NormalizedJob
 from src.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
@@ -26,12 +26,12 @@ class AIJobClassifier:
             self.enabled = True
             self.logger.info("AI Job Classifier initialized")
     
-    def classify_job(self, job: JobPosting) -> Tuple[Optional[str], float, bool]:
+    def classify_job(self, job: NormalizedJob) -> Tuple[Optional[str], float, bool]:
         """
         Use AI to classify a job and determine relevance.
         
         Args:
-            job: JobPosting to classify
+            job: NormalizedJob to classify
             
         Returns:
             Tuple of (category, confidence_score, is_relevant)
@@ -112,12 +112,12 @@ Reason: [brief 1-sentence explanation]
             # Fallback to assuming relevance
             return None, 0.0, True
     
-    def extract_skills(self, job: JobPosting) -> list[str]:
+    def extract_skills(self, job: NormalizedJob) -> list[str]:
         """
         Extract technical skills mentioned in job description.
         
         Args:
-            job: JobPosting to analyze
+            job: NormalizedJob to analyze
             
         Returns:
             List of technical skills
@@ -158,12 +158,12 @@ Docker
             self.logger.error(f"Error extracting skills: {e}")
             return []
     
-    def check_visa_sponsorship(self, job: JobPosting) -> Optional[bool]:
+    def check_visa_sponsorship(self, job: NormalizedJob) -> Optional[bool]:
         """
         Check if job mentions visa sponsorship.
         
         Args:
-            job: JobPosting to analyze
+            job: NormalizedJob to analyze
             
         Returns:
             True if sponsors visa, False if not, None if unknown
