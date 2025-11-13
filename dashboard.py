@@ -58,7 +58,6 @@ def jobs():
     
     company_filter = request.args.get('company', '')
     category_filter = request.args.get('category', '')
-    remote_filter = request.args.get('remote', '')
     status_filter = request.args.get('status', 'active')
     
     with get_db_context() as db:
@@ -73,9 +72,6 @@ def jobs():
         
         if category_filter:
             query = query.filter(Job.category == category_filter)
-        
-        if remote_filter == 'yes':
-            query = query.filter(Job.remote == True)
         
         # Get total count
         total = query.count()
@@ -99,8 +95,7 @@ def jobs():
             total=total,
             categories=categories,
             company_filter=company_filter,
-            category_filter=category_filter,
-            remote_filter=remote_filter
+            category_filter=category_filter
         )
 
 

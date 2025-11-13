@@ -1,0 +1,1555 @@
+summary:
+  total: 257
+  valid_with_jobs: 29
+  valid_no_jobs: 228
+  timeout: 0
+  invalid: 0
+  errors: 0
+results:
+  valid:
+  - company: Belvedere Trading
+    ats_type: lever
+    url: https://jobs.lever.co/belvederetrading
+    status: valid
+    job_count: 8
+    error: null
+  - company: Voleon Group
+    ats_type: lever
+    url: https://jobs.lever.co/voleon
+    status: valid
+    job_count: 73
+    error: null
+  - company: Feedzai
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/feedzai
+    status: valid
+    job_count: 40
+    error: null
+  - company: Forter
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/forter
+    status: valid
+    job_count: 38
+    error: null
+  - company: Riskified
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/riskified
+    status: valid
+    job_count: 28
+    error: null
+  - company: Arkose Labs
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/arkoselabs
+    status: valid
+    job_count: 18
+    error: null
+  - company: Finix
+    ats_type: lever
+    url: https://jobs.lever.co/finix
+    status: valid
+    job_count: 14
+    error: null
+  - company: Pagaya
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/pagaya
+    status: valid
+    job_count: 12
+    error: null
+  - company: Payoneer
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/payoneer
+    status: valid
+    job_count: 100
+    error: null
+  - company: Melio
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/melio
+    status: valid
+    job_count: 17
+    error: null
+  - company: Bill.com
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/billcom
+    status: valid
+    job_count: 73
+    error: null
+  - company: Recorded Future
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/recordedfuture
+    status: valid
+    job_count: 63
+    error: null
+  - company: ThreatConnect
+    ats_type: lever
+    url: https://jobs.lever.co/threatconnect
+    status: valid
+    job_count: 3
+    error: null
+  - company: Anomali
+    ats_type: lever
+    url: https://jobs.lever.co/anomali
+    status: valid
+    job_count: 17
+    error: null
+  - company: KnowBe4
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/knowbe4
+    status: valid
+    job_count: 76
+    error: null
+  - company: Dragos
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/dragos
+    status: valid
+    job_count: 21
+    error: null
+  - company: Tanium
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/tanium
+    status: valid
+    job_count: 131
+    error: null
+  - company: Orca Security
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/orcasecurity
+    status: valid
+    job_count: 17
+    error: null
+  - company: Domo
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/domo
+    status: valid
+    job_count: 5
+    error: null
+  - company: Sisense
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/sisense
+    status: valid
+    job_count: 5
+    error: null
+  - company: Collibra
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/collibra
+    status: valid
+    job_count: 63
+    error: null
+  - company: BigID
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/bigid
+    status: valid
+    job_count: 12
+    error: null
+  - company: StockX
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/stockx
+    status: valid
+    job_count: 17
+    error: null
+  - company: ComplyAdvantage
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/complyadvantage
+    status: valid
+    job_count: 27
+    error: null
+  - company: Jumio
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/jumio
+    status: valid
+    job_count: 17
+    error: null
+  - company: Alloy
+    ats_type: lever
+    url: https://jobs.lever.co/alloy
+    status: valid
+    job_count: 7
+    error: null
+  - company: MoneyLion
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/moneylion
+    status: valid
+    job_count: 42
+    error: null
+  - company: Prosper
+    ats_type: lever
+    url: https://jobs.lever.co/prosper
+    status: valid
+    job_count: 9
+    error: null
+  - company: Upstart
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/upstart
+    status: valid
+    job_count: 93
+    error: null
+  invalid: []
+  timeout: []
+  no_jobs:
+  - company: Citadel
+    ats_type: generic
+    url: https://www.citadel.com/careers/open-positions/positions-for-students/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Two Sigma
+    ats_type: generic
+    url: https://careers.twosigma.com/careers/JobDetail?jobId=12345
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Jane Street
+    ats_type: generic
+    url: https://www.janestreet.com/join-jane-street/open-roles/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: HRT
+    ats_type: generic
+    url: https://www.hudsonrivertrading.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: D.E. Shaw
+    ats_type: generic
+    url: https://www.deshaw.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Microsoft
+    ats_type: workday
+    url: null
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Google
+    ats_type: generic
+    url: https://careers.google.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Amazon
+    ats_type: workday
+    url: null
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Meta
+    ats_type: generic
+    url: https://www.metacareers.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Apple
+    ats_type: generic
+    url: https://jobs.apple.com/en-us/search?team=internships
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: NVIDIA
+    ats_type: generic
+    url: https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Databricks
+    ats_type: generic
+    url: https://www.databricks.com/company/careers/open-positions
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Snowflake
+    ats_type: generic
+    url: https://www.snowflake.com/careers/jobs/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Confluent
+    ats_type: generic
+    url: https://www.confluent.io/careers/jobs/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: MongoDB
+    ats_type: generic
+    url: https://www.mongodb.com/careers/positions
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Palantir
+    ats_type: generic
+    url: https://www.palantir.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Cloudflare
+    ats_type: workday
+    url: null
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Stripe
+    ats_type: generic
+    url: https://stripe.com/jobs/search
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Block (Square)
+    ats_type: workday
+    url: null
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Optiver
+    ats_type: generic
+    url: https://optiver.com/working-at-optiver/career-opportunities/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Akuna Capital
+    ats_type: generic
+    url: https://akunacapital.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Susquehanna (SIG)
+    ats_type: generic
+    url: https://sig.com/campus-programs/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Airbnb
+    ats_type: generic
+    url: https://careers.airbnb.com/university/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Uber
+    ats_type: generic
+    url: https://www.uber.com/us/en/careers/teams/university/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: DoorDash
+    ats_type: workday
+    url: null
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Instacart
+    ats_type: generic
+    url: https://careers.instacart.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Wayfair
+    ats_type: workday
+    url: null
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Shopify
+    ats_type: generic
+    url: https://www.shopify.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Tesla
+    ats_type: generic
+    url: https://www.tesla.com/careers/search/?site=US
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Waymo
+    ats_type: generic
+    url: https://waymo.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Adobe
+    ats_type: generic
+    url: https://careers.adobe.com/us/en/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Salesforce
+    ats_type: generic
+    url: https://www.salesforce.com/company/careers/university-recruiting/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: ServiceNow
+    ats_type: generic
+    url: https://careers.servicenow.com/early-career-programs
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Atlassian
+    ats_type: generic
+    url: https://www.atlassian.com/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Twilio
+    ats_type: generic
+    url: https://www.twilio.com/company/jobs
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: HubSpot
+    ats_type: generic
+    url: https://www.hubspot.com/careers/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Datadog
+    ats_type: generic
+    url: https://www.datadoghq.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Splunk
+    ats_type: generic
+    url: https://www.splunk.com/en_us/careers/university.html
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: CrowdStrike
+    ats_type: generic
+    url: https://www.crowdstrike.com/careers/students-and-grads/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Palo Alto Networks
+    ats_type: generic
+    url: https://jobs.paloaltonetworks.com/en/jobs/search/intern/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Okta
+    ats_type: generic
+    url: https://www.okta.com/company/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Zscaler
+    ats_type: generic
+    url: https://www.zscaler.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Rapid7
+    ats_type: generic
+    url: https://www.rapid7.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Tenable
+    ats_type: generic
+    url: https://www.tenable.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: SentinelOne
+    ats_type: generic
+    url: https://www.sentinelone.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Snyk
+    ats_type: generic
+    url: https://snyk.io/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Wiz
+    ats_type: generic
+    url: https://www.wiz.io/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Fortinet
+    ats_type: generic
+    url: https://www.fortinet.com/corporate/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Check Point
+    ats_type: generic
+    url: https://www.checkpoint.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Coinbase
+    ats_type: generic
+    url: https://www.coinbase.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Affirm
+    ats_type: generic
+    url: https://www.affirm.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Notion
+    ats_type: generic
+    url: https://www.notion.so/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: GitHub
+    ats_type: generic
+    url: https://github.com/about/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: GitLab
+    ats_type: generic
+    url: https://about.gitlab.com/jobs/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Plaid
+    ats_type: generic
+    url: https://plaid.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Brex
+    ats_type: generic
+    url: https://www.brex.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: PayPal
+    ats_type: generic
+    url: https://www.paypal.com/us/webapps/mpp/jobs/interns-and-grads
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Robinhood
+    ats_type: generic
+    url: https://careers.robinhood.com/openings/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Bloomberg
+    ats_type: generic
+    url: https://www.bloomberg.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Capital One
+    ats_type: generic
+    url: https://www.capitalonecareers.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: JPMorgan Chase
+    ats_type: generic
+    url: https://careers.jpmorgan.com/us/en/students/programs
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Goldman Sachs
+    ats_type: generic
+    url: https://www.goldmansachs.com/careers/students/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Morgan Stanley
+    ats_type: linkedin
+    url: null
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Jump Trading
+    ats_type: generic
+    url: https://www.jumptrading.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: DRW
+    ats_type: generic
+    url: https://drw.com/work-at-drw/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: IMC Trading
+    ats_type: generic
+    url: https://careers.imc.com/us/en/students-and-graduates
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Canva
+    ats_type: generic
+    url: https://www.canva.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Webflow
+    ats_type: generic
+    url: https://webflow.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Asana
+    ats_type: generic
+    url: https://asana.com/jobs
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: HashiCorp
+    ats_type: generic
+    url: https://www.hashicorp.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: SoFi
+    ats_type: generic
+    url: https://www.sofi.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Chime
+    ats_type: generic
+    url: https://www.chime.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Elastic
+    ats_type: generic
+    url: https://www.elastic.co/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: New Relic
+    ats_type: generic
+    url: https://newrelic.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Grafana Labs
+    ats_type: generic
+    url: https://grafana.com/about/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Linear
+    ats_type: generic
+    url: https://linear.app/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: ClickUp
+    ats_type: generic
+    url: https://clickup.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Monday.com
+    ats_type: generic
+    url: https://monday.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Miro
+    ats_type: generic
+    url: https://miro.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Coda
+    ats_type: generic
+    url: https://coda.io/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Betterment
+    ats_type: generic
+    url: https://www.betterment.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Wealthfront
+    ats_type: generic
+    url: https://www.wealthfront.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Sophos
+    ats_type: linkedin
+    url: null
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Trellix
+    ats_type: generic
+    url: https://careers.trellix.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Darktrace
+    ats_type: generic
+    url: https://darktrace.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Vectra AI
+    ats_type: generic
+    url: https://www.vectra.ai/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Exabeam
+    ats_type: generic
+    url: https://www.exabeam.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Arctic Wolf
+    ats_type: generic
+    url: https://arcticwolf.com/company/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Cybereason
+    ats_type: generic
+    url: https://www.cybereason.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Netskope
+    ats_type: generic
+    url: https://www.netskope.com/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Proofpoint
+    ats_type: generic
+    url: https://www.proofpoint.com/us/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Rubrik
+    ats_type: generic
+    url: https://www.rubrik.com/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Dynatrace
+    ats_type: generic
+    url: https://www.dynatrace.com/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Sumo Logic
+    ats_type: generic
+    url: https://www.sumologic.com/company/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Honeycomb
+    ats_type: generic
+    url: https://www.honeycomb.io/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: AppDynamics
+    ats_type: generic
+    url: https://www.appdynamics.com/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: LogicMonitor
+    ats_type: generic
+    url: https://www.logicmonitor.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Chronosphere
+    ats_type: generic
+    url: https://chronosphere.io/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Coralogix
+    ats_type: generic
+    url: https://coralogix.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: JetBrains
+    ats_type: generic
+    url: https://www.jetbrains.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Sketch
+    ats_type: generic
+    url: https://www.sketch.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: InVision
+    ats_type: generic
+    url: https://www.invisionapp.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Framer
+    ats_type: generic
+    url: https://www.framer.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Mural
+    ats_type: generic
+    url: https://www.mural.co/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Public.com
+    ats_type: generic
+    url: https://public.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Webull
+    ats_type: generic
+    url: https://www.webull.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: ServiceNow
+    ats_type: generic
+    url: https://careers.servicenow.com/early-career-programs
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Tech Companies
+    ats_type: indeed
+    url: https://www.indeed.com
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Lacework
+    ats_type: generic
+    url: https://www.lacework.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Abnormal Security
+    ats_type: generic
+    url: https://abnormalsecurity.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Axonius
+    ats_type: generic
+    url: https://www.axonius.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: SecurityScorecard
+    ats_type: generic
+    url: https://securityscorecard.com/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Vercel
+    ats_type: generic
+    url: https://vercel.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Supabase
+    ats_type: generic
+    url: https://supabase.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: PlanetScale
+    ats_type: generic
+    url: https://planetscale.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Neon
+    ats_type: generic
+    url: https://neon.tech/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Fly.io
+    ats_type: generic
+    url: https://fly.io/jobs/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Railway
+    ats_type: generic
+    url: https://railway.app/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Render
+    ats_type: generic
+    url: https://render.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Postman
+    ats_type: generic
+    url: https://www.postman.com/company/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: LaunchDarkly
+    ats_type: generic
+    url: https://launchdarkly.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Pulumi
+    ats_type: generic
+    url: https://www.pulumi.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Temporal
+    ats_type: generic
+    url: https://temporal.io/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Fivetran
+    ats_type: generic
+    url: https://www.fivetran.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: dbt Labs
+    ats_type: generic
+    url: https://www.getdbt.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Airbyte
+    ats_type: generic
+    url: https://airbyte.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Starburst Data
+    ats_type: generic
+    url: https://www.starburst.io/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Preset
+    ats_type: generic
+    url: https://preset.io/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Census
+    ats_type: generic
+    url: https://www.getcensus.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Hightouch
+    ats_type: generic
+    url: https://hightouch.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Ramp
+    ats_type: generic
+    url: https://ramp.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Mercury
+    ats_type: generic
+    url: https://mercury.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Gusto
+    ats_type: generic
+    url: https://gusto.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Rippling
+    ats_type: generic
+    url: https://www.rippling.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Marqeta
+    ats_type: generic
+    url: https://www.marqeta.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Navan
+    ats_type: generic
+    url: https://navan.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Column
+    ats_type: generic
+    url: https://column.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Faire
+    ats_type: generic
+    url: https://www.faire.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Flexport
+    ats_type: generic
+    url: https://www.flexport.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Shippo
+    ats_type: generic
+    url: https://goshippo.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: BigCommerce
+    ats_type: generic
+    url: https://careers.bigcommerce.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Discord
+    ats_type: generic
+    url: https://discord.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Zoom
+    ats_type: generic
+    url: https://careers.zoom.us/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Airtable
+    ats_type: generic
+    url: https://www.airtable.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Loom
+    ats_type: generic
+    url: https://www.loom.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Pitch
+    ats_type: generic
+    url: https://pitch.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Weights & Biases
+    ats_type: generic
+    url: https://www.wandb.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Replicate
+    ats_type: generic
+    url: https://replicate.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Modal
+    ats_type: generic
+    url: https://modal.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Runway
+    ats_type: generic
+    url: https://runwayml.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Stability AI
+    ats_type: generic
+    url: https://stability.ai/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Character.AI
+    ats_type: generic
+    url: https://character.ai/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Perplexity AI
+    ats_type: generic
+    url: https://www.perplexity.ai/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Together AI
+    ats_type: generic
+    url: https://www.together.ai/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Unity
+    ats_type: generic
+    url: https://careers.unity.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Roblox
+    ats_type: linkedin
+    url: null
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Epic Games
+    ats_type: generic
+    url: https://www.epicgames.com/site/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Riot Games
+    ats_type: generic
+    url: https://www.riotgames.com/en/work-with-us/jobs
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Oscar Health
+    ats_type: generic
+    url: https://www.hioscar.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Ro
+    ats_type: generic
+    url: https://ro.co/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Hims & Hers
+    ats_type: generic
+    url: https://www.forhims.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Tempus
+    ats_type: generic
+    url: https://www.tempus.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Cruise
+    ats_type: generic
+    url: https://getcruise.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Aurora
+    ats_type: generic
+    url: https://aurora.tech/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Zoox
+    ats_type: generic
+    url: https://zoox.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Nuro
+    ats_type: generic
+    url: https://www.nuro.ai/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Auth0
+    ats_type: generic
+    url: https://auth0.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Segment
+    ats_type: generic
+    url: https://segment.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Amplitude
+    ats_type: generic
+    url: https://amplitude.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Mixpanel
+    ats_type: generic
+    url: https://mixpanel.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Heap
+    ats_type: generic
+    url: https://heap.io/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Pendo
+    ats_type: generic
+    url: https://www.pendo.io/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Gong
+    ats_type: generic
+    url: https://www.gong.io/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Outreach
+    ats_type: generic
+    url: https://www.outreach.io/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Opendoor
+    ats_type: generic
+    url: https://www.opendoor.com/jobs
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Redfin
+    ats_type: generic
+    url: https://www.redfin.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Zillow
+    ats_type: generic
+    url: https://www.zillow.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Reddit
+    ats_type: generic
+    url: https://www.redditinc.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Snap
+    ats_type: generic
+    url: https://careers.snap.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Pinterest
+    ats_type: generic
+    url: https://www.pinterestcareers.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: TikTok
+    ats_type: generic
+    url: https://careers.tiktok.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Twitch
+    ats_type: generic
+    url: https://www.twitch.tv/jobs/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Coursera
+    ats_type: generic
+    url: https://about.coursera.org/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Udemy
+    ats_type: generic
+    url: https://about.udemy.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Duolingo
+    ats_type: generic
+    url: https://careers.duolingo.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Quizlet
+    ats_type: generic
+    url: https://quizlet.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Grammarly
+    ats_type: generic
+    url: https://www.grammarly.com/jobs
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Citadel Securities
+    ats_type: generic
+    url: https://www.citadelsecurities.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Virtu Financial
+    ats_type: generic
+    url: https://www.virtu.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Tower Research Capital
+    ats_type: generic
+    url: https://www.tower-research.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Five Rings Capital
+    ats_type: generic
+    url: https://fiverings.com/apply/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Flow Traders
+    ats_type: generic
+    url: https://www.flowtraders.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Millennium Management
+    ats_type: generic
+    url: https://www.mlp.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Point72
+    ats_type: generic
+    url: https://point72.com/working-here/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Bridgewater Associates
+    ats_type: generic
+    url: https://www.bridgewater.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Balyasny Asset Management
+    ats_type: generic
+    url: https://www.bamfunds.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: PDT Partners
+    ats_type: generic
+    url: https://www.pdtpartners.com/careers.html
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Old Mission Capital
+    ats_type: generic
+    url: https://www.oldmissioncapital.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Geneva Trading
+    ats_type: generic
+    url: https://www.genevatrading.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Group One Trading
+    ats_type: generic
+    url: https://group1.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Wolverine Trading
+    ats_type: generic
+    url: https://www.wolve.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Valkyrie Trading
+    ats_type: generic
+    url: https://www.valkyrietrading.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Schonfeld Strategic Advisors
+    ats_type: generic
+    url: https://www.schonfeld.com/careers/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: BioCatch
+    ats_type: generic
+    url: https://www.biocatch.com/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Kount
+    ats_type: generic
+    url: https://www.kount.com/company/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Adyen
+    ats_type: generic
+    url: https://careers.adyen.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Bank of America
+    ats_type: generic
+    url: https://campus.bankofamerica.com/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Wells Fargo
+    ats_type: generic
+    url: https://www.wellsfargo.com/about/careers/students/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Citi
+    ats_type: generic
+    url: https://jobs.citi.com/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Deutsche Bank
+    ats_type: generic
+    url: https://careers.db.com/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: UBS
+    ats_type: generic
+    url: https://www.ubs.com/careers/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: HSBC
+    ats_type: generic
+    url: https://www.hsbc.com/careers/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Standard Chartered
+    ats_type: generic
+    url: https://www.sc.com/careers/students/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Discover
+    ats_type: generic
+    url: https://jobs.discover.com/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Mastercard
+    ats_type: generic
+    url: https://careers.mastercard.com/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Visa
+    ats_type: generic
+    url: https://usa.visa.com/careers/students.html
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Fidelity
+    ats_type: generic
+    url: https://jobs.fidelity.com/students/
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Charles Schwab
+    ats_type: generic
+    url: https://www.schwab.com/careers/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Vanguard
+    ats_type: generic
+    url: https://www.vanguardjobs.com/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: BlackRock
+    ats_type: generic
+    url: https://careers.blackrock.com/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Cisco
+    ats_type: generic
+    url: https://www.cisco.com/c/en/us/about/careers/we-are-cisco/students-and-new-graduates.html
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Broadcom
+    ats_type: generic
+    url: https://www.broadcom.com/company/careers/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Dropbox
+    ats_type: generic
+    url: https://www.dropbox.com/jobs/teams/emerging-talent
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Qlik
+    ats_type: generic
+    url: https://www.qlik.com/careers
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: eBay
+    ats_type: generic
+    url: https://careers.ebayinc.com/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Poshmark
+    ats_type: greenhouse
+    url: https://boards.greenhouse.io/poshmark
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Persona
+    ats_type: lever
+    url: https://jobs.lever.co/persona
+    status: no_jobs
+    job_count: 0
+    error: null
+  - company: Bread Financial
+    ats_type: generic
+    url: https://careers.breadfinancial.com/students
+    status: no_jobs
+    job_count: 0
+    error: null
+  errors: []

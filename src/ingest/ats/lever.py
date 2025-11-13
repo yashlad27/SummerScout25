@@ -103,11 +103,6 @@ class LeverScraper(BaseScraper):
         
         description_html = "<br/>".join(description_parts) if description_parts else job_data.get("description", "")
         
-        # Determine if remote
-        remote = False
-        if location_str:
-            remote = "remote" in location_str.lower()
-        
         return self._create_raw_job(
             source_id=job_id,
             title=title,
@@ -115,6 +110,5 @@ class LeverScraper(BaseScraper):
             url=url,
             posted_at=posted_at,
             description_html=description_html,
-            remote=remote,
             raw_data=job_data,
         )

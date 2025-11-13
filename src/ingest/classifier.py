@@ -88,6 +88,7 @@ class JobFilter:
         self.internship_config = self.filters.get("internship", {})
         self.negatives = self.filters.get("negatives", {})
         self.locations_config = self.filters.get("locations", {})
+        self.visa_config = self.filters.get("visa", {})
     
     def should_include(self, job: NormalizedJob) -> tuple[bool, str]:
         """Determine if job should be included.
@@ -109,6 +110,10 @@ class JobFilter:
         # 3. Check location (if configured)
         if not self._location_allowed(job):
             return False, "location_excluded"
+        
+        # 4. Check visa requirements (exclude jobs that explicitly don't sponsor)
+        if self._excludes_visa_sponsorship(job):
+            return False, "no_visa_sponsorship"
         
         return True, "passed"
     
@@ -316,6 +321,28 @@ class JobFilter:
         # If we can't determine, reject it (US only policy)
         return False
     
+    def _excludes_visa_sponsorship(self, job: NormalizedJob) -> bool:
+        """Check if job explicitly excludes visa sponsorship.
+        
+        Args:
+            job: Normalized job
+            
+        Returns:
+            True if job explicitly states no visa sponsorship
+        """
+        description = job.description_md or ""
+        title = job.title
+        combined_text = f"{title} {description}".lower()
+        
+        # Check for negative visa indicators (must exclude these jobs)
+        negative_indicators = self.visa_config.get("negative_indicators", [])
+        for pattern in negative_indicators:
+            if re.search(pattern, combined_text):
+                logger.debug(f"Job '{title}' excluded: no visa sponsorship")
+                return True
+        
+        return False
+    
     def add_tags(self, job: NormalizedJob) -> list[str]:
         """Add tags to job based on classification.
         
@@ -339,9 +366,5 @@ class JobFilter:
         # Add category tag if classified
         if job.category:
             tags.append(job.category)
-        
-        # Add remote tag
-        if job.remote:
-            tags.append("remote")
         
         return tags

@@ -14,7 +14,6 @@ class RawJob(BaseModel):
     company: str
     title: str
     location: str | None = None
-    remote: bool = False
     employment_type: str | None = None
     posted_at: datetime | None = None
     url: str
@@ -34,7 +33,6 @@ class NormalizedJob(BaseModel):
     company: str
     title: str
     location: str | None
-    remote: bool
     employment_type: str | None
     posted_at: datetime | None
     url: str

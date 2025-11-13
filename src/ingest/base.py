@@ -45,7 +45,6 @@ class BaseScraper(ABC):
         posted_at: Any = None,
         description_html: str | None = None,
         employment_type: str | None = None,
-        remote: bool = False,
         raw_data: dict[str, Any] | None = None,
     ) -> RawJob:
         """Helper to create a RawJob instance.
@@ -58,7 +57,6 @@ class BaseScraper(ABC):
             posted_at: Posted date
             description_html: HTML description
             employment_type: Employment type
-            remote: Is remote
             raw_data: Raw API response data
             
         Returns:
@@ -70,7 +68,6 @@ class BaseScraper(ABC):
             company=self.company,
             title=title,
             location=location,
-            remote=remote,
             employment_type=employment_type,
             posted_at=posted_at,
             url=url,

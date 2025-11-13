@@ -142,7 +142,6 @@ class GenericScraper(BaseScraper):
                 description_html=link_data['title'],
                 posted_at=None,
                 employment_type="internship",
-                remote=False,
             )
             
         except Exception as e:

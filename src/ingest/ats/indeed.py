@@ -145,7 +145,6 @@ class IndeedScraper(BaseScraper):
                 description_html=description,
                 posted_at=None,  # Would need to parse date string
                 employment_type="internship",
-                remote=False,
             )
             
         except Exception as e:

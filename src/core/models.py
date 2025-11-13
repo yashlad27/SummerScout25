@@ -59,7 +59,6 @@ class Job(Base):
     company = Column(String(255), nullable=False, index=True)
     title = Column(String(500), nullable=False, index=True)
     location = Column(String(255), nullable=True)
-    remote = Column(Boolean, default=False)
     employment_type = Column(String(50), nullable=True)
     
     # Dates
