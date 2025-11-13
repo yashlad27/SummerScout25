@@ -59,7 +59,6 @@ class Job(Base):
     company = Column(String(255), nullable=False, index=True)
     title = Column(String(500), nullable=False, index=True)
     location = Column(String(255), nullable=True)
-    remote = Column(Boolean, default=False)
     employment_type = Column(String(50), nullable=True)
     
     # Dates
@@ -80,6 +79,23 @@ class Job(Base):
     category = Column(String(100), nullable=True, index=True)
     country = Column(String(50), nullable=True, default="us", index=True)
     tags = Column(ARRAY(String), nullable=True)
+    
+    # Enhanced metadata from AI/analyzer
+    tech_stack = Column(JSONB, nullable=True)  # {languages: [], frameworks: [], tools: []}
+    required_skills = Column(ARRAY(String), nullable=True)
+    compensation_min = Column(Integer, nullable=True)
+    compensation_max = Column(Integer, nullable=True)
+    visa_sponsorship = Column(Boolean, nullable=True)
+    application_deadline = Column(String(100), nullable=True)
+    duration = Column(String(100), nullable=True)
+    start_date = Column(String(100), nullable=True)
+    seniority_level = Column(String(50), nullable=True)
+    ai_confidence = Column(Integer, nullable=True)  # 0-100 confidence score
+    
+    # Application tracking
+    application_status = Column(String(50), nullable=True)  # not_applied, applied, interviewing, offer, rejected
+    applied_at = Column(DateTime(timezone=True), nullable=True)
+    notes = Column(Text, nullable=True)
     
     # Metadata
     raw_data = Column(JSONB, nullable=True)

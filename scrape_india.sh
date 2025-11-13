@@ -1,1 +1,0 @@
-scripts/scrape_india.sh

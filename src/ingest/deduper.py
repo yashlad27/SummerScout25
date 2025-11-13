@@ -61,7 +61,6 @@ class JobDeduper:
             company=job.company,
             title=job.title,
             location=job.location,
-            remote=job.remote,
             employment_type=job.employment_type,
             posted_at=job.posted_at,
             url=job.url,

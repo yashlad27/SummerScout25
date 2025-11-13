@@ -33,11 +33,6 @@ class JobNormalizer:
         elif raw_job.description_md:
             description_md = raw_job.description_md
         
-        # Determine if remote (from location or explicit flag)
-        remote = raw_job.remote
-        if not remote and raw_job.location:
-            remote = is_remote_location(raw_job.location)
-        
         # Compute hashes
         hash_stable = compute_hash_stable(
             title=raw_job.title,
@@ -61,7 +56,6 @@ class JobNormalizer:
             company=raw_job.company,
             title=raw_job.title,
             location=raw_job.location,
-            remote=remote,
             employment_type=raw_job.employment_type,
             posted_at=raw_job.posted_at,
             url=raw_job.url,

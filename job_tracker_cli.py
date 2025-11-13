@@ -90,6 +90,15 @@ class JobTrackerCLI:
         print("  ║  \033[1;36m9.\033[0m 🏢 View Jobs by Company                                         ║")
         print("  ╚══════════════════════════════════════════════════════════════════════╝")
         
+        # Maintenance section
+        print("\n\033[1;31m")  # Red for maintenance
+        print("  ╔══════════════════════════════════════════════════════════════════════╗")
+        print("  ║                      🔧  MAINTENANCE                                 ║")
+        print("  ╠══════════════════════════════════════════════════════════════════════╣")
+        print("\033[0m")
+        print("  ║  \033[1;36m10.\033[0m 🧹 Cleanup Stale Jobs (Mark Inactive)                          ║")
+        print("  ╚══════════════════════════════════════════════════════════════════════╝")
+        
         # Exit
         print("\n  \033[1;31m0. ❌ Exit Application\033[0m")
         print("\n" + "═" * 80)
@@ -539,6 +548,110 @@ class JobTrackerCLI:
         
         input("\nPress Enter to continue...")
     
+    def cleanup_stale_jobs(self):
+        """Show cleanup options and execute cleanup."""
+        print("\n\033[1;31m")  # Red
+        print("╔════════════════════════════════════════════════════════════════════════════════╗")
+        print("║                      🧹  JOB CLEANUP UTILITY                                  ║")
+        print("╚════════════════════════════════════════════════════════════════════════════════╝")
+        print("\033[0m")
+        
+        print("\n  This tool marks jobs as inactive based on when they were last seen.")
+        print("  Inactive jobs remain in the database for historical tracking.\n")
+        
+        # Import cleanup script
+        try:
+            from cleanup_jobs import JobCleanup
+            
+            # Show current stats
+            print("\n  \033[1;33m📊 Current Database Statistics:\033[0m")
+            cleanup = JobCleanup(dry_run=True)
+            stats = cleanup.get_cleanup_stats()
+            
+            print(f"\n  ┌────────────────────────────────────────────────────────────────────┐")
+            print(f"  │  📊 Total Jobs:              \033[1;36m{stats['total_jobs']:>6,}\033[0m                         │")
+            print(f"  │  ✅ Active Jobs:             \033[1;32m{stats['active_jobs']:>6,}\033[0m                         │")
+            print(f"  │  ❌ Inactive Jobs:           \033[1;31m{stats['inactive_jobs']:>6,}\033[0m                         │")
+            print("  ├────────────────────────────────────────────────────────────────────┤")
+            print("  │  \033[1;33m🕐 Stale Jobs (Not Seen Recently):\033[0m                              │")
+            print(f"  │     • 30+ days ago:          \033[1;33m{stats['stale_30_days']:>6,}\033[0m jobs                      │")
+            print(f"  │     • 60+ days ago:          \033[1;33m{stats['stale_60_days']:>6,}\033[0m jobs                      │")
+            print(f"  │     • 90+ days ago:          \033[1;33m{stats['stale_90_days']:>6,}\033[0m jobs                      │")
+            print("  └────────────────────────────────────────────────────────────────────┘")
+            
+            print("\n  \033[1;33m⚙️  Cleanup Options:\033[0m")
+            print("  1. Mark jobs not seen in 30 days as inactive")
+            print("  2. Mark jobs not seen in 60 days as inactive")
+            print("  3. Mark jobs not seen in 90 days as inactive")
+            print("  4. View detailed statistics only")
+            print("  0. Cancel")
+            
+            choice = input("\n  👉 Select option (0-4): ").strip()
+            
+            days_map = {'1': 30, '2': 60, '3': 90}
+            
+            if choice == '4':
+                # Just show detailed stats
+                cleanup.print_stats()
+                input("\n  \033[1;32m✓\033[0m Press Enter to continue...")
+                return
+            elif choice == '0':
+                print("\n  \033[1;31m❌ Cancelled\033[0m")
+                input("\n  Press Enter to continue...")
+                return
+            elif choice not in days_map:
+                print("\n  \033[1;31m❌ Invalid option\033[0m")
+                input("\n  Press Enter to continue...")
+                return
+            
+            days = days_map[choice]
+            
+            # Show what will be cleaned
+            print(f"\n  \033[1;33m📋 Preview: Jobs not seen in {days} days\033[0m")
+            print("\n  ⏳ Analyzing...\n")
+            
+            # Dry run first
+            dry_cleanup = JobCleanup(dry_run=True)
+            count = dry_cleanup.mark_stale_jobs_inactive(days)
+            
+            if count == 0:
+                print(f"\n  \033[1;32m✅ No stale jobs found! All jobs have been seen within {days} days.\033[0m")
+                input("\n  Press Enter to continue...")
+                return
+            
+            # Confirm
+            print(f"\n  \033[1;33m⚠️  This will mark {count} jobs as INACTIVE\033[0m")
+            print("  \033[0;90m   (They will remain in the database for historical tracking)\033[0m")
+            confirm = input("\n  Proceed? (yes/no): ").strip().lower()
+            
+            if confirm != 'yes':
+                print("\n  \033[1;31m❌ Cancelled\033[0m")
+                input("\n  Press Enter to continue...")
+                return
+            
+            # Execute cleanup
+            print("\n  \033[1;36m⏳ Executing cleanup...\033[0m\n")
+            real_cleanup = JobCleanup(dry_run=False)
+            result = real_cleanup.mark_stale_jobs_inactive(days)
+            
+            print(f"\n  \033[1;32m✅ Cleanup complete! Marked {result} jobs as inactive.\033[0m")
+            
+            # Show updated stats
+            new_stats = real_cleanup.get_cleanup_stats()
+            print(f"\n  \033[1;36m📊 Updated Statistics:\033[0m")
+            print(f"     Active Jobs: {new_stats['active_jobs']:,}")
+            print(f"     Inactive Jobs: {new_stats['inactive_jobs']:,}")
+            
+        except ImportError as e:
+            print(f"\n  \033[1;31m❌ Error: Cleanup script not found\033[0m")
+            print(f"     {e}")
+        except Exception as e:
+            print(f"\n  \033[1;31m❌ Error during cleanup: {e}\033[0m")
+            import traceback
+            traceback.print_exc()
+        
+        input("\n  \033[1;32m✓\033[0m Press Enter to continue...")
+    
     def run(self):
         """Run the interactive CLI."""
         while True:
@@ -546,7 +659,7 @@ class JobTrackerCLI:
             self.print_header()
             self.print_menu()
             
-            choice = input("\n👉 Select an option (0-9): ").strip()
+            choice = input("\n👉 Select an option (0-10): ").strip()
             
             if choice == '1':
                 self.run_full_scrape()
@@ -566,6 +679,8 @@ class JobTrackerCLI:
                 self.search_jobs()
             elif choice == '9':
                 self.view_jobs_by_company()
+            elif choice == '10':
+                self.cleanup_stale_jobs()
             elif choice == '0':
                 self.clear_screen()
                 print("\n\033[1;36m")
@@ -580,7 +695,7 @@ class JobTrackerCLI:
                 print("\033[0m\n")
                 break
             else:
-                print("\n  \033[1;31m❌ Invalid option. Please select 0-9.\033[0m")
+                print("\n  \033[1;31m❌ Invalid option. Please select 0-10.\033[0m")
                 input("\n  Press Enter to continue...")
 
 

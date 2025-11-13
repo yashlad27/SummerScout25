@@ -103,7 +103,6 @@ class AshbyScraper(BaseScraper):
         job_id = job_data["id"]
         title = job_data["title"]
         location_str = job_data.get("location")
-        remote = job_data.get("isRemote", False)
         url = job_data.get("jobUrl", "")
         description_html = job_data.get("descriptionHtml", "")
         
@@ -122,6 +121,5 @@ class AshbyScraper(BaseScraper):
             url=url,
             posted_at=posted_at,
             description_html=description_html,
-            remote=remote,
             raw_data=job_data,
         )

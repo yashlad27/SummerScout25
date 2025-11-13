@@ -106,10 +106,17 @@ categories:
       - "(?i)vulnerability"
       - "(?i)malware"
       - "(?i)forensic"
+      - "(?i)comptia"
+      - "(?i)security\\+|sec\\+"
+      - "(?i)network\\+|net\\+"
+      - "(?i)cysa\\+|ceh"
+      - "(?i)cissp|ccna security"
     description_hints:
       - "(?i)siem|splunk|elk"
       - "(?i)firewall|ids|ips"
       - "(?i)penetration|vulnerability"
+      - "(?i)comptia|security\\+|network\\+"
+      - "(?i)certifications.*security"
   
   data_engineering:
     title_any:
@@ -180,6 +187,30 @@ internship:
     - "(?i)ms.*student"
     - "(?i)master's.*degree"
     - "(?i)not phd"
+
+# Visa sponsorship patterns (F1 visa support)
+visa:
+  positive_indicators:
+    # Explicit sponsorship mentions
+    - "(?i)visa.*sponsor"
+    - "(?i)sponsor.*visa"
+    - "(?i)f-?1.*visa"
+    - "(?i)f-?1.*opt"
+    - "(?i)opt.*eligible"
+    - "(?i)cpt.*eligible"
+    - "(?i)international.*student"
+    - "(?i)work.*authorization"
+    - "(?i)authorized.*work"
+  negative_indicators:
+    # Exclude jobs that require work authorization
+    - "(?i)must.*be.*authorized.*work"
+    - "(?i)must.*have.*work.*authorization"
+    - "(?i)us.*citizen.*required"
+    - "(?i)no.*visa.*sponsor"
+    - "(?i)cannot.*sponsor"
+    - "(?i)will.*not.*sponsor"
+    - "(?i)unable.*sponsor"
+    - "(?i)security.*clearance.*required"
 
 # Negative filters (exclude these)
 negatives:

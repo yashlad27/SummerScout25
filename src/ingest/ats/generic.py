@@ -35,14 +35,13 @@ class GenericScraper(BaseScraper):
         jobs = []
         
         try:
-            self.logger.info(f"Fetching jobs from {self.base_url} using Playwright")
             
             with sync_playwright() as p:
                 browser = p.chromium.launch(headless=True)
                 page = browser.new_page()
                 
-                # Set timeout and navigate
-                page.set_default_timeout(30000)
+                # Set timeout and navigate (increased for heavy enterprise sites)
+                page.set_default_timeout(60000)  # 60 seconds instead of 30
                 page.goto(self.base_url, wait_until="networkidle")
                 
                 # Wait a bit for dynamic content
@@ -67,12 +66,19 @@ class GenericScraper(BaseScraper):
                     self.logger.warning(f"Failed to parse job link: {e}")
                     continue
             
-            self.logger.info(f"Found {len(jobs)} jobs for {self.company}")
+            self.logger.info(f"   ➜ Found {len(jobs)} jobs")
             
         except PlaywrightTimeout:
-            self.logger.error(f"Timeout loading {self.base_url} for {self.company}")
+            self.logger.error(f"   ❌ Timeout (60s exceeded)")
         except Exception as e:
-            self.logger.error(f"Failed to fetch jobs for {self.company}: {e}")
+            # Log the specific error type for debugging
+            error_msg = str(e)
+            if "ERR_HTTP2_PROTOCOL_ERROR" in error_msg:
+                self.logger.error(f"   ❌ HTTP2 protocol error (site blocking)")
+            elif "ERR_NAME_NOT_RESOLVED" in error_msg:
+                self.logger.error(f"   ❌ DNS error (invalid domain)")
+            else:
+                self.logger.error(f"   ❌ Error: {str(e)[:80]}")
         
         return jobs
     
@@ -136,7 +142,6 @@ class GenericScraper(BaseScraper):
                 description_html=link_data['title'],
                 posted_at=None,
                 employment_type="internship",
-                remote=False,
             )
             
         except Exception as e:

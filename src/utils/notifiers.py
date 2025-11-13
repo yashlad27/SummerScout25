@@ -154,12 +154,14 @@ class EmailNotifier(BaseNotifier):
         if not all([self.smtp_server, self.smtp_user, self.smtp_pass]):
             logger.warning("Email SMTP settings not fully configured")
     
-    def send_batch(self, jobs: list[Job], companies_scanned: list[str] = None) -> bool:
-        """Send consolidated email with all jobs.
+    def send_batch(self, jobs: list[Job], companies_scanned: list[str] = None, new_count: int = 0, updated_count: int = 0) -> bool:
+        """Send consolidated email with all jobs in table format.
         
         Args:
             jobs: List of jobs to notify about
             companies_scanned: List of companies that were scanned
+            new_count: Number of new jobs
+            updated_count: Number of updated jobs
             
         Returns:
             True if sent successfully
@@ -171,29 +173,15 @@ class EmailNotifier(BaseNotifier):
             logger.error("Cannot send email: SMTP settings not configured")
             return False
         
-        # Group jobs by category
-        jobs_by_category = {}
-        jobs_by_company = {}
-        for job in jobs:
-            category = job.category or "Other"
-            if category not in jobs_by_category:
-                jobs_by_category[category] = []
-            jobs_by_category[category].append(job)
-            
-            # Group by company
-            if job.company not in jobs_by_company:
-                jobs_by_company[job.company] = []
-            jobs_by_company[job.company].append(job)
-        
         # Create email subject
         total = len(jobs)
-        subject = f"🎯 {total} New Summer 2026 Internship{'s' if total > 1 else ''} Found!"
+        subject = f"🎯 {new_count} New + {updated_count} Updated Jobs ({total} total)"
         
-        # Build HTML body
+        # Build HTML body with table
         html_parts = [
             "<html><body style='font-family: Arial, sans-serif;'>",
             f"<h1 style='color: #2c3e50;'>{subject}</h1>",
-            f"<p style='color: #7f8c8d;'>Found {total} new internship opportunities from {len(jobs_by_company)} companies across {len(jobs_by_category)} categories</p>",
+            f"<p style='color: #7f8c8d;'>📊 <strong>{new_count}</strong> new jobs + <strong>{updated_count}</strong> updated jobs</p>",
         ]
         
         # Add scan summary if provided
@@ -202,39 +190,71 @@ class EmailNotifier(BaseNotifier):
         
         html_parts.append("<hr style='border: 1px solid #ecf0f1;'/>")
         
+        # Create table
+        html_parts.append("""
+        <table style='width: 100%; border-collapse: collapse; margin-top: 20px;'>
+            <thead>
+                <tr style='background: #3498db; color: white;'>
+                    <th style='padding: 12px; text-align: left; border: 1px solid #ddd;'>Company</th>
+                    <th style='padding: 12px; text-align: left; border: 1px solid #ddd;'>Title</th>
+                    <th style='padding: 12px; text-align: left; border: 1px solid #ddd;'>Location</th>
+                    <th style='padding: 12px; text-align: left; border: 1px solid #ddd;'>Category</th>
+                    <th style='padding: 12px; text-align: center; border: 1px solid #ddd;'>Remote</th>
+                    <th style='padding: 12px; text-align: center; border: 1px solid #ddd;'>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+        """)
+        
+        # Add each job as a table row
+        for idx, job in enumerate(jobs, 1):
+            row_color = "#f8f9fa" if idx % 2 == 0 else "#ffffff"
+            remote_icon = "✅" if job.remote else "❌"
+            category = (job.category or "Other").replace("_", " ").title()
+            
+            html_parts.append(f"""
+                <tr style='background: {row_color};'>
+                    <td style='padding: 10px; border: 1px solid #ddd;'><strong>{job.company}</strong></td>
+                    <td style='padding: 10px; border: 1px solid #ddd;'>{job.title}</td>
+                    <td style='padding: 10px; border: 1px solid #ddd;'>{job.location or 'N/A'}</td>
+                    <td style='padding: 10px; border: 1px solid #ddd;'>{category}</td>
+                    <td style='padding: 10px; border: 1px solid #ddd; text-align: center;'>{remote_icon}</td>
+                    <td style='padding: 10px; border: 1px solid #ddd; text-align: center;'>
+                        <a href='{job.url}' style='background: #3498db; color: white; padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 12px;'>Apply</a>
+                    </td>
+                </tr>
+            """)
+        
+        # Close table
+        html_parts.append("""
+            </tbody>
+        </table>
+        """)
+        
+        # Add text version (simple table)
         text_parts = [
             f"{subject}\n",
-            f"Found {total} new internship opportunities from {len(jobs_by_company)} companies\n",
+            f"📊 {new_count} new + {updated_count} updated jobs\n",
         ]
         
         if companies_scanned:
             text_parts.append(f"✅ Scanned {len(companies_scanned)} companies total\n")
         
-        text_parts.append("="*80 + "\n")
+        text_parts.append("="*100 + "\n")
+        text_parts.append(f"{'Company':<25} {'Title':<35} {'Location':<20} {'Remote':<8}\n")
+        text_parts.append("="*100 + "\n")
         
-        # Add jobs grouped by category
-        for category, category_jobs in sorted(jobs_by_category.items()):
-            html_parts.append(f"<h2 style='color: #3498db; margin-top: 30px;'>📁 {category.upper().replace('_', ' ')} ({len(category_jobs)} jobs)</h2>")
-            text_parts.append(f"\n## {category.upper().replace('_', ' ')} ({len(category_jobs)} jobs)\n")
-            
-            for job in category_jobs:
-                # HTML version
-                html_parts.append("<div style='background: #f8f9fa; padding: 15px; margin: 10px 0; border-left: 4px solid #3498db;'>")
-                html_parts.append(f"<h3 style='margin: 0 0 10px 0; color: #2c3e50;'>{job.company} - {job.title}</h3>")
-                html_parts.append(f"<p style='margin: 5px 0;'><strong>📍 Location:</strong> {job.location or 'Not specified'}</p>")
-                if job.remote:
-                    html_parts.append("<p style='margin: 5px 0;'><strong>🏠 Remote:</strong> Yes</p>")
-                if job.tags:
-                    html_parts.append(f"<p style='margin: 5px 0;'><strong>🏷️ Tags:</strong> {', '.join(job.tags)}</p>")
-                html_parts.append(f"<p style='margin: 10px 0 0 0;'><a href='{job.url}' style='background: #3498db; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; display: inline-block;'>Apply Now →</a></p>")
-                html_parts.append("</div>")
-                
-                # Text version
-                text_parts.append(f"\n• {job.company} - {job.title}")
-                text_parts.append(f"  Location: {job.location or 'Not specified'}")
-                if job.remote:
-                    text_parts.append(f"  Remote: Yes")
-                text_parts.append(f"  Apply: {job.url}\n")
+        for job in jobs:
+            remote_text = "Yes" if job.remote else "No"
+            text_parts.append(f"{job.company:<25} {job.title[:33]:<35} {(job.location or 'N/A')[:18]:<20} {remote_text:<8}\n")
+            text_parts.append(f"  🔗 {job.url}\n")
+        
+        # Group jobs by company for summary
+        jobs_by_company = {}
+        for job in jobs:
+            if job.company not in jobs_by_company:
+                jobs_by_company[job.company] = []
+            jobs_by_company[job.company].append(job)
         
         # Add scan summary footer
         html_parts.append("<hr style='border: 1px solid #ecf0f1; margin-top: 30px;'/>")
@@ -370,12 +390,14 @@ class NotificationManager:
         
         logger.info(f"Initialized notifiers: {list(self.notifiers.keys())}")
     
-    def notify_batch(self, jobs: list[Job], companies_scanned: list[str] = None) -> None:
+    def notify_batch(self, jobs: list[Job], companies_scanned: list[str] = None, new_count: int = 0, updated_count: int = 0) -> None:
         """Send consolidated notification for multiple jobs.
         
         Args:
             jobs: List of jobs to notify about
             companies_scanned: List of all companies that were scanned
+            new_count: Number of new jobs
+            updated_count: Number of updated jobs
         """
         if not jobs:
             return
@@ -383,7 +405,7 @@ class NotificationManager:
         # Send batch email if email notifier is configured
         email_notifier = self.notifiers.get("email")
         if email_notifier and hasattr(email_notifier, 'send_batch'):
-            success = email_notifier.send_batch(jobs, companies_scanned=companies_scanned)
+            success = email_notifier.send_batch(jobs, companies_scanned=companies_scanned, new_count=new_count, updated_count=updated_count)
             
             # Record alerts for all jobs (safely handle session issues)
             try:
